@@ -1,50 +1,55 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import Spinner from 'react-spinkit';
+import {searchMovies} from '../actions/index';
 
-import './searchForm.css';
-
-export default class SearchForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            editing: false
+export class MovieSearch extends React.Component {
+    renderResults() {
+        if (this.props.loading) {
+            return <Spinner spinnerName="circle" noFadeIn />;
         }
 
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    onSubmit(event) {
-        event.preventDefault();
-        const text = this.textInput.value.trim();
-        if (text && this.props.onAdd) {
-            this.props.onAdd(this.textInput.value);
+        if (this.props.error) {
+            return <strong>{this.props.error}</strong>;
         }
-        this.textInput.value = '';
-    }
 
-    setEditing(editing) {
-        this.setState({
-            editing
-        });
+        const movies = this.props.movies.map((movie, index) => (
+            <li key={index}>{movie}</li>
+        ));
+
+        return <ul className="movie-search-results">{movies}</ul>;
+    }
+  
+    search(e) {
+        e.preventDefault();
+        if (this.input.value.trim() === '') {
+            return;
+        }
+
+        this.props.dispatch(searchMovies(this.input.value));
     }
 
     render() {
-        if (!this.state.editing) {
-            return (
-                <div className="searchButton"
-                onClick={() => this.setEditing(true)}>
-                    <a href="#">Search for a movie</a>
-                </div>
-            );
-        }
-
         return (
-            <form className="searchForm" onSubmit={this.onSubmit}>
-                <input type="text" ref={input => this.textInput = input} />
-                <button>Search</button>
-                <button type="button" onClick={() => this.setEditing(false)}>
-                    Cancel
-                </button>
-            </form>
+            <div className="movie-search">
+                {/* When this form is submitted you should submit the
+                    searchCharacters action */}
+                <form onSubmit={(e) => this.search(e)}>
+                    <input type="search" ref={input => (this.input = input)} />
+                    <button>Search</button>
+                </form>
+                <ul className="movie-search-results">
+                    {this.renderResults()}
+                </ul>
+            </div>
         );
     }
 }
+
+const mapStateToProps = state => ({
+    movies: state.movies,
+    loading: state.loading,
+    error: state.error
+});
+
+export default connect(mapStateToProps)(MovieSearch);

@@ -7,8 +7,8 @@ export default class Navbar extends React.Component {
     render () {
         return (
             <nav className="navBar">
-                <SignupForm />
-                <LoginForm />
+                {/* <SignupForm />
+                <LoginForm /> */}
             </nav>
         );
     }
