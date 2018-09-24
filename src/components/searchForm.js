@@ -1,11 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Spinner from 'react-spinkit';
-import {searchMovies} from '../actions/index';
+import {searchMovies, idSearch} from '../actions/index';
+import {Link, Redirect} from 'react-router-dom';
 
 // imported in search.js as MovieSearch
 
 export class MovieSearch extends React.Component {
+    
+    handleClick = (e, movie) => {
+        console.log(movie.id)
+        e.preventDefault();
+        this.props.dispatch(idSearch(movie.id));
+    }
+
+
     renderResults() {
         if (this.props.loading) {
             return <Spinner spinnerName="circle" noFadeIn />;
@@ -15,11 +24,16 @@ export class MovieSearch extends React.Component {
             return <strong>{this.props.error}</strong>;
         }
 
+
+
+
+
         const movies = this.props.movies.map((movie, index) => (
-            <li key={index}>{movie}</li>
+            <li className="movieResultItem" key={index} id={movie.id} onClick={((e) => this.handleClick(e, movie))}><Link to="/analyze">{movie.title}</Link> <img className="moviePoster" src={movie.poster}/> </li>
         ));
 
-        return <ul className="movie-search-results">{movies}</ul>;
+
+        return movies;
     }
   
     search(e) {
@@ -30,6 +44,7 @@ export class MovieSearch extends React.Component {
 
         this.props.dispatch(searchMovies(this.input.value));
     }
+
 
     render() {
         return (
@@ -43,17 +58,18 @@ export class MovieSearch extends React.Component {
                 <ul className="movie-search-results">
                     {this.renderResults()}
                 </ul>
+                <Link to="/analyze">MATCH</Link>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    console.log('state', state);
+    console.log('kiwi state is', state);
     return {
-        movies: state.helix.movies,
-        loading: state.helix.loading,
-        error: state.helix.error
+        movies: state.search.movies,
+        loading: state.search.loading,
+        error: state.search.error
     }
 };
 

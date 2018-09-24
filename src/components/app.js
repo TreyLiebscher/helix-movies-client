@@ -4,7 +4,8 @@ import {BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
 
 import './app.css';
 import Navbar from './navbar';
-import HomePage from './homePage'
+import HomePage from './homePage';
+import MatchPage from './matchPage';
 import {refreshAuthToken} from '../actions/auth';
 import SignupPage from './signupPage';
 import Profile from './profile';
@@ -45,6 +46,7 @@ export class App extends React.Component {
             <div className="app">
                 <Navbar />
                 <Route exact path="/" component={HomePage} />
+                <Route exact path="/analyze" component={MatchPage} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/signup" component={SignupPage} />
             </div>
