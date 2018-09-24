@@ -1,5 +1,7 @@
 import {search} from '../components/tmdbSearch';
 
+// kiwi imported into HelixReducer
+
 export const MOVIE_SEARCH_REQUEST = 'MOVIE_SEARCH_REQUEST';
 export const movieSearchRequest = () => ({
     type: MOVIE_SEARCH_REQUEST

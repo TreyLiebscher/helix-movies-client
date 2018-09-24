@@ -10,7 +10,7 @@ const initialState = {
     error: null
 };
 
-export function helixReducer(state=initialState, action) {
+export default function reducer(state = initialState, action) {
 
     if (action.type === MOVIE_SEARCH_REQUEST) {
         const changedState = {loading: true, error: null};

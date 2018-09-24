@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import Spinner from 'react-spinkit';
 import {searchMovies} from '../actions/index';
 
+// imported in search.js as MovieSearch
+
 export class MovieSearch extends React.Component {
     renderResults() {
         if (this.props.loading) {
@@ -46,10 +48,13 @@ export class MovieSearch extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    movies: state.movies,
-    loading: state.loading,
-    error: state.error
-});
+const mapStateToProps = (state) => {
+    console.log('state', state);
+    return {
+        movies: state.helix.movies,
+        loading: state.helix.loading,
+        error: state.helix.error
+    }
+};
 
 export default connect(mapStateToProps)(MovieSearch);
