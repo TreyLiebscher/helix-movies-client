@@ -29,7 +29,7 @@ export class MovieSearch extends React.Component {
 
 
         const movies = this.props.movies.map((movie, index) => (
-            <li className="movieResultItem" key={index} id={movie.id} onClick={((e) => this.handleClick(e, movie))}><Link to="/analyze">{movie.title}</Link> <img className="moviePoster" src={movie.poster}/> </li>
+            <li className="movieResultItem" key={index} id={movie.id} onClick={((e) => this.handleClick(e, movie))}><Link to={`/analyze/${movie.id}`}>{movie.title}</Link> <img className="moviePoster" src={movie.poster}/> </li>
         ));
 
 
