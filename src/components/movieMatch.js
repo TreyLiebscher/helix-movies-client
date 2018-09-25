@@ -17,11 +17,9 @@ export class MovieMatch extends React.Component {
 
     componentDidMount() {
         const id = this.id;
-        console.log(id, 'kiwikiwi')
         fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&page=1`)
             .then(res => res.json())
             .then(data => this.setState({movies: data}))
-        console.log(this.state);
     }
 
     

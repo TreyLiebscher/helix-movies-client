@@ -66,10 +66,7 @@ export class MatchPage extends React.Component {
                 </ul> */}
                 <p className="overview">{this.props.overview}</p>
                 <p>{this.props.id}</p>
-                
-                <div ref={id => this.id = id}>
-                    <MovieMatch />
-                </div>
+                    <MovieMatch id={this.props.id}/>
             </div>
         );
     }
