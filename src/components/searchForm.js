@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Spinner from 'react-spinkit';
-import {searchMovies, idSearch} from '../actions/index';
+import {searchMovies} from '../actions/index';
 import {Link, Redirect} from 'react-router-dom';
 
 // imported in search.js as MovieSearch
@@ -16,10 +16,6 @@ export class MovieSearch extends React.Component {
         if (this.props.error) {
             return <strong>{this.props.error}</strong>;
         }
-
-
-
-
 
         const movies = this.props.movies.map((movie, index) => (
             <li className="movieResultItem" key={index} id={movie.id}><Link to={`/analyze/${movie.id}`}>{movie.title}</Link> <img className="moviePoster" src={movie.poster}/> </li>

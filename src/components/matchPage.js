@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Spinner from 'react-spinkit';
-import {searchMovies, idSearch} from '../actions/index';
+import {searchMovies, idSearch, similarMovies} from '../actions/index';
 import {Link, Redirect} from 'react-router-dom';
+import {MovieMatch} from './movieMatch';
 
 
 
@@ -12,6 +13,7 @@ export class MatchPage extends React.Component {
     componentDidMount() {
         const { id } = this.props.match.params;
         this.props.dispatch(idSearch(id));
+        // this.props.dispatch(similarMovies(id));
     }
 
     // Genres is an array, map each category
@@ -31,7 +33,24 @@ export class MatchPage extends React.Component {
         return moviePoster;
     }
 
+    // renderMatches() {
+    //     if (this.props.loading) {
+    //         return <Spinner spinnerName="circle" noFadeIn />;
+    //     }
+
+    //     if (this.props.error) {
+    //         return <strong>{this.props.error}</strong>;
+    //     }
+
+    //     const movieMatches = this.props.movies.map((movie, index) => {
+    //         <li className="matchedMovie" key={index} id={movie.id}>{movie.title}</li>
+    //     })
+    //     console.log('movieMatches returns', this.props.movies)
+    //     return movieMatches;
+    // }
+
     render() {
+
         return (
             <div className="matchPage">
                 <h2>{this.props.title}</h2>
@@ -42,7 +61,15 @@ export class MatchPage extends React.Component {
                 <ul className="genreList">
                     {this.renderGenre()}
                 </ul>
+                {/* <ul className="matchList">
+                    {this.renderMatches()}
+                </ul> */}
                 <p className="overview">{this.props.overview}</p>
+                <p>{this.props.id}</p>
+                
+                <div ref={id => this.id = id}>
+                    <MovieMatch />
+                </div>
             </div>
         );
     }
@@ -60,7 +87,9 @@ const mapStateToProps = (state) => {
         vote_average: state.detail.vote_average,
         vote_count: state.detail.vote_count,
         overview: state.detail.overview,
-        id: state.detail.id
+        id: state.detail.id,
+        // movies: state.similar.movies
+
     }
 };
 

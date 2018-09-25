@@ -41,6 +41,7 @@ export function searchReducer(state = searchState, action) {
 }
 
 const detailState = {
+    id: null,
     title: null,
     poster_path: null,
     overview: null,
@@ -59,6 +60,7 @@ export function detailReducer(state = detailState, action) {
         }
         else if (action.type === ID_SEARCH_SUCCESS) {
             const changedState = {
+                id: action.movies.id,
                 title: action.movies.title,
                 poster_path: action.movies.poster_path,
                 overview: action.movies.overview,
@@ -79,4 +81,31 @@ export function detailReducer(state = detailState, action) {
         }
 
         return state;
+}
+
+const similarState = {
+    movies: [],
+    loading: false,
+    error: null
+};
+
+export function similarReducer(state = similarState, action) {
+    //Movie Search
+    if (action.type === SIMILAR_MOVIE_REQUEST) {
+        const changedState = {loading: true, error: null};
+        const newState = {...state, ...changedState};
+        return newState;
+    }
+    else if (action.type === SIMILAR_MOVIE_SUCCESS) {
+        const changedState = {movies: action.movies, loading: false, error: null};
+        const newState = {...state, ...changedState};
+        return newState;
+    }
+    else if (action.type === SIMILAR_MOVIE_ERROR) {
+        const changedState = {loading: false, error: action.error};
+        const newState = {...state, ...changedState};
+        return newState;
+    }
+    
+    return state;
 }

@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import {loadAuthToken} from './localStorage';
 import authReducer from './reducers/auth';
 import protectedDataReducer from './reducers/protectedData';
-import {searchReducer, detailReducer} from './reducers/helixReducer';
+import {searchReducer, detailReducer, similarReducer} from './reducers/helixReducer';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
 
 const store = createStore(
@@ -13,7 +13,8 @@ const store = createStore(
         auth: authReducer,
         protectedData: protectedDataReducer,
         search: searchReducer,
-        detail: detailReducer
+        detail: detailReducer,
+        similar: similarReducer
     }),
     applyMiddleware(thunk)
 );

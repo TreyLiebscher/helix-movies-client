@@ -43,7 +43,11 @@ function _getSimilar(id) {
             return Promise.reject(res.statusText);
         }
         return res.json();
-    }).then(data => data.results.map(movie => movie.title));
+    }).then(data => data.results.map(movie => ({ 
+        title: movie.title,
+        id: movie.id,
+        poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    })));
 }
 
 export function getSimilar(id) {
