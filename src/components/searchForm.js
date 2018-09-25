@@ -7,13 +7,6 @@ import {Link, Redirect} from 'react-router-dom';
 // imported in search.js as MovieSearch
 
 export class MovieSearch extends React.Component {
-    
-    handleClick = (e, movie) => {
-        console.log(movie.id)
-        e.preventDefault();
-        this.props.dispatch(idSearch(movie.id));
-    }
-
 
     renderResults() {
         if (this.props.loading) {
@@ -29,7 +22,7 @@ export class MovieSearch extends React.Component {
 
 
         const movies = this.props.movies.map((movie, index) => (
-            <li className="movieResultItem" key={index} id={movie.id} onClick={((e) => this.handleClick(e, movie))}><Link to={`/analyze/${movie.id}`}>{movie.title}</Link> <img className="moviePoster" src={movie.poster}/> </li>
+            <li className="movieResultItem" key={index} id={movie.id}><Link to={`/analyze/${movie.id}`}>{movie.title}</Link> <img className="moviePoster" src={movie.poster}/> </li>
         ));
 
 

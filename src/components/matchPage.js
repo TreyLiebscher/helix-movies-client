@@ -8,6 +8,13 @@ import {Link, Redirect} from 'react-router-dom';
 
 export class MatchPage extends React.Component {
 
+    // Uses the id from the URL to make request
+    componentDidMount() {
+        const { id } = this.props.match.params;
+        this.props.dispatch(idSearch(id));
+    }
+
+    // Genres is an array, map each category
     renderGenre() {
         const genres = this.props.genres.map((genre, index) => (
             <li className="genre" key={index}>{genre.name}</li>
@@ -16,12 +23,13 @@ export class MatchPage extends React.Component {
         return genres;
     }
 
+    // Appends poster path to this URL in order
+    // to show visible poster
     renderPoster() {
         const path = `https://image.tmdb.org/t/p/w500${this.props.poster_path}`;
         const moviePoster = <img className="moviePoster" src={path}/>;
         return moviePoster;
     }
-
 
     render() {
         return (
