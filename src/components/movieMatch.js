@@ -6,61 +6,36 @@ import {Link, Redirect} from 'react-router-dom';
 
 // TODO WIP
 
-export class MovieMatch extends React.Component {
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-          movies: []
-        };
-      }
-
+export default class MovieMatch extends React.Component {
+  
     componentDidMount() {
-        const id = this.id;
-        fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&page=1`)
-            .then(res => res.json())
-            .then(data => this.setState({movies: data}))
+        console.log(this.props.movies)
     }
 
-    
-    
+    renderResults() {
+        if (this.props.loading) {
+            return <Spinner spinnerName="circle" noFadeIn />;
+        }
 
-    // Genres is an array, map each category
-    // renderGenre() {
-    //     const genres = this.props.genres.map((genre, index) => (
-    //         <li className="genre" key={index}>{genre.name}</li>
-    //     ))
+        if (this.props.error) {
+            return <strong>{this.props.error}</strong>;
+        }
 
-    //     return genres;
-    // }
+        const movies = this.props.movies.map((movie, index) => (
+            <li className="movieResultItem" key={index} id={movie.id}><Link to={`/analyze/${movie.id}`}>{movie.title}</Link> <img className="moviePoster" src={movie.poster}/> </li>
+        ));
 
-    // Appends poster path to this URL in order
-    // to show visible poster
-    // renderPoster() {
-    //     const path = `https://image.tmdb.org/t/p/w500${this.props.poster_path}`;
-    //     const moviePoster = <img className="moviePoster" src={path}/>;
-    //     return moviePoster;
-    // }
 
+        return movies;
+    }
 
     render() {
-
         return (
             <div className="movie-match-result">
-
+                <ul>
+                    {this.renderResults()}
+                </ul>
             </div>
         );
     }
-
 }
-
-
-const mapStateToProps = (state) => {
-    return {
-        movies: state.similar.movies,
-        loading: state.similar.loading,
-        error: state.similar.error
-    }
-};
-
-export default connect(mapStateToProps)(MovieMatch);
