@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Spinner from 'react-spinkit';
 import {searchMovies} from '../actions/index';
 import {Link, Redirect} from 'react-router-dom';
+import './searchForm.css'
 
 // imported in search.js as MovieSearch
 
