@@ -49,15 +49,15 @@ export class MatchPage extends React.Component {
         return (
             <div className="matchPage">
                 <h2>{this.props.title}</h2>
-                <p className="voteAverage">Rating: {this.props.vote_average}</p>
+                <p className="popularity">Popularity: {this.props.popularity}</p>
+                <p className="voteAverage">Rating: {this.props.vote_average}/10</p>
                 <p className="voteCounts">Votes: {this.props.vote_count}</p>
                 {this.renderPoster()}
-                <p className="budget">Budget: {this.props.budget}</p>
+                <p className="budget">Budget: ${this.props.budget}</p>
                 <ul className="genreList">
                     {this.renderGenre()}
                 </ul>
                 <p className="overview">{this.props.overview}</p>
-                <p>{this.props.id}</p>
                     {this.showMatches()}
             </div>
         );
@@ -70,6 +70,7 @@ const mapStateToProps = (state) => {
     console.log('detail state is', state);
     return {
         title: state.detail.title,
+        popularity: state.detail.popularity,
         poster_path: state.detail.poster_path,
         budget: state.detail.budget,
         genres: state.detail.genres,

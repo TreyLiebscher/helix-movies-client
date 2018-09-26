@@ -43,6 +43,7 @@ export function searchReducer(state = searchState, action) {
 const detailState = {
     id: null,
     title: null,
+    popularity: null,
     poster_path: null,
     overview: null,
     budget: null,
@@ -62,6 +63,7 @@ export function detailReducer(state = detailState, action) {
             const changedState = {
                 id: action.movies.id,
                 title: action.movies.title,
+                popularity: action.movies.popularity,
                 poster_path: action.movies.poster_path,
                 overview: action.movies.overview,
                 budget: action.movies.budget,

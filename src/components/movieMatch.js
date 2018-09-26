@@ -3,75 +3,76 @@ import {connect} from 'react-redux';
 import Spinner from 'react-spinkit';
 import {similarMovies} from '../actions/index';
 import {Link, Redirect} from 'react-router-dom';
+import './movieMatch.css'
 
-// TODO WIP
 
 export default class MovieMatch extends React.Component {
-  
+    constructor(props) {
+        super(props);
+        this.state = {Movies : []};
+    }
     componentDidMount() {
-        console.log(this.props.movies)
+        this.getDetails();
+    }
+
+    renderGenre(item) {
+        const genres = item.genres.map((genre, index) => (
+            <li className="genre" key={index}>{genre.name}</li>
+        ))
+        return genres;
     }
 
     getDetails() {
-        const result = this.props.movies.map(movie => movie.id);
-        
-        const movieDetailArray = [];
 
-        if (result.length <= 4) {
-            console.log('kiwi result is', result);
-            const movieDetailsReq = result.map((item) => {
-                return fetch(`https://api.themoviedb.org/3/movie/${item}?api_key=c582a638ad7c6555e68892f076404dae&language=en-US`)
-                    .then(res => movieDetailArray.push(res.json()));
-            })
+        let movieIdArray;
+        const resultsArray = [];
+
+        if (this.props.movies <= 4) {
+            movieIdArray = this.props.movies.map(movie => movie.id)
         } else {
-            const reducedResult = result.slice(0, 4);
-            console.log('kiwi reduced result is', reducedResult);
-            const movieDetailsReq = reducedResult.map((item) => {
-                return fetch(`https://api.themoviedb.org/3/movie/${item}?api_key=c582a638ad7c6555e68892f076404dae&language=en-US`)
-                    .then(res => movieDetailArray.push(res.json()));
-            })
+            const reducedArray = this.props.movies.slice(0, 4);
+            movieIdArray = reducedArray.map(movie => movie.id);
         }
-        console.log(movieDetailArray);
-        return movieDetailArray;
-    }
-
-    renderResults() {
-        if (this.props.loading) {
-            return <Spinner spinnerName="circle" noFadeIn />;
-        }
-
-        if (this.props.error) {
-            return <strong>{this.props.error}</strong>;
-        }
+        
+        const promises = movieIdArray.map((item) => {
+            return fetch(`https://api.themoviedb.org/3/movie/${item}?api_key=c582a638ad7c6555e68892f076404dae&language=en-US`)
+                .then((res) => {
+                    return res.json();
+                });
+        });
 
         
-        // Return only 4 results for matches
-        if (this.props.movies.length <= 4) {
+        Promise.all(promises).then((values) => {
+            values.map((item) => {
+                resultsArray.push(item);
+            })
+        }).then(() => {
+            this.setState({
+                Movies: resultsArray.map((item, index) => (
+                    <li key={index} className="movieMatch">
+                        <h3>{item.title}</h3>
+                        <img className="matchPoster" src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}></img>
+                        <p>Popularity: {item.popularity}</p>
+                        <p>Budget: ${item.budget}</p>
+                        <p>Rating: {item.vote_average}/10</p>
+                        <p>Votes: {item.vote_count}</p>
+                        <ul>
+                            {this.renderGenre(item)}
+                        </ul>
+                    </li>
+                ))
+            })
             
-            const movies = this.props.movies.map((movie, index) => (
-                <li className="movieResultItem" key={index} id={movie.id}>{movie.title}<img className="moviePoster" src={movie.poster}/> </li>
-            ));
-
-            return movies;
-        } else if (this.props.movies.length > 4) {
-            
-            const reduced = this.props.movies.slice(0, 4);
-            
-            const reducedMovies = reduced.map((movie, index) => (
-                <li className="movieResultItem" key={index} id={movie.id}><Link to={`/analyze/${movie.id}`}>{movie.title}</Link> <img className="moviePoster" src={movie.poster}/> </li>
-            ));
-
-            return reducedMovies;
-        }
+        })
+        
     }
 
     render() {
         return (
             <div className="movie-match-result">
-                <ul>
-                    {this.renderResults()}
+                <ul className="matches">
+                    {this.state.Movies}
                 </ul>
-                {this.getDetails()}
             </div>
         );
     }

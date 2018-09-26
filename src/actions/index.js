@@ -77,28 +77,3 @@ export const similarMovies = id => dispatch => {
         .then(movies => dispatch(similarMovieSuccess(movies)))
         .catch(error => dispatch(similarMovieError(error)));
 }
-
-//GET SIMILAR DETAILS TODO
-// export const SIMILAR_DETAIL_REQUEST = 'SIMILAR_DETAIL_REQUEST';
-// export const similarDetailRequest = () => ({
-//     type: SIMILAR_DETAIL_REQUEST
-// });
-
-// export const SIMILAR_DETAIL_SUCCESS = 'SIMILAR_DETAIL_SUCCESS';
-// export const similarDetailSuccess = () => ({
-//     type: SIMILAR_DETAIL_SUCCESS,
-//     movies
-// });
-
-// export const SIMILAR_DETAIL_ERROR = 'SIMILAR_DETAIL_ERROR';
-// export const similarDetailError = () => ({
-//     type: SIMILAR_DETAIL_ERROR,
-//     error
-// });
-
-// export const similarDetailSearch = ids => dispatch => {
-//     dispatch(similarDetailRequest());
-//     searchById(id)
-//         .then(movies => dispatch(similarDetailSuccess(movies)))
-//         .catch(error => dispatch(similarDetailError(error)));
-// };
