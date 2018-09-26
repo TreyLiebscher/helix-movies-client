@@ -61,7 +61,7 @@ export default class MovieMatch extends React.Component {
                         </ul>
                     </li>
                 ))
-            })
+            }, () => console.log(this.state))
             
         })
         
