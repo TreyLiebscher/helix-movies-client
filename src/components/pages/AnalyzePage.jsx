@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types'
 import { PromiseContainerWithRouter } from '../../containers/PromiseContainer';
 import { searchById, getMatches } from '../../lib/tmdbLoader';
+import { Link } from 'react-router-dom';
+import slugify from 'slugify';
+import comparePlot from 'string-similarity';
 
 export default function AnalyzePage(props) {
     const { movie } = props
@@ -16,18 +19,25 @@ export default function AnalyzePage(props) {
         const genres = match.genres.map((genre, index) => {
             return <li className="genre" key={index}>{genre.name}</li>
         })
-        return <li className="movieMatch" key={index}>
-                    <h3>{match.title} ({year})</h3>
-                    <p>Rating: {rating}% ({match.vote_count} votes)</p>
-                    <p>{match.runtime} minutes</p>
-                    <p>Popularity: {match.popularity}</p>
-                    <ul>{genres}</ul>
-                    {img}
-                    <p>Budget: ${match.budget}</p>
-                    <p>Revenue: ${match.revenue}</p>
-                    <p>{match.overview}</p>
-                </li>
+        const plotSimilarity = comparePlot.compareTwoStrings(movie.original.overview, match.overview);
+        const similarityScore = Math.floor(plotSimilarity * 100);
+        
+            return <li className="movieMatch" key={index}>
+            <h3>{match.title} ({year})</h3>
+            <Link to={`/analyze/${match.id}/${slugify(match.title)}`}>{match.title}</Link>
+            <p>Rating: {rating}% ({match.vote_count} votes)</p>
+            <p>{match.runtime} minutes</p>
+            <p>Popularity: {match.popularity}</p>
+            <ul>{genres}</ul>
+            {img}
+            <p>Budget: ${match.budget}</p>
+            <p>Revenue: ${match.revenue}</p>
+            <p>{similarityScore}% similar to plot of {movie.original.title}</p>
+            <p>{match.overview}</p>
+        </li>
     })
+
+    
 
     //Original
     const style = { maxWidth: '300px' }
@@ -62,18 +72,10 @@ AnalyzePage.propTypes = {
     movie: propTypes.object.isRequired
 }
 
-//could try multiple promises here for similar movies
-// const promise = props => {
-//     const id = props.match.params.id
-//     return searchById(id);
-// }
-
 const promise = props => {
     const id = props.match.params.id;
     return getMatches(id);
 }
-
-
 
 const renderFn = (props) => {
     const id = props.match.params.id
