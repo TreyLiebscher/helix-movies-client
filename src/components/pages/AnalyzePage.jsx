@@ -11,9 +11,21 @@ export default function AnalyzePage(props) {
     const matches = movie.matches.map((match, index) => {
         const rating = match.vote_average * 10;
         const year = match.release_date.substring(0, 4);
-        return <li key={index}>
+        const style = { maxWidth: '300px' }
+        const img = match.hasPoster ? (<img src={match.poster} style={style}></img>) : null;
+        const genres = match.genres.map((genre, index) => {
+            return <li className="genre" key={index}>{genre.name}</li>
+        })
+        return <li className="movieMatch" key={index}>
                     <h3>{match.title} ({year})</h3>
                     <p>Rating: {rating}% ({match.vote_count} votes)</p>
+                    <p>{match.runtime} minutes</p>
+                    <p>Popularity: {match.popularity}</p>
+                    <ul>{genres}</ul>
+                    {img}
+                    <p>Budget: ${match.budget}</p>
+                    <p>Revenue: ${match.revenue}</p>
+                    <p>{match.overview}</p>
                 </li>
     })
 
@@ -39,7 +51,7 @@ export default function AnalyzePage(props) {
 
             <a href={movie.original.homepage} target="_blank">{movie.original.title} website</a>
             <p>{movie.original.overview}</p>
-            <ul>
+            <ul className="movieMatchResults">
                 {matches}
             </ul>
 

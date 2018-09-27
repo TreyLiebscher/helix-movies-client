@@ -1,5 +1,3 @@
-import { search } from "../components/tmdbSearch";
-
 const cacheByUrl = {}
 
 // searchByTitle + getSimilar
@@ -59,16 +57,7 @@ export function searchById(id) {
         .then(normalizeDetailMovie)
 }
 
-// Find similar movies from initial movie ID (3)
-// export function getSimilar(id) {
-//     return fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&page=1`).then(res => {
-//         if (!res.ok) {
-//             return Promise.reject(res.statusText);
-//         }
-//         return res.json();
-//     }).then(data => data.results.map(normalizeMovie));
-// }
-
+// Find Similar Movies (3)
 export function getSimilar(id) {
     const url = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&page=1`
     return cachedFetch(url)
@@ -82,11 +71,13 @@ export async function getMatches(id) {
     const similarMovieArray = await getSimilar(id);
     const originalMovie = await searchById(id)
 
-    const returnObj = {
+    //Responses stores in this object    
+    const resObj = {
         original: originalMovie,
         matches: resultsArray
     }
 
+    //Only return first 3 matches
     if (similarMovieArray.length <= 3) {
         movieIdArray = similarMovieArray.map(movie => movie.id);
     } else {
@@ -94,15 +85,17 @@ export async function getMatches(id) {
         movieIdArray = top3Matches.map(movie => movie.id);
     }
 
+    //Make requests for each similar movie
     const requests = movieIdArray.map((item) => {
         return searchById(item)
     });
 
+    //Store details of matches and return response object
     const final = await Promise.all(requests).then((values) => {
         values.map((item) => {
             resultsArray.push(item);
         })
-    }).then(() => {return returnObj})
-    console.log('KIWI return obj returns', returnObj)
+    }).then(() => {return resObj})
+    
     return final;
 }
