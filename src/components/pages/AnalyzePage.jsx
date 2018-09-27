@@ -60,7 +60,7 @@ export default function AnalyzePage(props) {
             <p>Budget: ${movie.original.budget}</p>
             <p>Revenue: ${movie.original.revenue}</p>
 
-            <a href={movie.original.homepage} target="_blank">{movie.original.title} website</a>
+            <p>Movie webpage: <a href={movie.original.homepage} target="_blank">{movie.original.title}</a></p>
             <p>{movie.original.overview}</p>
             <ul className="movieMatchResults">
                 {matches}
