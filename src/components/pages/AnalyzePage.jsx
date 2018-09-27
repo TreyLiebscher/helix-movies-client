@@ -5,6 +5,7 @@ import { searchById, getMatches } from '../../lib/tmdbLoader';
 import { Link } from 'react-router-dom';
 import slugify from 'slugify';
 import comparePlot from 'string-similarity';
+import './AnalyzePage.css'
 
 export default function AnalyzePage(props) {
     const { movie } = props
