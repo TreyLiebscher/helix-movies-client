@@ -13,7 +13,7 @@ export default (
     <Route exact path="/" component={HomePageWithData} />
     <Route path="/search/:searchString" component={HomePageWithData} />
     <Route exact path="/analyze/:id/:title" component={AnalyzePageWithData} />
-    <Route path="/streaming/:title" component={StreamingInfoWithData} />
+    <Route exact path="/streaming/:title" component={StreamingInfoWithData} />
     <Route path="*" component={NotFoundPage} />
   </Switch>
 );

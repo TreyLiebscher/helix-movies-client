@@ -3,15 +3,25 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    list-style: none;
 }
 
 .movieMatch {
     flex: 1 1;
     margin: 1em;
-    height: 200px;
-    width: 150px;
+    /* height: 200px;
+    width: 150px; */
+    border: 1px solid red;
 }
 
 .matchPoster {
     height: 100%;
+}
+
+td {
+    border: 1px solid #333;
+}
+
+.movieComparisonTable {
+    width: 100%;
 }

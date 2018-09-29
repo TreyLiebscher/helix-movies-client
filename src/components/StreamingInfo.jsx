@@ -6,7 +6,11 @@ import { getStreamingAvailability, getStreaming } from '../lib/tmdbLoader';
 export default function StreamingInfo(props) {
     const { info } = props;
     const services = info.locations.map((item, index) => {
-        return <li key={index}>{item.display_name}</li>
+        return <li key={index}>
+                    <p>{item.display_name}</p>
+                    <img src={item.icon} />
+                    <a href={item.url} target="_blank">Watch on {item.display_name}</a>
+                </li>
     })
     return (
         <div>
