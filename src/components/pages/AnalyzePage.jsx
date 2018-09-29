@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types'
 import { PromiseContainerWithRouter } from '../../containers/PromiseContainer';
 import { searchById, getMatches } from '../../lib/tmdbLoader';
+
 import { Link } from 'react-router-dom';
 import slugify from 'slugify';
 import comparePlot from 'string-similarity';
@@ -51,6 +52,8 @@ export default function AnalyzePage(props) {
 
     return (
         <div>
+            <button >Streaming Availability</button>
+            <Link to={`/streaming/${slugify(movie.original.title)}`}>Streaming info for {movie.original.title}</Link>
             <h1>{movie.original.title} ({year})</h1>
             <h2>Rating: {rating}% ({movie.original.vote_count} votes)</h2>
             <p>{movie.original.runtime} minutes</p>

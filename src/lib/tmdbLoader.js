@@ -28,12 +28,12 @@ const normalizeDetailMovie = movie => ({
     vote_count: movie.vote_count
 });
 
-function cachedFetch(url) {
+function cachedFetch(url, options) {
     if (cacheByUrl[url]) {
         return Promise.resolve(cacheByUrl[url])
     }
     //cache results in browser memory
-    return fetch(url)
+    return fetch(url, {headers: options})
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
@@ -62,6 +62,15 @@ export function getSimilar(id) {
     const url = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&page=1`
     return cachedFetch(url)
         .then(data => data.results.map(normalizeMovie));
+}
+
+export function getStreamingAvailability(title) {
+    const url = `https://utelly-tv-shows-and-movies-availability-v1.p.mashape.com/lookup?country=us&term=${title}`;
+    const options = {
+        "X-Mashape-Key": "zixfzYPHfKmshNNxNEW2n8bR7l3Gp1cNGdljsnhf2G7uUj9b0L",
+        "Accept": "application/json"
+    }
+    return cachedFetch(url, options);
 }
 
 export async function getMatches(id) {
@@ -96,6 +105,23 @@ export async function getMatches(id) {
             resultsArray.push(item);
         })
     }).then(() => {return resObj})
-    
+
     return final;
+}
+
+export async function getStreaming(title) {
+
+    let singleResult;
+    const initialResultsArray = await getStreamingAvailability(title);
+
+
+    //Only return top result
+    if (initialResultsArray.results <= 1) {
+        singleResult = initialResultsArray.results
+    } else {
+        singleResult = initialResultsArray.results[0];
+    }
+    
+    console.log('kiwi single result returns', singleResult)
+    return singleResult;
 }
