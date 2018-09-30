@@ -3,7 +3,7 @@ import React from 'react';
 import LoginForm from './loginForm';
 import SignupForm from './signupForm';
 
-import './navbar.css'
+import './NavBar.css'
 
 export default class Navbar extends React.Component {
     render () {
