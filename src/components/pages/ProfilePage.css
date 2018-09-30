@@ -1,0 +1,8 @@
+.profile-chart-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-chart {
+    flex: 1;
+}
