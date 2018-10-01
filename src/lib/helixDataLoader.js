@@ -1,38 +1,23 @@
+
+// Approach 1 ----> clean but more processing required on front end
+
+
+// Example of saving a movie:
+// user clicks 'like/save' on movie
+// a PUT request is made to user.helix
+// each relevant field of movie (year, genres, budget, etc) is pushed into a corresponding array
+// in the helix object
+
+
 export const mockUserData = {
     userName: 'Trey',
     password: '123',
     helix: {
         decades: ['1975', '1975', '1977', '1974', '1983', '1982', '1990', '2008'],
-        genres: ['action', 'thriller', 'comedy', 'action', 'action', 'drama', 'thriller', 'action'],
-        budget: [24, 29, 30, 45, 21, 40],
+        genres: ['action', 'thriller', 'thriller', 'thriller', 'thriller', 'comedy', 'action', 'action', 'drama', 'thriller', 'action'],
+        budget: [100000000, 200000000],
         runtime: [122, 140, 90, 98, 140, 101],
-        revenue: [32, 45, 56, 57, 60, 70],
+        revenue: [200000000, 300000000],
         rating: [68, 90, 56, 75, 80, 90, 95]
     }
-}
-
-export const mockUserData2 = {
-    helix: {
-        decades: {
-            '1900': [],
-            '1910': [],
-            '1920': ['1924', '1928'],
-            '1930': ['1932'],
-            '1940': [],
-            '1950': ['1951', '1953', '1957'],
-            '1960': [],
-            '1970': ['1971', '1971', '1971', '1973', '1975', '1975', '1976', '1977'],
-            '1980': ['1984', '1988'],
-            '1990': ['1992', '1992', '1995', '1995'],
-            '2000': ['2001', '2002', '2008'],
-            '2010': ['2010', '2011', '2011', '2012', '2012'],
-            '2020': [],
-        },
-        genres: {
-            action: [1, 1, 1, 1, 1, 1],
-            thriller: [1, 1, 1],
-            comedy: [1, 1],
-            drama: [1, 1, 1, 1]
-        }
-    }
-}
+}    

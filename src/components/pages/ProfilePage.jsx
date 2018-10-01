@@ -1,9 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import PieChart from 'react-minimal-pie-chart';
 import { PromiseContainerWithRouter } from '../../containers/PromiseContainer'
 import { mockUserData, mockUserData2 } from '../../lib/helixDataLoader';
-import RandomColor from 'randomcolor';
+import formatCurrency from 'format-currency';
 import './ProfilePage.css'
 
 export default function ProfilePage(props) {
@@ -24,29 +23,6 @@ export default function ProfilePage(props) {
         return average;
     }
 
-    // let total = [];
-    // const decades2 = mockUserData2.helix.decades.map((item, index) => {
-    //     total.push(item.length);
-    // })
-    // const test = mockUserData2.helix.decades.map((item) => {
-    //     console.log(item.length)
-    // });
-    // const test = mockUserData2.helix.decades.map((item) => {
-    //     console.log(item.length)
-    // });
-    // console.log('kiwi total returns', test)
-    let total = [];
-    const decades2 = mockUserData2.helix.decades;
-    const values = Object.entries(decades2).forEach(
-        ([key, value]) => {
-            // total.push(value.length)
-            total.push({title: key, value: value.length, color: RandomColor()})
-        }
-    )
-
-    const sumTotalDecades = total.reduce((a, b) => a + b, 0);
-
-    console.log(total)
 
 
     const decades = mockUserData.helix.decades;
@@ -57,24 +33,17 @@ export default function ProfilePage(props) {
     const userGenre = getFrequency(genres);
     
     const budgets = mockUserData.helix.budget;
-    const userBudget = getAverage(budgets);
+    const userBudget = formatCurrency(Math.floor(getAverage(budgets)));
 
     const runtimes = mockUserData.helix.runtime;
     const userRuntimes = Math.floor(getAverage(runtimes));
 
     const revenues = mockUserData.helix.revenue;
-    const userRevenues = Math.floor(getAverage(revenues));
+    const userRevenues = formatCurrency(Math.floor(getAverage(revenues)));
 
     const ratings = mockUserData.helix.rating;
     const userRating = Math.floor(getAverage(ratings));
 
-    const data = [
-        {title: "Data 1", value: 100, color: "#22594e"},
-        {title: "Data 2", value: 60, color: "#2f7d6d"},
-        {title: "Data 3", value: 30, color: "#3da18d"},
-        {title: "Data 4", value: 20, color: "#69c2b0"},
-        {title: "Data 5", value: 10, color: "#a1d9ce"},
-      ]
 
     
 
@@ -89,11 +58,31 @@ export default function ProfilePage(props) {
                 with average budgets of {userBudget}, average runtimes of {userRuntimes} minutes,
                 average revenues of {userRevenues}, and an average rating of {userRating}%
             </p>
-            <div className="profile-chart-container">
-            <PieChart data={total} radius={30} className="profile-chart" />
-            <PieChart data={data} radius={30} className="profile-chart"/>
-            <PieChart data={data} radius={30} className="profile-chart"/>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">Your Preferences</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Decade</td>
+                        <td>Genre</td>
+                        <td>Runtime</td>
+                        <td>Rating</td>
+                        <td>Budget</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>{userDecade}</td>
+                        <td>{userGenre}</td>
+                        <td>{userRuntimes} mins</td>
+                        <td>{userRating}%</td>
+                        <td>${userBudget}</td>
+                        <td>${userRevenues}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     )
 }
