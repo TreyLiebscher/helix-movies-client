@@ -5,6 +5,7 @@ import { searchByTitle } from '../../lib/tmdbLoader'
 import { Link } from 'react-router-dom'
 import propTypes from 'prop-types'
 import slugify from 'slugify'
+import LoginForm from '../loginForm';
 
 
 //props: searchString, searchResults, history
@@ -20,6 +21,8 @@ export default function HomePage(props) {
         <div key={searchString || 'empty'}  >
             <h1>MovieHelix</h1>
             <h3>{message}</h3>
+            <LoginForm />
+            <Link to="/signup">Sign Up</Link>
             <SearchForm history={history} initialValue={searchString}  />
             {results}
         </div>
