@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router';
 // Module root components
 import { HomePageWithData } from './components/pages/HomePage';
 import { AnalyzePageWithData } from './components/pages/AnalyzePage';
-import { ProfilePageWithData } from './components/pages/ProfilePage';
+import ProfilePageWithData from './components/pages/ProfilePage';
 import { StreamingInfoWithData } from './components/StreamingInfo';
 import { SignupPage } from './components/signupPage';
 import { NavBar } from './components/NavBar';

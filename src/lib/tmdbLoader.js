@@ -1,4 +1,7 @@
+import {API_BASE_URL} from '../config';
+
 const cacheByUrl = {}
+
 
 // searchByTitle + getSimilar
 const normalizeMovie = movie => ({
@@ -124,4 +127,12 @@ export async function getStreaming(title) {
     
     console.log('kiwi single result returns', singleResult)
     return singleResult;
+}
+
+export async function getProfile(token) {
+    const url = `${API_BASE_URL}/profile`;
+    const options = {
+        Authorization: `Bearer ${token}`
+    }
+    return cachedFetch(url, options);
 }
