@@ -12,20 +12,92 @@ export default function AnalyzePage(props) {
     const { movie } = props
     console.log('kiwi movieProps of analyze page are', movie)
     
+    function closestMatch (num, arr) {
+        let current = arr[0];
+        let diff = Math.abs (num - current);
+        for (let val = 0; val < arr.length; val++) {
+            let newdiff = Math.abs (num - arr[val]);
+            if (newdiff < diff) {
+                diff = newdiff;
+                current = arr[val];
+            }
+        }
+        return current;
+    }
+
+    function exactMatch(arr, val) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].match(val)) return arr[i]
+        }
+        return -1;
+    }
+
+
+
+
+
+    // const matchArray = movie.matches.map((item) => {
+    //     const year = item.release_date.substring(0, 4);
+    //     return year;
+    // })
+    
+    
+    
+
+
+
+
     //Match Titles
     const matchTitles = movie.matches.map((match, index) => {
-        return <td>{match.title}</td>
+        return <td key={index}>{match.title}</td>
     });
-    //Match Years
+    //Match Years (return green for each closest match)
     const matchYears = movie.matches.map((match, index) => {
+        
         const year = match.release_date.substring(0, 4);
-        return <td>{year}</td>
+        const originalYear = movie.original.release_date.substring(0, 4);
+
+        const yearArray = movie.matches.map((item) => {
+            const year = item.release_date.substring(0, 4);
+            return year;
+        });
+        // Returns single best matched value
+        const closest = closestMatch(originalYear, yearArray);
+        // If current year matches ^ closest
+        if(year === closest) {
+            return <td className="matchedField" key={index}>{year}</td>
+        } else {
+            return <td key={index}>{year}</td>
+        }
     });
+
+    // const matcheGenres2 = movie.matches.map((item) => {
+    //     const genres = item.genres.map((item) => item.name)
+    //     return genres
+    // });
+    // const genres2 = [].concat.apply([], matcheGenres2);
+    // console.log('kiwi matchGenres2 returns', matcheGenres2)
+    // console.log('kiwi genres2 returns', genres2)
+    // const originalGenres = movie.original.genres.map((genre, index) => {
+    //       return    genre.name
+    // })
+    // console.log(originalGenres)
+    // console.log('genre match', closestMatch(originalGenres[0], genres2))
+
     //Match Genres
     const matchGenres = movie.matches.map((match, index) => {
+        
+        const originalGenreArray = movie.original.genres.map((genre) => genre.name);
+
         const genres = match.genres.map((genre, index) => {
-            return <li className="genre" key={index}>{genre.name}</li>
+            const matcher = exactMatch(originalGenreArray, genre.name)
+            if (matcher !== -1) {
+                return <li className="genre matchedField" key={index}>{genre.name}</li>
+            } else {
+                return <li className="genre" key={index}>{genre.name}</li>
+            }
         })
+
         return <td>{genres}</td>
     });
     //Match Ratings

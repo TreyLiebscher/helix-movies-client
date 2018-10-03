@@ -136,3 +136,8 @@ export async function getProfile(token) {
     }
     return cachedFetch(url, options);
 }
+
+export async function getPublicProfile(username) {
+    const url = `${API_BASE_URL}/users/profile/${username}`;
+    return cachedFetch(url);
+}

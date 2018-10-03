@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router';
 import { HomePageWithData } from './components/pages/HomePage';
 import { AnalyzePageWithData } from './components/pages/AnalyzePage';
 import ProfilePageWithData from './components/pages/ProfilePage';
+import { PublicProfileWithData } from './components/pages/PublicProfile';
 import { StreamingInfoWithData } from './components/StreamingInfo';
 import { SignupPage } from './components/signupPage';
 import { NavBar } from './components/NavBar';
@@ -18,6 +19,7 @@ export default (
     <Route exact path="/analyze/:id/:title" component={AnalyzePageWithData} />
     <Route exact path="/streaming/:title" component={StreamingInfoWithData} />
     <Route exact path="/profile" component={ProfilePageWithData} />
+    <Route exact path="/profile/:username" component={PublicProfileWithData} />
     <Route exact path="/signup" component={SignupPage} />
     <Route path="*" component={NotFoundPage} />
   </Switch>

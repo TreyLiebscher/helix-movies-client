@@ -25,3 +25,7 @@ td {
 .movieComparisonTable {
     width: 100%;
 }
+
+.matchedField {
+    background-color: lightgreen;
+}
