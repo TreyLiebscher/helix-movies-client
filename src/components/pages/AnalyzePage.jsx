@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types'
 import { PromiseContainerWithRouter } from '../../containers/PromiseContainer';
 import { searchById, getMatches } from '../../lib/tmdbLoader';
+import formatCurrency from 'format-currency';
 
 import { Link } from 'react-router-dom';
 import slugify from 'slugify';
@@ -12,6 +13,7 @@ export default function AnalyzePage(props) {
     const { movie } = props
     console.log('kiwi movieProps of analyze page are', movie)
     
+    // Close Match (numbers)
     function closestMatch (num, arr) {
         let current = arr[0];
         let diff = Math.abs (num - current);
@@ -24,33 +26,27 @@ export default function AnalyzePage(props) {
         }
         return current;
     }
-
+    // Exact Match (strings)
     function exactMatch(arr, val) {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i].match(val)) return arr[i]
         }
         return -1;
     }
-
-
-
-
-
-    // const matchArray = movie.matches.map((item) => {
-    //     const year = item.release_date.substring(0, 4);
-    //     return year;
-    // })
     
     
-    
-
-
-
-
     //Match Titles
     const matchTitles = movie.matches.map((match, index) => {
-        return <td key={index}>{match.title}</td>
+        return <td key={index}>
+                    <Link to={`/analyze/${match.id}/${slugify(match.title)}`}>{match.title}</Link>
+                </td>
     });
+    //Match Posters
+    const matchPosters = movie.matches.map((match, index) => {
+        const style = { maxWidth: '300px' }
+        const img = match.hasPoster ? (<img src={match.poster} style={style}></img>) : null;
+        return <td key={index}>{img}</td>
+    })
     //Match Years (return green for each closest match)
     const matchYears = movie.matches.map((match, index) => {
         
@@ -70,21 +66,7 @@ export default function AnalyzePage(props) {
             return <td key={index}>{year}</td>
         }
     });
-
-    // const matcheGenres2 = movie.matches.map((item) => {
-    //     const genres = item.genres.map((item) => item.name)
-    //     return genres
-    // });
-    // const genres2 = [].concat.apply([], matcheGenres2);
-    // console.log('kiwi matchGenres2 returns', matcheGenres2)
-    // console.log('kiwi genres2 returns', genres2)
-    // const originalGenres = movie.original.genres.map((genre, index) => {
-    //       return    genre.name
-    // })
-    // console.log(originalGenres)
-    // console.log('genre match', closestMatch(originalGenres[0], genres2))
-
-    //Match Genres
+    //Match Genres (return green for each closest match)
     const matchGenres = movie.matches.map((match, index) => {
         
         const originalGenreArray = movie.original.genres.map((genre) => genre.name);
@@ -100,32 +82,95 @@ export default function AnalyzePage(props) {
 
         return <td>{genres}</td>
     });
-    //Match Ratings
+    //Match Ratings (return green for each closest match)
     const matchRatings = movie.matches.map((match, index) => {
-        const rating = match.vote_average * 10;
-        return <td>{rating}</td>
+        
+        const originalRating = movie.original.vote_average;
+        const rating = match.vote_average;
+        const ratingArray = movie.matches.map((item) => item.vote_average);
+
+        const closest = closestMatch(originalRating, ratingArray);
+
+        if (rating === closest) {
+            return <td className="matchedField" key={index}>{rating * 10}%</td>
+        } else {
+            return <td key={index}>{rating * 10}%</td>
+        }
     });
-    //Match Votes
+    //Match Votes (return green for each closest match)
     const matchVotes = movie.matches.map((match, index) => {
-        return <td>{match.vote_count}</td>
+
+        const originalVote = movie.original.vote_count;
+        const vote = match.vote_count;
+        const voteArray = movie.matches.map((item) => item.vote_count);
+
+        const closest = closestMatch(originalVote, voteArray);
+
+        if (vote === closest) {
+            return <td className="matchedField" key={index}>{vote} votes</td>
+        } else {
+            return <td key={index}>{vote} votes</td>
+        }
     });
-    //Match Runtimes
+    //Match Runtimes (return green for each closest match)
     const matchRuntimes = movie.matches.map((match, index) => {
-        return <td>{match.runtime}</td>
+
+        const originalRuntime = movie.original.runtime;
+        const runtime = match.runtime;
+        const runtimeArray = movie.matches.map((item) => item.runtime);
+
+        const closest = closestMatch(originalRuntime, runtimeArray);
+
+        if (runtime === closest) {
+            return <td className="matchedField" key={index}>{runtime}</td>
+        } else {
+            return <td key={index}>{runtime}</td>
+        }
     });
-    //Match Budgets
+    //Match Budgets (return green for each closest match)
     const matchBudgets = movie.matches.map((match, index) => {
-        return <td>{match.budget}</td>
+
+        const originalBudget = movie.original.budget;
+        const budget = match.budget;
+        const budgetArray = movie.matches.map((item) => item.budget);
+
+        const closest = closestMatch(originalBudget, budgetArray);
+        console.log(closest)
+        if (budget === closest) {
+            return <td className="matchedField" key={index}>${formatCurrency(budget)}</td>
+        } else {
+            return <td key={index}>${formatCurrency(budget)}</td>
+        }
     });
-    //Match Revenues
+    //Match Revenues (return green for each closest match)
     const matchRevenues = movie.matches.map((match, index) => {
-        return <td>{match.revenue}</td>
+
+        const originalRevenue = movie.original.revenue;
+        const revenue = match.revenue;
+        const revenueArray = movie.matches.map((item) => item.revenue);
+
+        const closest = closestMatch(originalRevenue, revenueArray);
+
+        if (revenue === closest) {
+            return <td className="matchedField" key={index}>${formatCurrency(revenue)}</td>
+        } else {
+            return <td key={index}>${formatCurrency(revenue)}</td>
+        }
     });
-    //Match Production Companies
+    //Match Production Companies (return green for each closest match)
     const matchProductionCompanies = movie.matches.map((match, index) => {
+
+        const originalCompanyArray = movie.original.production_companies.map((company) => company.name);
+
         const companies = match.production_companies.map((company, index) => {
-            return <li key={index}>{company.name}</li>
-        })
+            const matcher = exactMatch(originalCompanyArray, company.name);
+            if (matcher !== -1) {
+                return <li className="matchedField" key={index}>{company.name}</li>
+            } else {
+                return <li key={index}>{company.name}</li>
+            }
+        });
+
         return <td>{companies}</td>
     });
     //Match Plot Similarities
@@ -135,33 +180,36 @@ export default function AnalyzePage(props) {
         return <td>{similarityScore}%</td>
     })
 
+
     //Matches
     const matches = movie.matches.map((match, index) => {
         const rating = match.vote_average * 10;
-        const originalRating = movie.original.vote_average * 10;
+        // const originalRating = movie.original.vote_average * 10;
         const year = match.release_date.substring(0, 4);
-        const originalYear = movie.original.release_date.substring(0, 4);
+        // const originalYear = movie.original.release_date.substring(0, 4);
         const style = { maxWidth: '300px' }
         const img = match.hasPoster ? (<img src={match.poster} style={style}></img>) : null;
         const genres = match.genres.map((genre, index) => {
             return <li className="genre" key={index}>{genre.name}</li>
         })
-        const originalGenres = movie.original.genres.map((genre, index) => {
-            return <li className="genre" key={index}>{genre.name}</li>
-        })
+        // const originalGenres = movie.original.genres.map((genre, index) => {
+        //     return <li className="genre" key={index}>{genre.name}</li>
+        // })
         const plotSimilarity = comparePlot.compareTwoStrings(movie.original.overview, match.overview);
         const similarityScore = Math.floor(plotSimilarity * 100);
         
             return <li className="movieMatch" key={index}>
-            <h3>{match.title} ({year})</h3>
-            <Link to={`/analyze/${match.id}/${slugify(match.title)}`}>{match.title}</Link>
+            
+            <Link to={`/analyze/${match.id}/${slugify(match.title)}`}>
+                <h3>{match.title} ({year})</h3>
+            </Link>
             <p>Rating: {rating}% ({match.vote_count} votes)</p>
             <p>{match.runtime} minutes</p>
             <p>Popularity: {match.popularity}</p>
             <ul>{genres}</ul>
             {img}
-            <p>Budget: ${match.budget}</p>
-            <p>Revenue: ${match.revenue}</p>
+            <p>Budget: ${formatCurrency(match.budget)}</p>
+            <p>Revenue: ${formatCurrency(match.revenue)}</p>
             <p>{similarityScore}% similar to plot of {movie.original.title}</p>
             <p>{match.overview}</p>
         </li>
@@ -180,6 +228,8 @@ export default function AnalyzePage(props) {
     const productionCompanies = movie.original.production_companies.map((company, index) => {
         return <li key={index}>{company.name}</li>
     })
+    const budget = formatCurrency(movie.original.budget);
+    const revenue = formatCurrency(movie.original.revenue);
 
     return (
         <div>
@@ -191,8 +241,8 @@ export default function AnalyzePage(props) {
             <p>Popularity: {movie.original.popularity}</p>
             <ul>{genres}</ul>
             {img}
-            <p>Budget: ${movie.original.budget}</p>
-            <p>Revenue: ${movie.original.revenue}</p>
+            <p>Budget: ${budget}</p>
+            <p>Revenue: ${revenue}</p>
 
             <p>Movie webpage: <a href={movie.original.homepage} target="_blank">{movie.original.title}</a></p>
             <p>{movie.original.overview}</p>
@@ -207,6 +257,11 @@ export default function AnalyzePage(props) {
                         <td>Title</td>
                         <td>{movie.original.title}</td>
                         {matchTitles}
+                    </tr>
+                    <tr>
+                        <td>Poster</td>
+                        <td>{img}</td>
+                        {matchPosters}
                     </tr>
                     <tr>
                         <td>Year</td>
@@ -235,12 +290,12 @@ export default function AnalyzePage(props) {
                     </tr>
                     <tr>
                         <td>Budget</td>
-                        <td>{movie.original.budget}</td>
+                        <td>${budget}</td>
                         {matchBudgets}
                     </tr>
                     <tr>
                         <td>Revenue</td>
-                        <td>{movie.original.revenue}</td>
+                        <td>${revenue}</td>
                         {matchRevenues}
                     </tr>
                     <tr>
