@@ -40,8 +40,9 @@ export const fetchProfileError = error => ({
 
 export const getProfile = user => (dispatch, getState) => {
     const AUTH_TOKEN = getState().auth.authToken;
-
-    return fetch(`${API_BASE_URL}/users/profile`, {
+    // const kiwi = JSON.stringify(user);
+    console.log('kiwi user is', user)
+    return fetch(`${API_BASE_URL}/users/profile/home`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${AUTH_TOKEN}`

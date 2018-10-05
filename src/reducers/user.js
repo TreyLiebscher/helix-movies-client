@@ -3,9 +3,9 @@ import { FETCH_PROFILE_SUCCESS, FETCH_PROFILE_ERROR} from '../actions/users';
 const initialState = {
     username: '',
     email: '',
-    helix: '',
-    genres: '',
-    error: null
+    movies: [],
+    error: null,
+    loading: false
 };
 
 export default function reducer(state = initialState, action) {
@@ -13,13 +13,14 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             username: action.profile.username,
             email: action.profile.email,
-            helix: action.profile.helix,
-            genres: action.profile.genres,
-            error: null
+            movies: action.profile.movies,
+            error: null,
+            loading: false
         });
     } else if (action.type === FETCH_PROFILE_ERROR) {
         return Object.assign({}, state, {
-            error: action.error
+            error: action.error,
+            loading: false
         });
     }
     return state;

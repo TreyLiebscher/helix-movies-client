@@ -142,7 +142,12 @@ export async function getPublicProfile(username) {
     return cachedFetch(url);
 }
 
-
+export async function saveMovie(id) {
+    const url = `${API_BASE_URL}/movies/save`;
+    const options = {
+        
+    }
+}
 
 // {
 // 	"user": "5bb503d21fb438de851e1710",
