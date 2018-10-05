@@ -4,6 +4,14 @@ const initialState = {
     username: '',
     email: '',
     movies: [],
+    preferences: '',
+    genres: [],
+    companies: [],
+    countries: [],
+    budget: '',
+    revenue: '',
+    runtime: '',
+    rating: '',
     error: null,
     loading: false
 };
@@ -14,6 +22,14 @@ export default function reducer(state = initialState, action) {
             username: action.profile.username,
             email: action.profile.email,
             movies: action.profile.movies,
+            preferences: action.preferences,
+            genres: action.preferences.genres,
+            companies: action.preferences.companies,
+            countries: action.preferences.countries,
+            budget: action.preferences.budget,
+            revenue: action.preferences.revenue,
+            runtime: action.preferences.runtime,
+            rating: action.preferences.rating,
             error: null,
             loading: false
         });

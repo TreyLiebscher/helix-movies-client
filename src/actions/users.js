@@ -27,9 +27,10 @@ export const registerUser = user => dispatch => {
 };
 
 export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILESUCCESS';
-export const fetchProfileSuccess = profile => ({
+export const fetchProfileSuccess = (profile, preferences) => ({
     type: FETCH_PROFILE_SUCCESS,
-    profile
+    profile,
+    preferences
 });
 
 export const FETCH_PROFILE_ERROR = 'FETCH_PROFILE_ERROR';
@@ -40,8 +41,7 @@ export const fetchProfileError = error => ({
 
 export const getProfile = user => (dispatch, getState) => {
     const AUTH_TOKEN = getState().auth.authToken;
-    // const kiwi = JSON.stringify(user);
-    console.log('kiwi user is', user)
+    
     return fetch(`${API_BASE_URL}/users/profile/home`, {
         method: 'GET',
         headers: {
@@ -50,7 +50,7 @@ export const getProfile = user => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(({profile}) => dispatch(fetchProfileSuccess(profile)))
+        .then(({profile, preferences}) => dispatch(fetchProfileSuccess(profile, preferences)))
         .catch(err => {
             dispatch(fetchProfileError(err));
         });
