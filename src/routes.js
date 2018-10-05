@@ -15,9 +15,10 @@ import HomePage2 from './components/pages/HomePage2';
 
 export default (
   <Switch>
-    <Route exact path="/" component={HomePageWithData} />
-    {/* <Route exact path="/" component={HomePage2} /> */}
-    <Route path="/search/:searchString" component={HomePageWithData} />
+    {/* <Route exact path="/" component={HomePageWithData} /> */}
+    <Route exact path="/" component={HomePage2} />
+    <Route path="/search/:searchString" component={HomePage2} />
+    {/* <Route path="/search/:searchString" component={HomePageWithData} /> */}
     <Route exact path="/analyze/:id/:title" component={AnalyzePageWithData} />
     <Route exact path="/streaming/:title" component={StreamingInfoWithData} />
     <Route exact path="/profile/home" component={ProfilePageWithData} />

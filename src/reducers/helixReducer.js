@@ -8,7 +8,7 @@ import {
     ID_SEARCH_REQUEST,
     ID_SEARCH_SUCCESS,
     ID_SEARCH_ERROR
-} from '../actions/index';
+} from '../actions/tmdbAPI';
 
 const searchState = {
     movies: [],
