@@ -12,13 +12,13 @@ import './AnalyzePage.css'
 export default function AnalyzePage(props) {
     const { movie } = props
     console.log('kiwi movieProps of analyze page are', movie)
-    
+
     // Close Match (numbers)
-    function closestMatch (num, arr) {
+    function closestMatch(num, arr) {
         let current = arr[0];
-        let diff = Math.abs (num - current);
+        let diff = Math.abs(num - current);
         for (let val = 0; val < arr.length; val++) {
-            let newdiff = Math.abs (num - arr[val]);
+            let newdiff = Math.abs(num - arr[val]);
             if (newdiff < diff) {
                 diff = newdiff;
                 current = arr[val];
@@ -33,13 +33,13 @@ export default function AnalyzePage(props) {
         }
         return -1;
     }
-    
-    
+
+
     //Match Titles
     const matchTitles = movie.matches.map((match, index) => {
         return <td key={index}>
-                    <Link to={`/analyze/${match.id}/${slugify(match.title)}`}>{match.title}</Link>
-                </td>
+            <Link to={`/analyze/${match.id}/${slugify(match.title)}`}>{match.title}</Link>
+        </td>
     });
     //Match Posters
     const matchPosters = movie.matches.map((match, index) => {
@@ -49,7 +49,7 @@ export default function AnalyzePage(props) {
     })
     //Match Years (return green for each closest match)
     const matchYears = movie.matches.map((match, index) => {
-        
+
         const year = match.release_date.substring(0, 4);
         const originalYear = movie.original.release_date.substring(0, 4);
 
@@ -60,7 +60,7 @@ export default function AnalyzePage(props) {
         // Returns single best matched value
         const closest = closestMatch(originalYear, yearArray);
         // If current year matches ^ closest
-        if(year === closest) {
+        if (year === closest) {
             return <td className="matchedField" key={index}>{year}</td>
         } else {
             return <td key={index}>{year}</td>
@@ -68,7 +68,7 @@ export default function AnalyzePage(props) {
     });
     //Match Genres (return green for each closest match)
     const matchGenres = movie.matches.map((match, index) => {
-        
+
         const originalGenreArray = movie.original.genres.map((genre) => genre.name);
 
         const genres = match.genres.map((genre, index) => {
@@ -84,7 +84,7 @@ export default function AnalyzePage(props) {
     });
     //Match Ratings (return green for each closest match)
     const matchRatings = movie.matches.map((match, index) => {
-        
+
         const originalRating = movie.original.vote_average;
         const rating = match.vote_average;
         const ratingArray = movie.matches.map((item) => item.vote_average);
@@ -184,22 +184,18 @@ export default function AnalyzePage(props) {
     //Matches
     const matches = movie.matches.map((match, index) => {
         const rating = match.vote_average * 10;
-        // const originalRating = movie.original.vote_average * 10;
         const year = match.release_date.substring(0, 4);
-        // const originalYear = movie.original.release_date.substring(0, 4);
         const style = { maxWidth: '300px' }
         const img = match.hasPoster ? (<img src={match.poster} style={style}></img>) : null;
         const genres = match.genres.map((genre, index) => {
             return <li className="genre" key={index}>{genre.name}</li>
         })
-        // const originalGenres = movie.original.genres.map((genre, index) => {
-        //     return <li className="genre" key={index}>{genre.name}</li>
-        // })
+
         const plotSimilarity = comparePlot.compareTwoStrings(movie.original.overview, match.overview);
         const similarityScore = Math.floor(plotSimilarity * 100);
-        
-            return <li className="movieMatch" key={index}>
-            
+
+        return <li className="movieMatch" key={index}>
+
             <Link to={`/analyze/${match.id}/${slugify(match.title)}`}>
                 <h3>{match.title} ({year})</h3>
             </Link>
@@ -215,7 +211,7 @@ export default function AnalyzePage(props) {
         </li>
     })
 
-    
+
 
     //Original
     const style = { maxWidth: '300px' }
@@ -236,6 +232,7 @@ export default function AnalyzePage(props) {
             <Link to={`/`}>HOME</Link>
             <Link to={`/streaming/${slugify(movie.original.title)}`}><button >Streaming Availability</button> </Link>
             <h1>{movie.original.title} ({year})</h1>
+            
             <h2>Rating: {rating}% ({movie.original.vote_count} votes)</h2>
             <p>{movie.original.runtime} minutes</p>
             <p>Popularity: {movie.original.popularity}</p>
@@ -310,9 +307,9 @@ export default function AnalyzePage(props) {
                     </tr>
                 </tbody>
             </table>
-            <ul className="movieMatchResults">
+            {/* <ul className="movieMatchResults">
                 {matches}
-            </ul>
+            </ul> */}
 
         </div>
     )

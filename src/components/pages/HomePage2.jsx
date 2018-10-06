@@ -9,24 +9,34 @@ import SearchForm2 from '../SearchForm2';
 export function HomePage2(props) {
     const {history, results} = props;
     const searchString = props.match.params.searchString || ''
-    if (props.loggedIn) {
-        return <Redirect to='/profile/home' />;
-    }
+    // if (props.loggedIn) {
+    //     return <Redirect to='/profile/home' />;
+    // }
 
     searchMovies(searchString)
 
-    const movies = results.movies.map((movie, index) => (
-        <li key={movie.id}>
-            <Link to={`/analyze/${movie.id}/${slugify(movie.title)}`}>{movie.title}</Link>
-        </li>
-    ));
+    
+
+    const movies = results.movies.map((movie, index) => {
+        
+        const style = { maxWidth: '300px' }
+        const img = movie.hasPoster ? (<img src={movie.poster} style={style}></img>) : null;
+        
+        return (<li key={movie.id}>
+            <Link to={`/analyze/${movie.id}/${slugify(movie.title)}`}>{img}</Link>
+            
+        </li>)
+        
+    });
 
     return (
         <div className="homePage">
             <h1>Helix Movies</h1>
             <LoginForm />
             <SearchForm2 history={history} initialValue={searchString}/>
-            {movies}
+            <ul className="search-results">
+                {movies}
+            </ul>
             <Link to="/signup">Sign Up</Link>
         </div>
     )
