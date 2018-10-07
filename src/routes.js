@@ -11,6 +11,7 @@ import { SignupPage } from './components/signupPage';
 import { NavBar } from './components/NavBar';
 import NotFoundPage from './components/pages/NotFoundPage';
 import HomePage2 from './components/pages/HomePage2';
+import AnalyzePage2 from './components/pages/AnalyzePage2';
 
 
 export default (
@@ -19,7 +20,8 @@ export default (
     <Route exact path="/" component={HomePage2} />
     <Route path="/search/:searchString" component={HomePage2} />
     {/* <Route path="/search/:searchString" component={HomePageWithData} /> */}
-    <Route exact path="/analyze/:id/:title" component={AnalyzePageWithData} />
+    {/* <Route exact path="/analyze/:id/:title" component={AnalyzePageWithData} /> */}
+    <Route exact path="/analyze/:id/:title" component={AnalyzePage2} />
     <Route exact path="/streaming/:title" component={StreamingInfoWithData} />
     <Route exact path="/profile/home" component={ProfilePageWithData} />
     <Route exact path="/profile/:username" component={PublicProfileWithData} />

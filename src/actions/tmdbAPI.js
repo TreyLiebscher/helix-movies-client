@@ -143,3 +143,75 @@ export function getSimilar(id) {
     return cachedFetch(url)
         .then(data => data.results.map(normalizeMovie));
 }
+
+// GET_MATCHES_+_DETAIL
+export const MATCH_REQUEST = 'MATCH_REQUEST';
+export const matchRequest = () => ({
+    type: MATCH_REQUEST
+});
+
+export const MATCH_SUCCESS = 'MATCH_SUCCESS';
+export const matchSuccess = movies => ({
+    type: MATCH_SUCCESS,
+    movies
+});
+
+export const MATCH_ERROR = 'MATCH_ERROR';
+export const matchError = error => ({
+    type: MATCH_ERROR,
+    error
+});
+
+export const matchMovies = id => dispatch => {
+    dispatch(matchRequest());
+    getMatches(id)
+        .then(movies => dispatch(matchSuccess(movies)))
+        .catch(error => dispatch(matchError(error)));
+}
+
+
+export async function getMatches(id) {
+    let movieIdArray;
+    const resultsArray = [];
+    const similarMovieArray = await getSimilar(id);
+    const originalMovie = await searchById(id);
+
+    const resObj = {
+        original: originalMovie,
+        matches: resultsArray
+    }
+
+    //Only return first 3 matches
+    if (similarMovieArray.length <= 3) {
+        movieIdArray = similarMovieArray.map(movie => movie.id);
+    } else {
+        const top3Matches = similarMovieArray.slice(0, 3);
+        movieIdArray = top3Matches.map(movie => movie.id);
+    }
+
+    //Make requests for each similar movie
+    const requests = movieIdArray.map((item) => {
+        return searchById(item)
+    });
+
+    //Store details of matches and return response object
+    const final = await Promise.all(requests).then((values) => {
+        values.map((item) => {
+            resultsArray.push(item);
+        })
+    }).then(() => {return resObj})
+
+    return final;
+}
+
+export function saveMovie(data = {}) {
+    const url = `${API_BASE_URL}/movies/save`;
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json());
+}

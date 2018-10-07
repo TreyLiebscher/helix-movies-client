@@ -5,7 +5,7 @@ import {loadAuthToken} from './localStorage';
 import authReducer from './reducers/auth';
 import protectedDataReducer from './reducers/protectedData';
 import userReducer from './reducers/user';
-import {searchReducer, detailReducer, similarReducer} from './reducers/helixReducer';
+import {searchReducer, detailReducer, similarReducer, matchReducer} from './reducers/helixReducer';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
 
 const store = createStore(
@@ -16,6 +16,7 @@ const store = createStore(
         search: searchReducer,
         detail: detailReducer,
         similar: similarReducer,
+        match: matchReducer,
         userProfile: userReducer
     }),
     applyMiddleware(thunk)

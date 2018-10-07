@@ -55,3 +55,34 @@ export const getProfile = user => (dispatch, getState) => {
             dispatch(fetchProfileError(err));
         });
 };
+
+
+
+// TODO need to figure out how to pass data into this
+// in order to save the movie
+// export const saveMovie =  user => (dispatch, getState) => {
+//     const AUTH_TOKEN = getState().auth.authToken;
+
+//     return fetch(`${API_BASE_URL}/movies/save`, {
+//         method: 'POST',
+//         headers: {
+//             'Authorization': `Bearer ${AUTH_TOKEN}`,
+//             'Content-Type': 'application/json'
+//         }
+//         body: 
+//     })
+// }
+
+// {
+// 	"user": "5bb503d21fb438de851e1710",
+// 		"title": "Test Movie 5",
+// 		"year": "2008",
+// 		"genre": ["comedy", "romance", "horror"],
+// 		"rating": 92,
+// 		"runtime": 90,
+// 		"budget": 300000000,
+// 		"revenue": 100000000,
+// 		"production_companies": ["Warner Bros", "Canal+"],
+// 		"production_countries": ["US", "China"],
+// 		"users": ["5bb503d21fb438de851e1710"]
+// }

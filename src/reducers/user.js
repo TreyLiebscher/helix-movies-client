@@ -1,6 +1,7 @@
 import { FETCH_PROFILE_SUCCESS, FETCH_PROFILE_ERROR} from '../actions/users';
 
 const initialState = {
+    id: '',
     username: '',
     email: '',
     movies: [],
@@ -19,6 +20,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     if (action.type === FETCH_PROFILE_SUCCESS) {
         return Object.assign({}, state, {
+            id: action.profile.id,
             username: action.profile.username,
             email: action.profile.email,
             movies: action.profile.movies,
