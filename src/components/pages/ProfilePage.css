@@ -6,3 +6,15 @@
 .profile-chart {
     flex: 1;
 }
+
+.savedMovies {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.movie {
+    margin: 1em;
+    flex: 1;
+}

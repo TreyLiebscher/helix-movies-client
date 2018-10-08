@@ -31,7 +31,6 @@ export function HomePage2(props) {
 
     return (
         <div className="homePage">
-            <h1>Helix Movies</h1>
             <LoginForm />
             <SearchForm2 history={history} initialValue={searchString}/>
             <ul className="search-results">

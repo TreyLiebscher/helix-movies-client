@@ -23,19 +23,36 @@ export class NavBar extends React.Component {
     render() {
         // Only render the log out button if we are logged in
         let logOutButton;
+        let profileButton;
+        let logInButton;
+        let signupButton;
         if (this.props.loggedIn) {
             logOutButton = (
-                <button onClick={() => this.logOut()}>Log out</button>
+                <button className="navBar-button" onClick={() => this.logOut()}>Log out</button>
             );
+            profileButton = (
+                <button className="navBar-button">
+                    <Link to={`/profile/home`} style={{display: 'block', height: '100%', textDecoration: 'none', color: 'white'}}>Your profile</Link>
+                </button>
+            )
+        } else {
+            logInButton = (
+                <button className="navBar-button">Log In</button>
+            )
+            signupButton = (
+                <button className="navBar-button" >Sign Up</button>
+            )
         }
         return (
             <nav className="navBar">
                 <h1 className="navBar-title">Movie<span className="navBar-span">Helix</span></h1>
-                
-                <Router>
+                {logOutButton}
+                {profileButton}
+                {signupButton}
+                {logInButton}
+                {/* <Router>
                 <Link to={`/`}>Home</Link>
-                
-                </Router>
+                </Router> */}
             </nav>
         );
     }

@@ -34,18 +34,20 @@ export class ProfilePage extends React.Component {
             return <li key={index}>{item}</li>
         })
 
+        const savedMovies = this.props.profile.movies.map((movie, index) => {
+            const style = { maxWidth: '300px' };
+            const poster = movie.hasPoster ? (<img src={movie.poster} style={style}></img>) : <p>No Poster Available for {movie.title}</p>;
+            return <li key={index} className="movie">
+                        {poster}
+                    </li>
+        })
+
+
         const avgRating = this.props.profile.rating;
-        const avgBudget = this.props.profile.budget;
-        const avgRevenue = this.props.profile.revenue;
+        const avgBudget = formatCurrency(this.props.profile.budget);
+        const avgRevenue = formatCurrency(this.props.profile.revenue);
         const avgRuntime = this.props.profile.runtime;
 
-        // const titles = movieArray.map((item) => item.title);
-        // const genres = movieArray.map((item) => item.genre);
-        // const budgets = movieArray.map((item) => item.budget);
-        // const revenues = movieArray.map((item) => item.revenue);
-        // const runtimes = movieArray.map((item) => item.runtime);
-        // const companies = movieArray.map((item) => item.production_companies);
-        // const countries = movieArray.map((item) => item.production_countries);
 
         return (
             <div>
@@ -55,17 +57,18 @@ export class ProfilePage extends React.Component {
                 <div>Top Genres</div>
                 <ul>{genres}</ul>
                 <div>Average Budget</div>
-                <p>{avgBudget}</p>
+                <p>${avgBudget}</p>
                 <div>Average Revenue</div>
-                <p>{avgRevenue}</p>
+                <p>${avgRevenue}</p>
                 <div>Average Runtime</div>
-                <p>{avgRuntime}</p>
+                <p>{avgRuntime} minutes</p>
                 <div>Average Rating</div>
-                <p>{avgRating}</p>
+                <p>{avgRating}%</p>
                 <div>Top Production Companies</div>
                 <ul>{companies}</ul>
                 <div>Top Production Countries</div>
                 <ul>{countries}</ul>
+                <ul className="savedMovies">{savedMovies}</ul>
             </div>
         )
     }

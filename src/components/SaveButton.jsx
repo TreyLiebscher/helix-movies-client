@@ -11,6 +11,8 @@ export default function SaveButton(props) {
         console.log('kiwi saving movie...')
         const year = props.movie.release_date.substring(0, 4);
         const title = props.movie.title;
+        const hasPoster = props.movie.hasPoster;
+        const poster = props.movie.poster;
         const genre = props.movie.genres;
         const rating = props.movie.vote_average * 10;
         const runtime = props.movie.runtime;
@@ -29,6 +31,8 @@ export default function SaveButton(props) {
                 body: JSON.stringify({
                     user: user,
                     title: title,
+                    hasPoster: hasPoster,
+                    poster: poster,
                     year: year,
                     genre: genre,
                     rating: rating,
