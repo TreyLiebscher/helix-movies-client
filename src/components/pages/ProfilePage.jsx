@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import slugify from 'slugify';
 import { PromiseContainerWithRouter } from '../../containers/PromiseContainer'
 import { mockUserData, mockUserData2 } from '../../lib/helixDataLoader';
 import requiresLogin from '../requires-login';
@@ -35,10 +37,20 @@ export class ProfilePage extends React.Component {
         })
 
         const savedMovies = this.props.profile.movies.map((movie, index) => {
-            const style = { maxWidth: '300px' };
+            const style = { maxWidth: '300px', margin: 'auto' };
             const poster = movie.hasPoster ? (<img src={movie.poster} style={style}></img>) : <p>No Poster Available for {movie.title}</p>;
+            
             return <li key={index} className="movie">
+                         <Link to={`/analyze/${movie.movieId}/${slugify(movie.title)}`}>
+                            <h3 style={{textAlign: 'center'}}>{movie.title} ({movie.year})</h3>
+                        </Link>
                         {poster}
+                        <div className="buttonHolder">
+                            <button className="movieButton">Get Matches</button>
+                            {/* <Link to={`/streaming/${slugify(movie.title)}`}><button className="movieButton">Streaming Availability</button> </Link> */}
+                            <button className="movieButton">Get Streaming Info</button>
+                            <button className="movieButton">Remove from Favorites</button>
+                        </div>
                     </li>
         })
 

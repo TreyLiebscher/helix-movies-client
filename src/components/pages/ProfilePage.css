@@ -16,5 +16,17 @@
 
 .movie {
     margin: 1em;
+    -ms-flex: 1 1;
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonHolder {
+    display: flex;
+}
+
+.movieButton {
+    margin: 1em;
     flex: 1;
 }

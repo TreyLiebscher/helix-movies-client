@@ -9,6 +9,7 @@ export default function SaveButton(props) {
     function saveMovie (e) {
         e.preventDefault();
         console.log('kiwi saving movie...')
+        const movieId = props.movie.id;
         const year = props.movie.release_date.substring(0, 4);
         const title = props.movie.title;
         const hasPoster = props.movie.hasPoster;
@@ -30,6 +31,7 @@ export default function SaveButton(props) {
                 },
                 body: JSON.stringify({
                     user: user,
+                    movieId: movieId,
                     title: title,
                     hasPoster: hasPoster,
                     poster: poster,
