@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import {connect} from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import slugify from 'slugify';
 import {searchMovies} from '../actions/tmdbAPI';
 import Input from './input';
@@ -75,4 +75,4 @@ const mapStateToProps = state => ({
     error: state.search.error
 });
 
-export default connect(mapStateToProps)(SearchForm2);
+export default withRouter(connect(mapStateToProps)(SearchForm2));

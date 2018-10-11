@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, withRouter} from 'react-router-dom';
 import {searchMovies} from '../../actions/tmdbAPI';
 import slugify from 'slugify'
 import LoginForm from '../loginForm';
@@ -46,4 +46,4 @@ const mapStateToProps = state => ({
     results: state.search
 });
 
-export default connect(mapStateToProps)(HomePage2);
+export default withRouter(connect(mapStateToProps)(HomePage2));

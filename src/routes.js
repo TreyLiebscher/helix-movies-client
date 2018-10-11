@@ -14,6 +14,7 @@ import HomePage2 from './components/pages/HomePage2';
 import AnalyzePage2 from './components/pages/AnalyzePage2';
 
 
+
 export default (
   <Switch>
     {/* <Route exact path="/" component={HomePageWithData} /> */}
