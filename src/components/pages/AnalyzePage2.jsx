@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {Link, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import slugify from 'slugify';
-import {matchMovies} from '../../actions/tmdbAPI';
+import { matchMovies } from '../../actions/tmdbAPI';
 import SaveButton from '../SaveButton';
-import {getProfile} from '../../actions/users';
+import { getProfile } from '../../actions/users';
 import formatCurrency from 'format-currency';
 
 export class AnalyzePage2 extends React.Component {
-    componentDidMount() {
+
+    fetchData() {
         const id = this.props.match.params.id
         this.props.dispatch(matchMovies(id));
         this.props.dispatch(getProfile());
+    }
+
+    componentDidMount() {
+        console.log(`AnalyzePage2 mounted`)
+        this.fetchData()
         //TODO only make profile request
         // if user is logged in
         // if (this.props.loggedIn) {
@@ -19,6 +25,15 @@ export class AnalyzePage2 extends React.Component {
         // }
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const ID = this.props.match.params.id
+        const prevID = prevProps.match.params.id
+        //console.log('Did the movie change?', ID !== prevID)
+        if (ID !== prevID) {
+            this.fetchData()
+        }
+
+    }
 
     renderSaveButton() {
         if (this.props.loggedIn) {
@@ -52,7 +67,7 @@ export class AnalyzePage2 extends React.Component {
 
 
     render() {
-        
+
         // Original
         const orgMovie = this.props.movies.original;
         const orgTitle = orgMovie.title;
@@ -75,28 +90,28 @@ export class AnalyzePage2 extends React.Component {
 
         // Matches
         const matchMovie = this.props.movies.matches;
-        
+
         const matchTitles = matchMovie.map((match, index) => {
             return <td key={index}>
-                <Link to={`/analyze/${match.id}/${slugify(match.title)}`} 
-                onClick={ev => {
-                    ev.preventDefault()
-                    const val = match.id
-                    if (!val) {
-                        return this.props.history.push('/analyze')
-                    }
-                    this.props.history.push('/analyze/' + val + '/' + slugify(match.title))
-                }}>
-                {match.title}
+                <Link to={`/analyze/${match.id}/${slugify(match.title)}`}
+                    onClick={ev => {
+                        ev.preventDefault()
+                        const val = match.id
+                        if (!val) {
+                            return this.props.history.push('/analyze')
+                        }
+                        this.props.history.push('/analyze/' + val + '/' + slugify(match.title))
+                    }}>
+                    {match.title}
                 </Link>
             </td>
         });
-        
+
         const matchYears = matchMovie.map((match, index) => {
 
             const year = match.release_date.substring(0, 4);
             const originalYear = orgMovie.release_date.substring(0, 4);
-    
+
             const yearArray = matchMovie.map((item) => {
                 const year = item.release_date.substring(0, 4);
                 return year;
@@ -149,7 +164,7 @@ export class AnalyzePage2 extends React.Component {
             }
         });
 
-        
+
 
 
         return (
@@ -195,7 +210,7 @@ export class AnalyzePage2 extends React.Component {
                             <td>Rating</td>
                             <td>{orgRating}%</td>
                             {matchRatings}
-                        </tr> 
+                        </tr>
                         {/* <tr>
                             <td>Votes</td>
                             <td>{movie.original.vote_count}</td>
@@ -227,11 +242,11 @@ export class AnalyzePage2 extends React.Component {
                             {matchProductionCompanies}
                         </tr> */}
                     </tbody>
-                </table>        
+                </table>
             </div>
         )
     }
-    
+
 }
 
 const mapStateToProps = state => ({
@@ -240,7 +255,7 @@ const mapStateToProps = state => ({
     user: state.userProfile
 })
 
-export default connect(mapStateToProps)(withRouter(AnalyzePage2, {updateOnLocationChange: true}))
+export default connect(mapStateToProps)(withRouter(AnalyzePage2, { updateOnLocationChange: true }))
 
 // const MyConnectedComponent = connect(mapStateToProps)(withRouter(MyComponent, {updateOnLocationChange: true}))
 
