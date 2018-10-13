@@ -1,15 +1,24 @@
 .navBar {
     position: fixed;
+    display: -ms-flexbox;
     display: flex;
     top: 0;
-    width: 80%;
-    left: 10%;
-    right: 10%;
+    width: 100%;
+    /* left: 10%; */
+    /* right: 10%; */
     height: 10vh;
     border-bottom: 1px solid #91875e;
+    background-color: #fffffff2;
 }
 
 .navBar-title {
+    font-family: 'Megrim', cursive;
+    color: #91875e;
+    text-align: center;
+    margin: auto;
+}
+
+.helix-title-link {
     font-family: 'Megrim', cursive;
     color: #91875e;
     text-align: center;
@@ -24,6 +33,7 @@
     color: white;
     margin-top: auto;
     margin-bottom: auto;
+    font-family: 'Roboto Condensed', sans-serif;
 }
  
 .navBar-button:hover {

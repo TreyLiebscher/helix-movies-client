@@ -1,7 +1,3 @@
-
-
-
-
 import { Link } from 'react-router-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 
@@ -37,7 +33,9 @@ export class NavBar extends React.Component {
             )
         } else {
             logInButton = (
-                <button className="navBar-button">Log In</button>
+                <button className="navBar-button">
+                    <Link to={`/login`} style={{display: 'block', height: '100%', textDecoration: 'none', color: 'white'}}>Log In</Link>
+                </button>
             )
             signupButton = (
                 <button className="navBar-button" >Sign Up</button>
@@ -45,14 +43,11 @@ export class NavBar extends React.Component {
         }
         return (
             <nav className="navBar">
-                <h1 className="navBar-title">Movie<span className="navBar-span">Helix</span></h1>
+                <h1 className="navBar-title"><Link to={'/'} className="helix-title-link">Movie Helix</Link></h1>
                 {logOutButton}
                 {profileButton}
                 {signupButton}
                 {logInButton}
-                {/* <Router>
-                <Link to={`/`}>Home</Link>
-                </Router> */}
             </nav>
         );
     }

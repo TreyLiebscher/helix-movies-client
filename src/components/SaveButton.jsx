@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 import {API_BASE_URL} from '../config';
+import './SaveButton.css'
 
 export default function SaveButton(props) {
     const {movie, user} = props;
@@ -58,24 +59,3 @@ export default function SaveButton(props) {
     )
     
 }
-
-// const mapStateToProps = state => ({
-//     loggedIn: state.auth.currentUser !== null,
-// })
-
-// export default connect(mapStateToProps)(SaveButton);
-
-
-// {
-// 	"user": "5bb503d21fb438de851e1710",
-// 		"title": "Test Movie 5",
-// 		"year": "2008",
-// 		"genre": ["comedy", "romance", "horror"],
-// 		"rating": 92,
-// 		"runtime": 90,
-// 		"budget": 300000000,
-// 		"revenue": 100000000,
-// 		"production_companies": ["Warner Bros", "Canal+"],
-// 		"production_countries": ["US", "China"],
-// 		"users": ["5bb503d21fb438de851e1710"]
-// }

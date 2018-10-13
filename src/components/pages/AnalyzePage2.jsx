@@ -6,6 +6,7 @@ import { matchMovies } from '../../actions/tmdbAPI';
 import SaveButton from '../SaveButton';
 import { getProfile } from '../../actions/users';
 import formatCurrency from 'format-currency';
+import './AnalyzePage.css'
 
 export class AnalyzePage2 extends React.Component {
 
@@ -83,6 +84,13 @@ export class AnalyzePage2 extends React.Component {
         const orgPoster = orgMovie.hasPoster ? (<img src={orgMovie.poster} style={style}></img>) : null;
         const orgBudget = formatCurrency(orgMovie.budget);
         const orgRevenue = formatCurrency(orgMovie.revenue);
+        const orgCompanies = orgMovie.production_companies.map((company, index) => {
+            return <li key={index}>{company.name}</li>
+        });
+        const orgCountries = orgMovie.production_countries.map((country, index) => {
+            return <li key={index}>{country.name}</li>
+        });
+        
         const orgPlot = orgMovie.overview;
 
 
@@ -163,8 +171,98 @@ export class AnalyzePage2 extends React.Component {
                 return <td key={index}>{rating * 10}%</td>
             }
         });
+        //Match Votes (return green for each closest match)
+        const matchVotes = matchMovie.map((match, index) => {
 
+            const originalVote = orgMovie.vote_count;
+            const vote = match.vote_count;
+            const voteArray = matchMovie.map((item) => item.vote_count);
 
+            const closest = this.closestMatch(originalVote, voteArray);
+
+            if (vote === closest) {
+                return <td className="matchedField" key={index}>{vote} votes</td>
+            } else {
+                return <td key={index}>{vote} votes</td>
+            }
+        });
+        //Match Runtimes (return green for each closest match)
+        const matchRuntimes = matchMovie.map((match, index) => {
+
+            const originalRuntime = orgMovie.runtime;
+            const runtime = match.runtime;
+            const runtimeArray = matchMovie.map((item) => item.runtime);
+
+            const closest = this.closestMatch(originalRuntime, runtimeArray);
+
+            if (runtime === closest) {
+                return <td className="matchedField" key={index}>{runtime}</td>
+            } else {
+                return <td key={index}>{runtime}</td>
+            }
+        });
+        //Match Budgets (return green for each closest match)
+        const matchBudgets = matchMovie.map((match, index) => {
+
+            const originalBudget = orgMovie.budget;
+            const budget = match.budget;
+            const budgetArray = matchMovie.map((item) => item.budget);
+
+            const closest = this.closestMatch(originalBudget, budgetArray);
+            
+            if (budget === closest) {
+                return <td className="matchedField" key={index}>${formatCurrency(budget)}</td>
+            } else {
+                return <td key={index}>${formatCurrency(budget)}</td>
+            }
+        });
+        //Match Revenues (return green for each closest match)
+        const matchRevenues = matchMovie.map((match, index) => {
+
+            const originalRevenue = orgMovie.revenue;
+            const revenue = match.revenue;
+            const revenueArray = matchMovie.map((item) => item.revenue);
+
+            const closest = this.closestMatch(originalRevenue, revenueArray);
+
+            if (revenue === closest) {
+                return <td className="matchedField" key={index}>${formatCurrency(revenue)}</td>
+            } else {
+                return <td key={index}>${formatCurrency(revenue)}</td>
+            }
+        });
+        //Match Production Companies (return green for each closest match)
+        const matchProductionCompanies = matchMovie.map((match, index) => {
+
+            const originalCompanyArray = orgMovie.production_companies.map((company) => company.name);
+
+            const companies = match.production_companies.map((company, index) => {
+                const matcher = this.exactMatch(originalCompanyArray, company.name);
+                if (matcher !== -1) {
+                    return <li className="matchedField" key={index}>{company.name}</li>
+                } else {
+                    return <li key={index}>{company.name}</li>
+                }
+            });
+
+            return <td>{companies}</td>
+        });
+        //Match Production Companies (return green for each closest match)
+        const matchProductionCountries = matchMovie.map((match, index) => {
+
+            const originalCountryArray = orgMovie.production_countries.map((country) => country.name);
+
+            const countries = match.production_countries.map((country, index) => {
+                const matcher = this.exactMatch(originalCountryArray, country.name);
+                if (matcher !== -1) {
+                    return <li className="matchedField" key={index}>{country.name}</li>
+                } else {
+                    return <li key={index}>{country.name}</li>
+                }
+            });
+
+            return <td>{countries}</td>
+        });
 
 
         return (
@@ -211,36 +309,41 @@ export class AnalyzePage2 extends React.Component {
                             <td>{orgRating}%</td>
                             {matchRatings}
                         </tr>
-                        {/* <tr>
+                        <tr>
                             <td>Votes</td>
-                            <td>{movie.original.vote_count}</td>
+                            <td>{orgMovie.vote_count}</td>
                             {matchVotes}
                         </tr>
                         <tr>
                             <td>Runtime</td>
-                            <td>{movie.original.runtime}</td>
+                            <td>{orgMovie.runtime}</td>
                             {matchRuntimes}
                         </tr>
                         <tr>
                             <td>Budget</td>
-                            <td>${budget}</td>
+                            <td>${orgBudget}</td>
                             {matchBudgets}
                         </tr>
                         <tr>
                             <td>Revenue</td>
-                            <td>${revenue}</td>
+                            <td>${orgRevenue}</td>
                             {matchRevenues}
                         </tr>
-                        <tr>
+                        {/* <tr>
                             <td>Plot Similarity</td>
                             <td>100%</td>
                             {matchPlotSimilarity}
-                        </tr>
+                        </tr> */}
                         <tr>
                             <td>Production Companies</td>
-                            <td>{productionCompanies}</td>
+                            <td>{orgCompanies}</td>
                             {matchProductionCompanies}
-                        </tr> */}
+                        </tr>
+                        <tr>
+                            <td>Production Countries</td>
+                            <td>{orgCountries}</td>
+                            {matchProductionCountries}
+                        </tr>  
                     </tbody>
                 </table>
             </div>

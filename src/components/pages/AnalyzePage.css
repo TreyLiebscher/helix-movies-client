@@ -1,3 +1,15 @@
+* {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.analyze-page {
+    /* top: 10vh; */
+    /* left: 10%; */
+    /* right: 10%; */
+    width: 80%;
+    margin: auto;
+}
+
 .movieMatchResults {
     padding: 0;
     display: flex;
