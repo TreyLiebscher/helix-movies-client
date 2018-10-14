@@ -8,11 +8,7 @@ class App extends Component {
   render() {
     return (
       <div className="main-wrapper">
-        
-        
-        
         <div>
-          {/* main content */}
           <Router>
             <div>
               <NavBar />    

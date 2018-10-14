@@ -4,7 +4,6 @@ import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import slugify from 'slugify';
 import { PromiseContainerWithRouter } from '../../containers/PromiseContainer'
-import { mockUserData, mockUserData2 } from '../../lib/helixDataLoader';
 import requiresLogin from '../requires-login';
 import {getProfile} from '../../actions/users'
 import formatCurrency from 'format-currency';

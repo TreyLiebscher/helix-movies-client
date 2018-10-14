@@ -129,13 +129,6 @@ export async function getStreaming(title) {
     return singleResult;
 }
 
-// export async function getProfile(token) {
-//     const url = `${API_BASE_URL}/profile`;
-//     const options = {
-//         Authorization: `Bearer ${token}`
-//     }
-//     return cachedFetch(url, options);
-// }
 
 export async function getPublicProfile(username) {
     const url = `${API_BASE_URL}/users/profile/${username}`;
