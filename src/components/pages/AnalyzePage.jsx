@@ -29,7 +29,6 @@ export class AnalyzePage extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const ID = this.props.match.params.id
         const prevID = prevProps.match.params.id
-        //console.log('Did the movie change?', ID !== prevID)
         if (ID !== prevID) {
             this.fetchData()
         }
@@ -40,8 +39,8 @@ export class AnalyzePage extends React.Component {
         if (this.props.loggedIn) {
             return <SaveButton movie={this.props.movies.original} user={this.props.user}>Save to Favorites</SaveButton>;
         } else {
-            // return <Link to={'/signup'}><button>Log in to save movies!</button></Link>
-            return <SaveButton movie={this.props.movies.original} user={this.props.user}>Save to Favorites</SaveButton>;
+            return <Link to={'/login'} tabIndex="-1"><button>Log in to save movies!</button></Link>
+            // return <SaveButton movie={this.props.movies.original} user={this.props.user}>Save to Favorites</SaveButton>;
         }
     }
 

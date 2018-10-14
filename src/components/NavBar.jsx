@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import './NavBar.css'
@@ -14,6 +14,7 @@ export class NavBar extends React.Component {
     logOut() {
         this.props.dispatch(clearAuth());
         clearAuthToken();
+        <Redirect to="/" />
     }
 
     render() {
@@ -27,18 +28,14 @@ export class NavBar extends React.Component {
                 <button className="navBar-button" onClick={() => this.logOut()}>Log out</button>
             );
             profileButton = (
-                <button className="navBar-button">
-                    <Link to={`/profile/home`} style={{display: 'block', height: '100%', textDecoration: 'none', color: 'white'}}>Your profile</Link>
-                </button>
+                <Link to={`/profile/home`} className="navBar-button" tabIndex="-1"><button className="navBar-button">Your profile</button></Link>
             )
         } else {
             logInButton = (
-                <button className="navBar-button">
-                    <Link to={`/login`} style={{display: 'block', height: '100%', textDecoration: 'none', color: 'white'}}>Log In</Link>
-                </button>
+                <Link to={`/login`} className="navBar-button" tabIndex="-1"><button className="navBar-button">Log In</button></Link>
             )
             signupButton = (
-                <button className="navBar-button" >Sign Up</button>
+                <Link to={`/signup`} className="navBar-button" tabIndex="-1"><button className="navBar-button" >Sign Up</button></Link>
             )
         }
         return (

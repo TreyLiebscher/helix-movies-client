@@ -1,0 +1,45 @@
+.SignupForm {
+    text-align: center;
+}
+
+.form-input {
+    margin-bottom: 2%;
+}
+
+#username, #email, #password, #passwordConfirm {
+    border: none;
+    border-bottom: 1px solid gray;
+    width:80%;
+    height: 40px;
+    background-color: white;
+    color: #91875e;
+    font-size: 25px;
+    transition: all 0.3s;
+}
+
+#username:focus,
+#email:focus,
+#password:focus,
+#passwordConfirm:focus {
+    background-color: #91875ee3;
+    color: white;
+}
+
+.signup-button {
+    border-radius: 10px;
+    height: 50px;
+    width: 20%;
+    margin-top: 10px;    
+    border: 1px solid;
+    color: #91875e;
+    background-color: white;
+    font-family: 'Roboto Condensed', sans-serif;
+    transition: all 0.3s;
+}
+
+.signup-button:hover,
+.signup-button:focus {
+    background-color: #91875e;
+    color: white;
+    cursor: pointer;
+}

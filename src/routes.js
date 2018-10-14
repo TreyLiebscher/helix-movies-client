@@ -5,7 +5,8 @@ import { Route, Switch } from 'react-router';
 import ProfilePage from './components/pages/ProfilePage';
 import { PublicProfileWithData } from './components/pages/PublicProfile';
 import { StreamingInfoWithData } from './components/StreamingInfo';
-import { SignupPage } from './components/signupPage';
+import SignupPage from './components/signupPage';
+import LogInPage from './components/pages/LogInPage';
 import { NavBar } from './components/NavBar';
 import NotFoundPage from './components/pages/NotFoundPage';
 import HomePage from './components/pages/HomePage';
@@ -23,6 +24,7 @@ export default (
     <Route exact path="/profile/home" component={ProfilePage} />
     <Route exact path="/profile/:username" component={PublicProfileWithData} />
     <Route exact path="/signup" component={SignupPage} />
+    <Route exact path="/login" component={LogInPage} />
     <Route path="*" component={NotFoundPage} />
   </Switch>
 );

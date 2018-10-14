@@ -13,7 +13,7 @@ export function HomePage(props) {
     //     return <Redirect to='/profile/home' />;
     // }
 
-    searchMovies(searchString)
+    // searchMovies(searchString)
 
     
 
@@ -31,12 +31,10 @@ export function HomePage(props) {
 
     return (
         <div className="homePage">
-            <LoginForm />
             <SearchForm history={history} initialValue={searchString}/>
             <ul className="search-results">
                 {movies}
             </ul>
-            <Link to="/signup">Sign Up</Link>
         </div>
     )
 }
