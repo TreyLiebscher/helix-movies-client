@@ -14,21 +14,9 @@ import './ProfilePage.css'
 
 export class ProfilePage extends React.Component {
     
-    
-    
     componentDidMount() {
-        // this.props.dispatch(getProfile())
         this.props.dispatch(getProfile());
     }
-
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     const Movies = this.props.profile.movies.length;
-    //     const PrevMovies = prevProps.profile.movies.length;
-    //     if (Movies !== PrevMovies) {
-    //         console.log('need fetch!')
-    //         this.fetchData()
-    //     }
-    // }
 
 
     render () {
@@ -62,7 +50,7 @@ export class ProfilePage extends React.Component {
                             <button className="movieButton">Get Matches</button>
                             {/* <Link to={`/streaming/${slugify(movie.title)}`}><button className="movieButton">Streaming Availability</button> </Link> */}
                             <button className="movieButton">Get Streaming Info</button>
-                            <DeleteButton title={movie.title} user={this.props.profile.id}/>
+                            <DeleteButton title={movie.title} />
                         </div>
                     </li>
         })

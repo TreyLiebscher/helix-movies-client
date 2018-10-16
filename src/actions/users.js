@@ -57,6 +57,50 @@ export const getProfile = user => (dispatch, getState) => {
 };
 
 
+export const DELETE_MOVIE_SUCCESS = 'DELETE_MOVIE_SUCCESS';
+export const profileRefreshSuccess = (profile, preferences) => ({
+    type: DELETE_MOVIE_SUCCESS,
+    profile,
+    preferences
+});
+
+export const DELETE_MOVIE_ERROR = 'DELETE_MOVIE_ERROR';
+export const profileRefreshError = error => ({
+    type: DELETE_MOVIE_ERROR,
+    error
+});
+
+export const deleteMovie = movieTitle => (dispatch, getState) => {
+    const userId = getState().userProfile.id;
+    
+    
+    
+
+    const movieArray = getState().userProfile.movies;
+    const copyMovieArray = movieArray.slice(0);
+    console.log('movieArray returns', movieArray);
+    
+    return fetch(`${API_BASE_URL}/movies/delete`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            user: userId,
+            title: movieTitle,
+        })
+    })
+        .then(res => res.json())
+        
+        .then(({profile, preferences}) => dispatch(profileRefreshSuccess(profile, preferences)))
+        // .then(res => dispatch(profileRefreshSuccess(res.user.movies)))
+        .catch(err => {
+            dispatch(profileRefreshError(err));
+        });
+}
+
+
+
 
 // TODO need to figure out how to pass data into this
 // in order to save the movie

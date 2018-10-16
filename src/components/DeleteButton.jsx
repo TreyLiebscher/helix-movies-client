@@ -1,39 +1,30 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {API_BASE_URL} from '../config';
+import { API_BASE_URL } from '../config';
+import { deleteMovie } from '../actions/users';
 import './SaveButton.css'
 
-export default function DeleteButton(props) {
-    const {title, user, dispatch} = props;
+export function DeleteButton(props) {
 
-    function deleteMovie (e) {
-        e.preventDefault();
-        console.log('kiwi deleting movie...')
-        
+
+    function deleteMovieClick(e) {
+        e && e.preventDefault()
         const title = props.title;
-        const user = props.user;
-        
-        return fetch(`${API_BASE_URL}/movies/delete`, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    user: user,
-                    title: title,
-                })
-            })
-            .then(res => res.json())
-        
+        return props.dispatch(deleteMovie(title))
     }
 
-    
+
     return (
         <div className="save-button-holder">
-            <button className="delete-button" onClick={deleteMovie}>Delete Movie</button>
+            <button className="delete-button" onClick={deleteMovieClick}>Delete Movie</button>
         </div>
     )
-    
+
 }
+
+const mapStateToProps = state => ({
+    user: state.userProfile
+})
+
+export default connect(mapStateToProps)(DeleteButton);
