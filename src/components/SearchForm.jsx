@@ -1,11 +1,11 @@
 import React from 'react';
-import {Field, reduxForm, focus} from 'redux-form';
-import {connect} from 'react-redux';
+import { Field, reduxForm, focus } from 'redux-form';
+import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import slugify from 'slugify';
-import {searchMovies} from '../actions/tmdbAPI';
+import { searchMovies } from '../actions/tmdbAPI';
 import Input from './input';
-import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
+import { required, nonEmpty, matches, length, isTrimmed } from '../validators';
 
 
 export class SearchForm extends React.Component {
@@ -23,7 +23,7 @@ export class SearchForm extends React.Component {
                 <Link to={`/analyze/${movie.id}/${slugify(movie.title)}`}>{movie.title}</Link>
             </li>
         ));
-        
+
         return movies;
     }
 
@@ -48,18 +48,10 @@ export class SearchForm extends React.Component {
             <div className="movie-search">
                 <form
                     onReset={ev => { this.props.history.push('/') }}
-                    onSubmit={ev => {
-                    ev.preventDefault()
-                    const val = this.inputRef.value
-                    if (!val) {
-                        return this.props.history.push('/')
-                    }
-                    this.props.history.push('/search/' + val)
-                    this.props.dispatch(searchMovies(val))
-                }}>
-                <input name="query" type="text" ref={this._inputRef}></input>
-                <input type="submit" value="Search" />
-                <input type="reset" value="Clear" />
+                    onSubmit={ev => { ev.preventDefault(); this.props.onSubmit(this.inputRef.value) }}>
+                    <input name="query" type="text" ref={this._inputRef}></input>
+                    <input type="submit" value="Search" />
+                    <input type="reset" value="Clear" />
                 </form>
             </div>
         );

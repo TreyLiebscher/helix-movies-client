@@ -29,9 +29,18 @@ export function HomePage(props) {
         
     });
 
+    const onSubmit = val => {                        
+      
+        if (!val) {
+            return props.history.push('/')
+        }
+        props.history.push('/search/' + val)
+        props.dispatch(searchMovies(val))
+    }
+
     return (
         <div className="homePage">
-            <SearchForm history={history} initialValue={searchString}/>
+            <SearchForm onSubmit = {onSubmit} history={history} initialValue={searchString}/>
             <ul className="search-results">
                 {movies}
             </ul>
