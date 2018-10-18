@@ -1,0 +1,27 @@
+
+
+.search-results {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1em;
+    width: 90%;
+    margin: auto;
+    justify-content: center;
+}
+
+.movie-poster {
+    width: 200px;
+    height: 300px;
+    border: 1px solid black;
+}
+
+.movie-no-poster {
+    text-align: center;
+    line-height: 20px;
+    text-decoration: none;
+    width: 200px;
+    height: 300px;
+    border: 1px solid black;
+}

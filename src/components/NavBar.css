@@ -7,7 +7,7 @@
     /* left: 10%; */
     /* right: 10%; */
     height: 10vh;
-    border-bottom: 1px solid #927606;
+    border-bottom: 5px solid #927606;
     background-color: #fffffff2;
 }
 
@@ -23,6 +23,19 @@
     color: #927606;
     text-align: center;
     margin: auto;
+    transition: all 0.5s;
+}
+
+.helix-title-link:hover,
+.helix-title-link:focus {
+    color: black;
+}
+
+.navBar-button-holder {
+    position: absolute;
+    right: 0;
+    display: flex;
+    height: 100%;
 }
 
 .navBar .navBar-button {
@@ -30,11 +43,11 @@
     height: 100%;
     width: 100%;
     text-decoration: none;
-    border: 1px solid #927606;
+    border: 3px solid #927606;
     background-color: #927606;
-    color: black;
+    color: white;
     font-family: 'Roboto Condensed', sans-serif;
-    transition: all 0.3s;
+    /* transition: all 0.3s; */
 }
 
 .navBar-logout-button {
@@ -45,19 +58,11 @@
     margin-top: auto;
     margin-bottom: auto;
     text-decoration: none;
-    border: 1px solid #927606;
+    border: 3px solid #927606;
     background-color: #927606;
-    color: black;
+    color: white;
     font-family: 'Roboto Condensed', sans-serif;
-    transition: all 0.3s;
-}
- 
-.navBar-button:hover,
-.navBar-button:focus,
-.navBar-logout-button:hover,
-.navBar-logout-button:focus {
-    background-color: white;
-    cursor: pointer;
+    /* transition: all 0.3s; */
 }
 
 .navBar-link {
@@ -66,4 +71,12 @@
     margin-right: 1em;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.navBar-button:hover,
+.navBar-button:focus,
+.navBar-logout-button:hover,
+.navBar-logout-button:focus {
+    background-color: #685404;
+    cursor: pointer;
 }

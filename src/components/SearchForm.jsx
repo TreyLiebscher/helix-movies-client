@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import slugify from 'slugify';
 import { searchMovies } from '../actions/tmdbAPI';
+import './SearchForm.css';
 import Input from './input';
 import { required, nonEmpty, matches, length, isTrimmed } from '../validators';
 
@@ -19,7 +20,7 @@ export class SearchForm extends React.Component {
         }
 
         const movies = this.props.movies.map((movie, index) => (
-            <li key={movie.id}>
+            <li key={movie.id} className="result-movie">
                 <Link to={`/analyze/${movie.id}/${slugify(movie.title)}`}>{movie.title}</Link>
             </li>
         ));
@@ -46,12 +47,16 @@ export class SearchForm extends React.Component {
     render() {
         return (
             <div className="movie-search">
+                <h2>Search Movies</h2>
                 <form
+                    className="search-form"
                     onReset={ev => { this.props.history.push('/') }}
                     onSubmit={ev => { ev.preventDefault(); this.props.onSubmit(this.inputRef.value) }}>
-                    <input name="query" type="text" ref={this._inputRef}></input>
-                    <input type="submit" value="Search" />
-                    <input type="reset" value="Clear" />
+                    <div className="button-holder">
+                        <input name="query" type="text" ref={this._inputRef} className="search-input" placeholder="type the name of a movie"></input>
+                        <input type="reset" value="Clear" className="form-button clear"/>
+                    </div>
+                    <input type="submit" value="Search" className="form-button submit"/>
                 </form>
             </div>
         );

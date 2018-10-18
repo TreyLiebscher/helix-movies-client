@@ -5,6 +5,7 @@ import {searchMovies} from '../../actions/tmdbAPI';
 import slugify from 'slugify'
 import LoginForm from '../loginForm';
 import SearchForm from '../SearchForm';
+import './HomePage.css';
 
 export function HomePage(props) {
     const {history, results} = props;
@@ -20,9 +21,9 @@ export function HomePage(props) {
     const movies = results.movies.map((movie, index) => {
         
         const style = { maxWidth: '300px' }
-        const img = movie.hasPoster ? (<img src={movie.poster} style={style}></img>) : null;
+        const img = movie.hasPoster ? (<img src={movie.poster} className="movie-poster"></img>) : <div className="movie-no-poster">No Poster available for {movie.title}</div>;
         
-        return (<li key={movie.id}>
+        return (<li key={movie.id} className="result-movie">
             <Link to={`/analyze/${movie.id}/${slugify(movie.title)}`}>{img}</Link>
             
         </li>)

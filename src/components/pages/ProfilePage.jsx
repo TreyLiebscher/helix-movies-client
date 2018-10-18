@@ -63,7 +63,10 @@ export class ProfilePage extends React.Component {
 
 
         return (
-            <div>
+            <div className="profile-container">
+                <div className="user-info-container">
+                    Welcome {this.props.profile.username}!
+                </div>
                 <p>This profile belongs to {this.props.profile.username}</p>
                 <div>{this.props.profile.email}</div>
                 <div>You have rated {moviesRated} movies</div>

@@ -41,10 +41,12 @@ export class NavBar extends React.Component {
         return (
             <nav className="navBar">
                 <h1 className="navBar-title"><Link to={'/'} className="helix-title-link">Movie Helix</Link></h1>
-                {logOutButton}
-                {profileButton}
-                {signupButton}
-                {logInButton}
+                <div className="navBar-button-holder">
+                    {logOutButton}
+                    {profileButton}
+                    {signupButton}
+                    {logInButton}
+                </div>
             </nav>
         );
     }
