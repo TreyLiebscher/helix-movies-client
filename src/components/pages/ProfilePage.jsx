@@ -67,8 +67,6 @@ export class ProfilePage extends React.Component {
                 <p>This profile belongs to {this.props.profile.username}</p>
                 <div>{this.props.profile.email}</div>
                 <div>You have rated {moviesRated} movies</div>
-                {/* <div>Top Genres</div>
-                <ul>{genres}</ul> */}
                 <div className="profile-table-container">
                     <table className="profile-table">
                         <tbody>
@@ -110,7 +108,7 @@ export class ProfilePage extends React.Component {
                             </tr>
                         </tbody>
                     </table>
-                    <table className="profile-table">
+                    {/* <table className="profile-table">
                         <tbody>
                             <tr>
                                 <td className="profile-table-subject">Average Rating</td>
@@ -119,7 +117,7 @@ export class ProfilePage extends React.Component {
                                 <td className="profile-table-content">{avgRating}%</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> */}
                     <table className="profile-table">
                         <tbody>
                             <tr>
@@ -141,18 +139,6 @@ export class ProfilePage extends React.Component {
                         </tbody>
                     </table>
                 </div>
-                {/* <div>Average Budget</div>
-                <p>${avgBudget}</p> */}
-                {/* <div>Average Revenue</div>
-                <p>${avgRevenue}</p>
-                <div>Average Runtime</div>
-                <p>{avgRuntime} minutes</p> */}
-                {/* <div>Average Rating</div>
-                <p>{avgRating}%</p>
-                <div>Top Production Companies</div>
-                <ul>{companies}</ul>
-                <div>Top Production Countries</div>
-                <ul>{countries}</ul> */}
                 <ul className="savedMovies">{savedMovies}</ul>
             </div>
         )

@@ -1,11 +1,11 @@
 .home {
     width: 50%;
     margin: auto;
-    background-color: #91885c;
+    background-color: #927606;
     /* border: 1px solid #91885c; */
     border-radius: 10px;
     text-align: center;
-    box-shadow: 5px 10px 30px 8px rgba(0,0,0,0.4)
+    box-shadow: 6px 7px 20px -5px rgba(0,0,0,0.9);
 }
 
 .form-link {
