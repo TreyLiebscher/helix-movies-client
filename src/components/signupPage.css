@@ -1,8 +1,19 @@
 .home {
     width: 50%;
     margin: auto;
-    background-color: #ffffff;
-    border: 1px solid #91885c;
+    background-color: #91885c;
+    /* border: 1px solid #91885c; */
     border-radius: 10px;
+    text-align: center;
+    box-shadow: 5px 10px 30px 8px rgba(0,0,0,0.4)
 }
+
+.form-link {
+    color: white;
+}
+
+.form-link:hover {
+    color: black;
+}
+
 

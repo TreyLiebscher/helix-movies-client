@@ -14,7 +14,7 @@ export function SignupPage(props) {
         <div className="home">
             <h2>Signup for Movie Helix</h2>
             <SignupForm />
-            <Link to="/login">Login</Link>
+            <p>Already have an account? <Link to="/login" className="form-link">Login</Link></p>
         </div>
     );
 }

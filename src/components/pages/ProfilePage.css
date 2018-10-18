@@ -20,8 +20,21 @@
     flex: 1 1;
     display: flex;
     flex-direction: column;
+    background-color: #91875e;
 }
 
+.profile-table-container {
+    display: flex;
+    width: 90%;
+    margin: auto;
+    flex-wrap: wrap;
+}
+
+.profile-table {
+    flex: 1;
+    margin: 1em;
+    width: 20%;
+}
 .buttonHolder {
     display: flex;
 }

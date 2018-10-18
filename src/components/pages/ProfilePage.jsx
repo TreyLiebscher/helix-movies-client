@@ -67,20 +67,92 @@ export class ProfilePage extends React.Component {
                 <p>This profile belongs to {this.props.profile.username}</p>
                 <div>{this.props.profile.email}</div>
                 <div>You have rated {moviesRated} movies</div>
-                <div>Top Genres</div>
-                <ul>{genres}</ul>
-                <div>Average Budget</div>
-                <p>${avgBudget}</p>
-                <div>Average Revenue</div>
+                {/* <div>Top Genres</div>
+                <ul>{genres}</ul> */}
+                <div className="profile-table-container">
+                    <table className="profile-table">
+                        <tbody>
+                            <tr>
+                                <td className="profile-table-subject">Top Genres</td>
+                            </tr>
+                            <tr>
+                                <td className="profile-table-content"><ul>{genres}</ul></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="profile-table">
+                        <tbody>
+                            <tr>
+                                <td className="profile-table-subject">Average Budget</td>
+                            </tr>
+                            <tr>
+                                <td className="profile-table-content">{avgBudget}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="profile-table">
+                        <tbody>
+                            <tr>
+                                <td className="profile-table-subject">Average Revenue</td>
+                            </tr>
+                            <tr>
+                                <td className="profile-table-content">{avgRevenue}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="profile-table">
+                        <tbody>
+                            <tr>
+                                <td className="profile-table-subject">Average Runtime</td>
+                            </tr>
+                            <tr>
+                                <td className="profile-table-content">{avgRuntime} minutes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="profile-table">
+                        <tbody>
+                            <tr>
+                                <td className="profile-table-subject">Average Rating</td>
+                            </tr>
+                            <tr>
+                                <td className="profile-table-content">{avgRating}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="profile-table">
+                        <tbody>
+                            <tr>
+                                <td className="profile-table-subject">Top Production Companies</td>
+                            </tr>
+                            <tr>
+                                <td className="profile-table-content"><ul>{companies}</ul></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="profile-table">
+                        <tbody>
+                            <tr>
+                                <td className="profile-table-subject">Top Production Countries</td>
+                            </tr>
+                            <tr>
+                                <td className="profile-table-content"><ul>{countries}</ul></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {/* <div>Average Budget</div>
+                <p>${avgBudget}</p> */}
+                {/* <div>Average Revenue</div>
                 <p>${avgRevenue}</p>
                 <div>Average Runtime</div>
-                <p>{avgRuntime} minutes</p>
-                <div>Average Rating</div>
+                <p>{avgRuntime} minutes</p> */}
+                {/* <div>Average Rating</div>
                 <p>{avgRating}%</p>
                 <div>Top Production Companies</div>
                 <ul>{companies}</ul>
                 <div>Top Production Countries</div>
-                <ul>{countries}</ul>
+                <ul>{countries}</ul> */}
                 <ul className="savedMovies">{savedMovies}</ul>
             </div>
         )

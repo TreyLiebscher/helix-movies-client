@@ -61,9 +61,6 @@ export class SearchForm extends React.Component {
                 <input type="submit" value="Search" />
                 <input type="reset" value="Clear" />
                 </form>
-                {/* <ul className="movie-search-results">
-                    {this.renderResults()}
-                </ul> */}
             </div>
         );
     }

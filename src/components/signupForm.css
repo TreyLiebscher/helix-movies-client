@@ -8,7 +8,7 @@
 
 #username, #email, #password, #passwordConfirm {
     border: none;
-    border-bottom: 1px solid gray;
+    border-radius: 5px;
     width:80%;
     height: 40px;
     background-color: white;
@@ -21,8 +21,8 @@
 #email:focus,
 #password:focus,
 #passwordConfirm:focus {
-    background-color: #91875ee3;
-    color: white;
+    background-color: #cccccc;
+    color: black;
 }
 
 .signup-button {
@@ -35,6 +35,7 @@
     background-color: white;
     font-family: 'Roboto Condensed', sans-serif;
     transition: all 0.3s;
+    box-shadow: 0px 17px 10px -10px rgba(0,0,0,0.4)
 }
 
 .signup-button:hover,
@@ -42,4 +43,5 @@
     background-color: #91875e;
     color: white;
     cursor: pointer;
+    box-shadow: none;
 }

@@ -12,7 +12,7 @@ export function LogInPage(props) {
         <div className="home">
             <h2>Log in to Movie Helix</h2>
             <LogInForm />
-            <Link to="/signup">Signup</Link>
+            <p>Don't have an account? <Link to="/signup" className="form-link">Signup</Link> is free!</p>
         </div>
     );
 }
