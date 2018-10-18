@@ -14,7 +14,7 @@ describe('<SearchForm />', () => {
         const wrapper = mount(<SearchForm onSubmit={callback} />);
         const value = 'Movie';
         wrapper.find('input[type="text"]').instance().value = value;
-        wrapper.simulate('submit');
+        wrapper.find('form').simulate('submit');
         expect(callback).toHaveBeenCalledWith(value);
     });
 })
