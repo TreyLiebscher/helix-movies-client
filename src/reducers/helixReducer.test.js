@@ -56,8 +56,8 @@ describe('searchReducer', () => {
         expect(state).toBe(currentState);
     });
 
-    describe('searchMovies', () => {
-        it('Should search for movies', async () => {
+    describe('searchMovies API', () => {
+        it('Should search for movies by title', async () => {
             //mock the response
             fetch.mockResponseOnce(JSON.stringify(mockResponses.banana))
             const movies = await searchByTitle('banana')
