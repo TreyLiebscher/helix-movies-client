@@ -1,3 +1,11 @@
+const mockResponses = {
+    banana: {
+        results: [
+            { title: 'fake', id: 'fake', poster_path: null }
+        ]
+    }
+}
+
 import {
     searchReducer,
     detailReducer,
@@ -10,6 +18,7 @@ import {
     MOVIE_SEARCH_SUCCESS,
     MOVIE_SEARCH_ERROR,
     searchMovies,
+    searchByTitle,
     SIMILAR_MOVIE_REQUEST,
     SIMILAR_MOVIE_SUCCESS,
     SIMILAR_MOVIE_ERROR,
@@ -23,6 +32,10 @@ import {
 
 //Search Reducer
 describe('searchReducer', () => {
+
+    beforeEach(() => {
+        fetch.resetMocks()
+    })
 
     const testMovie = "Movie1";
 
@@ -39,15 +52,18 @@ describe('searchReducer', () => {
 
     it('Should return the current state on an unknown action', () => {
         let currentState = {};
-        const state = searchReducer(currentState, {type: '__UNKNOWN'});
+        const state = searchReducer(currentState, { type: '__UNKNOWN' });
         expect(state).toBe(currentState);
     });
 
     describe('searchMovies', () => {
-        it('Should search for movies', () => {
-            // let state;
-            // state = searchReducer(state, searchMovies(testMovie));
-            // expect(state).toEqual
+        it('Should search for movies', async () => {
+            //mock the response
+            fetch.mockResponseOnce(JSON.stringify(mockResponses.banana))
+            const movies = await searchByTitle('banana')
+           
+            //expect a normalizedMovie to be retrieved
+            expect(movies[0].hasPoster).toEqual(false);
         })
     })
 })
@@ -74,7 +90,7 @@ describe('detailReducer', () => {
 
     it('Should return the current state on an unknown action', () => {
         let currentState = {};
-        const state = detailReducer(currentState, {type: '__UNKNOWN'});
+        const state = detailReducer(currentState, { type: '__UNKNOWN' });
         expect(state).toBe(currentState);
     });
 })
@@ -95,7 +111,7 @@ describe('similarReducer', () => {
 
     it('Should return the current state on an unknown action', () => {
         let currentState = {};
-        const state = similarReducer(currentState, {type: '__UNKNOWN'});
+        const state = similarReducer(currentState, { type: '__UNKNOWN' });
         expect(state).toBe(currentState);
     });
 })
@@ -134,7 +150,7 @@ describe('matchReducer', () => {
 
     it('Should return the current state on an unknown action', () => {
         let currentState = {};
-        const state = matchReducer(currentState, {type: '__UNKNOWN'});
+        const state = matchReducer(currentState, { type: '__UNKNOWN' });
         expect(state).toBe(currentState);
     });
 })
