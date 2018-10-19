@@ -2,12 +2,12 @@ import {
     MOVIE_SEARCH_REQUEST,
     MOVIE_SEARCH_SUCCESS,
     MOVIE_SEARCH_ERROR,
-    SIMILAR_MOVIE_REQUEST,
-    SIMILAR_MOVIE_SUCCESS,
-    SIMILAR_MOVIE_ERROR,
-    ID_SEARCH_REQUEST,
-    ID_SEARCH_SUCCESS,
-    ID_SEARCH_ERROR,
+    // SIMILAR_MOVIE_REQUEST,
+    // SIMILAR_MOVIE_SUCCESS,
+    // SIMILAR_MOVIE_ERROR,
+    // ID_SEARCH_REQUEST,
+    // ID_SEARCH_SUCCESS,
+    // ID_SEARCH_ERROR,
     MATCH_REQUEST,
     MATCH_SUCCESS,
     MATCH_ERROR
@@ -43,77 +43,77 @@ export function searchReducer(state = searchState, action) {
     return state;
 }
 
-const detailState = {
-    id: null,
-    title: null,
-    popularity: null,
-    poster_path: null,
-    overview: null,
-    budget: null,
-    genres: [],
-    vote_average: null,
-    vote_count: null
-}
+// const detailState = {
+//     id: null,
+//     title: null,
+//     popularity: null,
+//     poster_path: null,
+//     overview: null,
+//     budget: null,
+//     genres: [],
+//     vote_average: null,
+//     vote_count: null
+// }
 
-export function detailReducer(state = detailState, action) {
-        //Search by ID
-        if (action.type === ID_SEARCH_REQUEST) {
-            const changedState = {loading: true, error: null};
-            const newState = {...state, ...changedState};
-            return newState;
-        }
-        else if (action.type === ID_SEARCH_SUCCESS) {
-            const changedState = {
-                id: action.movies.id,
-                title: action.movies.title,
-                popularity: action.movies.popularity,
-                poster_path: action.movies.poster_path,
-                overview: action.movies.overview,
-                budget: action.movies.budget,
-                genres: action.movies.genres,
-                vote_average: action.movies.vote_average,
-                vote_count: action.movies.vote_count,
-                loading: false,
-                error: null
-            }
-            const newState = {...state, ...changedState};
-            return newState;
-        }
-        else if (action.type === ID_SEARCH_ERROR) {
-            const changedState = {loading: false, error: action.error};
-            const newState = {...state, ...changedState};
-            return newState;
-        }
+// export function detailReducer(state = detailState, action) {
+//         //Search by ID
+//         if (action.type === ID_SEARCH_REQUEST) {
+//             const changedState = {loading: true, error: null};
+//             const newState = {...state, ...changedState};
+//             return newState;
+//         }
+//         else if (action.type === ID_SEARCH_SUCCESS) {
+//             const changedState = {
+//                 id: action.movies.id,
+//                 title: action.movies.title,
+//                 popularity: action.movies.popularity,
+//                 poster_path: action.movies.poster_path,
+//                 overview: action.movies.overview,
+//                 budget: action.movies.budget,
+//                 genres: action.movies.genres,
+//                 vote_average: action.movies.vote_average,
+//                 vote_count: action.movies.vote_count,
+//                 loading: false,
+//                 error: null
+//             }
+//             const newState = {...state, ...changedState};
+//             return newState;
+//         }
+//         else if (action.type === ID_SEARCH_ERROR) {
+//             const changedState = {loading: false, error: action.error};
+//             const newState = {...state, ...changedState};
+//             return newState;
+//         }
 
-        return state;
-}
+//         return state;
+// }
 
-const similarState = {
-    movies: [],
-    loading: false,
-    error: null
-};
+// const similarState = {
+//     movies: [],
+//     loading: false,
+//     error: null
+// };
 
-export function similarReducer(state = similarState, action) {
-    //Movie Search
-    if (action.type === SIMILAR_MOVIE_REQUEST) {
-        const changedState = {loading: true, error: null};
-        const newState = {...state, ...changedState};
-        return newState;
-    }
-    else if (action.type === SIMILAR_MOVIE_SUCCESS) {
-        const changedState = {movies: action.movies, loading: false, error: null};
-        const newState = {...state, ...changedState};
-        return newState;
-    }
-    else if (action.type === SIMILAR_MOVIE_ERROR) {
-        const changedState = {loading: false, error: action.error};
-        const newState = {...state, ...changedState};
-        return newState;
-    }
+// export function similarReducer(state = similarState, action) {
+//     //Movie Search
+//     if (action.type === SIMILAR_MOVIE_REQUEST) {
+//         const changedState = {loading: true, error: null};
+//         const newState = {...state, ...changedState};
+//         return newState;
+//     }
+//     else if (action.type === SIMILAR_MOVIE_SUCCESS) {
+//         const changedState = {movies: action.movies, loading: false, error: null};
+//         const newState = {...state, ...changedState};
+//         return newState;
+//     }
+//     else if (action.type === SIMILAR_MOVIE_ERROR) {
+//         const changedState = {loading: false, error: action.error};
+//         const newState = {...state, ...changedState};
+//         return newState;
+//     }
     
-    return state;
-}
+//     return state;
+// }
 
 // const matchedState = {
 //     original: '',

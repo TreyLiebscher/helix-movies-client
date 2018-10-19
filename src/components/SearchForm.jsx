@@ -3,7 +3,7 @@ import { Field, reduxForm, focus } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import slugify from 'slugify';
-import { searchMovies } from '../actions/tmdbAPI';
+import { searchMovies, searchMoviesTEST } from '../actions/tmdbAPI';
 import './SearchForm.css';
 import Input from './input';
 import { required, nonEmpty, matches, length, isTrimmed } from '../validators';

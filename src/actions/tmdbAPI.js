@@ -1,5 +1,8 @@
 import {API_BASE_URL} from '../config';
 
+import axios from 'axios';
+import { format } from 'path';
+
 const cacheByUrl = {}
 
 // searchByTitle + getSimilar
@@ -74,6 +77,27 @@ export const searchMovies = title => dispatch => {
       .catch(error => dispatch(movieSearchError(error)));
 };
 
+// Better for testing (will replace searchMovies)
+export const searchMoviesTEST = (title) => (dispatch) => {
+    const tmdbURL = `https://api.themoviedb.org/3/search/movie?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&page=1&include_adult=false&query=${title}`; 
+    dispatch(movieSearchRequest());
+
+    return axios({
+        url: tmdbURL,
+        method: 'get',
+    })
+        .then(res => {
+            const formatRes = res.data.results.map(normalizeMovie);
+            dispatch(movieSearchSuccess(formatRes));
+            return res;
+        })
+        .catch(error => {
+            dispatch(movieSearchError(error));
+            return error;
+        });
+}
+// // // // // // // // // // // // // // // // //
+
 // Find Movie by Title (1)
 export function searchByTitle(title) {
     const url = `https://api.themoviedb.org/3/search/movie?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&page=1&include_adult=false&query=${title}`
@@ -82,29 +106,29 @@ export function searchByTitle(title) {
 }
 
 // // SEARCH BY ID
-export const ID_SEARCH_REQUEST = 'ID_SEARCH_REQUEST';
-export const idSearchRequest = () => ({
-    type: ID_SEARCH_REQUEST
-});
+// export const ID_SEARCH_REQUEST = 'ID_SEARCH_REQUEST';
+// export const idSearchRequest = () => ({
+//     type: ID_SEARCH_REQUEST
+// });
 
-export const ID_SEARCH_SUCCESS = 'ID_SEARCH_SUCCESS';
-export const idSearchSuccess = movies => ({
-    type: ID_SEARCH_SUCCESS,
-    movies
-});
+// export const ID_SEARCH_SUCCESS = 'ID_SEARCH_SUCCESS';
+// export const idSearchSuccess = movies => ({
+//     type: ID_SEARCH_SUCCESS,
+//     movies
+// });
 
-export const ID_SEARCH_ERROR = 'ID_SEARCH_ERROR';
-export const idSearchError = error => ({
-    type: ID_SEARCH_ERROR,
-    error
-});
+// export const ID_SEARCH_ERROR = 'ID_SEARCH_ERROR';
+// export const idSearchError = error => ({
+//     type: ID_SEARCH_ERROR,
+//     error
+// });
 
-export const idSearch = id => dispatch => {
-    dispatch(idSearchRequest());
-    searchById(id)
-      .then(movies => dispatch(idSearchSuccess(movies)))
-      .catch(error => dispatch(idSearchError(error)));
-};
+// export const idSearch = id => dispatch => {
+//     dispatch(idSearchRequest());
+//     searchById(id)
+//       .then(movies => dispatch(idSearchSuccess(movies)))
+//       .catch(error => dispatch(idSearchError(error)));
+// };
 
 export function searchById(id) {
     const url = `https://api.themoviedb.org/3/movie/${id}?api_key=c582a638ad7c6555e68892f076404dae&language=en-US`
@@ -112,31 +136,51 @@ export function searchById(id) {
         .then(normalizeDetailMovie)
 }
 
+// export const searchByIdTEST = (id) => (dispatch) => {
+//     const tmdbURL = `https://api.themoviedb.org/3/movie/${id}?api_key=c582a638ad7c6555e68892f076404dae&language=en-US`;
+//     dispatch(idSearchRequest());
+
+//     return axios({
+//         url: tmdbURL,
+//         method: 'get',
+//     })
+//         .then(res => {
+//             const formatRes = normalizeDetailMovie(res);
+//             console.log('kiwi format res is', res)
+//             dispatch(idSearchSuccess(formatRes));
+//             return res;
+//         })
+//         .catch(error => {
+//             dispatch(idSearchError(error));
+//             return error;
+//         });
+// }
+
 
 // GET_SIMILAR
-export const SIMILAR_MOVIE_REQUEST = 'SIMILAR_MOVIE_REQUEST';
-export const similarMovieRequest = () => ({
-    type: SIMILAR_MOVIE_REQUEST
-});
+// export const SIMILAR_MOVIE_REQUEST = 'SIMILAR_MOVIE_REQUEST';
+// export const similarMovieRequest = () => ({
+//     type: SIMILAR_MOVIE_REQUEST
+// });
 
-export const SIMILAR_MOVIE_SUCCESS = 'SIMILAR_MOVIE_SUCCESS';
-export const similarMovieSuccess = movies => ({
-    type: SIMILAR_MOVIE_SUCCESS,
-    movies
-});
+// export const SIMILAR_MOVIE_SUCCESS = 'SIMILAR_MOVIE_SUCCESS';
+// export const similarMovieSuccess = movies => ({
+//     type: SIMILAR_MOVIE_SUCCESS,
+//     movies
+// });
 
-export const SIMILAR_MOVIE_ERROR = 'SIMILAR_MOVIE_ERROR';
-export const similarMovieError = error => ({
-    type: SIMILAR_MOVIE_ERROR,
-    error
-});
+// export const SIMILAR_MOVIE_ERROR = 'SIMILAR_MOVIE_ERROR';
+// export const similarMovieError = error => ({
+//     type: SIMILAR_MOVIE_ERROR,
+//     error
+// });
 
-export const similarMovies = id => dispatch => {
-    dispatch(similarMovieRequest());
-    getSimilar(id)
-        .then(movies => dispatch(similarMovieSuccess(movies)))
-        .catch(error => dispatch(similarMovieError(error)));
-}
+// export const similarMovies = id => dispatch => {
+//     dispatch(similarMovieRequest());
+//     getSimilar(id)
+//         .then(movies => dispatch(similarMovieSuccess(movies)))
+//         .catch(error => dispatch(similarMovieError(error)));
+// }
 
 export function getSimilar(id) {
     const url = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&page=1`
@@ -168,6 +212,8 @@ export const matchMovies = id => dispatch => {
         .then(movies => dispatch(matchSuccess(movies)))
         .catch(error => dispatch(matchError(error)));
 }
+
+
 
 
 export async function getMatches(id) {

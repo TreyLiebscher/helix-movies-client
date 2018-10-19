@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect, withRouter} from 'react-router-dom';
-import {searchMovies} from '../../actions/tmdbAPI';
+import {searchMovies, searchMoviesTEST} from '../../actions/tmdbAPI';
 import slugify from 'slugify'
 import LoginForm from '../loginForm';
 import SearchForm from '../SearchForm';
@@ -18,6 +18,17 @@ export function HomePage(props) {
 
     
 
+    const onSubmit = val => {                        
+      
+        if (!val) {
+            return props.history.push('/')
+        }
+        props.history.push('/search/' + val)
+        props.dispatch(searchMoviesTEST(val))
+    }
+
+    console.log('kiwi', results)
+
     const movies = results.movies.map((movie, index) => {
         
         const style = { maxWidth: '300px' }
@@ -29,15 +40,6 @@ export function HomePage(props) {
         </li>)
         
     });
-
-    const onSubmit = val => {                        
-      
-        if (!val) {
-            return props.history.push('/')
-        }
-        props.history.push('/search/' + val)
-        props.dispatch(searchMovies(val))
-    }
 
     return (
         <div className="homePage">
