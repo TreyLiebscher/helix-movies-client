@@ -1,8 +1,8 @@
-import {API_BASE_URL} from '../config';
+import { API_BASE_URL } from '../config';
 
 import axios from 'axios';
 import { format } from 'path';
-import {cachedFetch} from './tmdbFetch';
+import { cachedFetch } from './tmdbFetch';
 
 const cacheByUrl = {}
 
@@ -60,14 +60,17 @@ export const movieSearchError = error => ({
 
 export const searchMovies = title => dispatch => {
     dispatch(movieSearchRequest());
-    searchByTitle(title)
-      .then(movies => dispatch(movieSearchSuccess(movies)))
-      .catch(error => dispatch(movieSearchError(error)));
+    return searchByTitle(title)
+        .then(movies => dispatch(movieSearchSuccess(movies)))
+        .catch(error => {
+            console.log('FETCH ERR!', error)
+            dispatch(movieSearchError(error))
+        });
 };
 
 // Better for testing (will replace searchMovies)
 export const searchMoviesTEST = (title) => (dispatch) => {
-    const tmdbURL = `https://api.themoviedb.org/3/search/movie?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&page=1&include_adult=false&query=${title}`; 
+    const tmdbURL = `https://api.themoviedb.org/3/search/movie?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&page=1&include_adult=false&query=${title}`;
     dispatch(movieSearchRequest());
 
     return axios({
@@ -233,7 +236,7 @@ export async function getMatches(id) {
         values.map((item) => {
             resultsArray.push(item);
         })
-    }).then(() => {return resObj})
+    }).then(() => { return resObj })
 
     return final;
 }
@@ -247,5 +250,5 @@ export function saveMovie(data = {}) {
         },
         body: JSON.stringify(data)
     })
-    .then(res => res.json());
+        .then(res => res.json());
 }
