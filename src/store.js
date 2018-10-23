@@ -5,7 +5,7 @@ import {loadAuthToken} from './localStorage';
 import authReducer from './reducers/auth';
 import protectedDataReducer from './reducers/protectedData';
 import userReducer from './reducers/user';
-import {searchReducer, matchReducer} from './reducers/helixReducer';
+import {searchReducer, profileSearchReducer, matchReducer} from './reducers/helixReducer';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
 
 const store = createStore(
@@ -14,6 +14,7 @@ const store = createStore(
         auth: authReducer,
         protectedData: protectedDataReducer,
         search: searchReducer,
+        profileSearch: profileSearchReducer,
         // detail: detailReducer,
         // similar: similarReducer,
         match: matchReducer,

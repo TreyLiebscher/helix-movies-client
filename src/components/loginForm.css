@@ -20,7 +20,7 @@
 
 .login-button:hover,
 .login-button:focus {
-    background-color: #927606;
+    background-color: #126b5f;
     color: white;
     cursor: pointer;
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.6);

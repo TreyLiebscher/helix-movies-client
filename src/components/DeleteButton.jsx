@@ -16,9 +16,9 @@ export function DeleteButton(props) {
 
 
     return (
-        <div className="save-button-holder">
-            <button className="delete-button" onClick={deleteMovieClick}>Delete Movie</button>
-        </div>
+        
+            <button className="movieButton" onClick={deleteMovieClick}>Delete Movie</button>
+        
     )
 
 }

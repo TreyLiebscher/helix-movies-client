@@ -29,7 +29,12 @@ export class AnalyzePage extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const ID = this.props.match.params.id
         const prevID = prevProps.match.params.id
+        const movieArray = this.props.user.movies.length;
+        const prevMovieArray = prevProps.user.movies.length;
+        console.log(movieArray, prevMovieArray)
         if (ID !== prevID) {
+            this.fetchData()
+        } else if (movieArray !== prevMovieArray) {
             this.fetchData()
         }
 
@@ -39,7 +44,7 @@ export class AnalyzePage extends React.Component {
         if (this.props.loggedIn) {
             return <SaveButton movie={this.props.movies.original} user={this.props.user}>Save to Favorites</SaveButton>;
         } else {
-            return <Link to={'/login'} tabIndex="-1"><button>Log in to save movies!</button></Link>
+            return <Link to={'/login'} tabIndex="-1"><button className="save-button">Log in to save movies!</button></Link>
             // return <SaveButton movie={this.props.movies.original} user={this.props.user}>Save to Favorites</SaveButton>;
         }
     }
@@ -67,6 +72,8 @@ export class AnalyzePage extends React.Component {
 
 
     render() {
+
+
 
         // Original
         const orgMovie = this.props.movies.original;
@@ -266,8 +273,8 @@ export class AnalyzePage extends React.Component {
 
         return (
             <div className="analyze-page">
-                {this.renderSaveButton()}
                 <h1>{orgTitle} ({orgYear})</h1>
+                {this.renderSaveButton()}
                 <h2>Rating: {orgRating}% ({orgVotes} votes)</h2>
                 <p>{orgRuntime} minutes</p>
                 <p>Popularity: {orgPopularity}</p>

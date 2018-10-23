@@ -12,7 +12,7 @@
     width:80%;
     height: 40px;
     background-color: white;
-    color: #927606;
+    color: #126b5f;
     font-size: 25px;
     transition: all 0.3s;
 }
@@ -43,7 +43,7 @@
 
 .signup-button:hover,
 .signup-button:focus {
-    background-color: #927606;
+    background-color: #126b5f;
     color: white;
     cursor: pointer;
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.6);

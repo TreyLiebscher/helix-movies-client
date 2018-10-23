@@ -3,8 +3,7 @@
     width: 80%;
     margin: auto;
     height: 200px;
-    background-color: #927606;
-    /* border: 1px solid #91885c; */
+    background-color: #126b5f;
     border-radius: 10px;
     text-align: center;
     -webkit-box-shadow: 6px 7px 20px -5px rgba(0,0,0,0.9);
@@ -18,12 +17,10 @@
 
 .search-input {
     width: 80%;
-    /* margin: auto;
-    margin-right: 0; */
     border: none;
     border-radius: 0;
     height: 40px;
-    border-right: 1px solid #927606;
+    border-right: 1px solid #126b5f;
 }
 
 .button-holder {
@@ -67,7 +64,7 @@
 
 .form-button:hover,
 .form-button:focus {
-    background-color: #927606;
+    background-color: #126b5f;
     color: white;
     cursor: pointer;
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.6);

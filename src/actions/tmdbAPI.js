@@ -96,17 +96,36 @@ export function searchByTitle(title) {
         .then(data => data.results.map(normalizeMovie))
 }
 
-export const profileMovieSearch = (genre, company) => dispatch => {
-    dispatch(movieSearchRequest());
-    return searchByProfile(genre, company)
-        .then(movies => dispatch(movieSearchSuccess(movies)))
+
+
+// Profile OneClick search
+export const PROFILE_SEARCH_REQUEST = 'PROFILE_SEARCH_REQUEST';
+export const profileSearchRequest = () => ({
+    type: PROFILE_SEARCH_REQUEST
+});
+
+export const PROFILE_SEARCH_SUCCESS = 'PROFILE_SEARCH_SUCCESS';
+export const profileSearchSuccess = movies => ({
+    type: PROFILE_SEARCH_SUCCESS,
+    movies
+});
+
+export const PROFILE_SEARCH_ERROR = 'PROFILE_SEARCH_ERROR';
+export const profileSearchError = error => ({
+    type: PROFILE_SEARCH_ERROR,
+    error
+});
+export const profileMovieSearch = (genre, company, year) => dispatch => {
+    dispatch(profileSearchRequest());
+    return searchByProfile(genre, company, year)
+        .then(movies => dispatch(profileSearchSuccess(movies)))
         .catch(error => {
-            dispatch(movieSearchError(error))
+            dispatch(profileSearchError(error))
         });
 };
 
-export function searchByProfile(genre, company) {
-    const url = `https://api.themoviedb.org/3/discover/movie?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_companies=${company}&with_genres=${genre}`;
+export function searchByProfile(genre, company, year) {
+    const url = `https://api.themoviedb.org/3/discover/movie?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&primary_release_date.lte=${year}-12-31&with_companies=${company}&with_genres=${genre}`;
     return cachedFetch(url)
         .then(data => data.results.map(normalizeMovie))
 }

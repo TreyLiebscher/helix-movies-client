@@ -4,7 +4,7 @@
 }
 
 .user-info-container {
-    background-color: #927606;
+    background-color: #126b5f;
     color: white;
 }
 
@@ -26,35 +26,69 @@
 }
 
 .movie {
-    margin: 1em;
+    margin: 0.5em;
+    height: 300px;
     -ms-flex: 1 1;
     flex: 1 1;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-direction: column;
     flex-direction: column;
-    background-color:#927606;
+    border: 3px solid #126b5f;
+    color: white;
+}
+
+.movie-link {
+    color: white;
+}
+
+.movie-link:hover,
+.movie-link:focus {
+    color: #126b5f;
+    background-color: #191919;
 }
 
 .profile-table-container {
     display: flex;
     width: 90%;
-    height: 500px;
+    /* height: 500px; */
     margin: auto;
     flex-wrap: wrap;
+    justify-content: center;
+}
+
+.blah {
+    flex: 1 0 200px;
+    max-width: 200px;
+    height: 300px;
+    margin-top: 10px;
+    margin-right: 5px;
+    line-height: 150px;
 }
 
 .profile-table {
     flex: 1;
     /* margin: 0.2em;
     width: 25%; */
-    height: 50%;
+    height: 200px;
+    border: 3px solid #086b5f;
 }
 
 .profile-table-subject {
-    background-color: #927606;
+    background-color: #126b5f;
     color: white;
     text-align: center;
     border: none;
     height: 50%;
+}
+
+.profile-table-content {
+    text-align: center;
+}
+
+.profile-table-list {
+    list-style: none;
+    padding: 0;
 }
 
 .buttonHolder {
@@ -63,5 +97,17 @@
 
 .movieButton {
     margin: 1em;
-    flex: 1;
+    -ms-flex: 1 1;
+    flex: 1 1;
+    background-color: #126b5f;
+    border: 3px solid #126b5f;
+    color: white;
+    border-radius: 5px;
+    height: 50px;
+}
+
+.movieButton:hover,
+.movieButton:focus {
+    background-color: #043a33;
+    cursor: pointer;
 }

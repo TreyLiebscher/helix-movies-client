@@ -10,14 +10,16 @@ export function OneClickSearch(props) {
         e.preventDefault()
         const genre = encodeURIComponent(props.profile.preferences.genreId);
         const company = encodeURIComponent(props.profile.preferences.companyIds);
-        console.log('kiwi genre rturns', genre)
-        console.log('kiwi genre rturns', company)
-        return props.dispatch(profileMovieSearch(genre, company));
+        const formatYear = props.profile.preferences.years[0].substring(0, 3);
+        const finalYear = formatYear + '9';
+        const year = encodeURIComponent(finalYear);
+        
+        return props.dispatch(profileMovieSearch(genre, company, year));
     }
 
     return (
     <div className="one-click-holder">
-        <button className="one-click-button" onClick={search}>ONE CLICK SEARCH</button>
+        <button className="save-button" onClick={search}>ONE CLICK SEARCH</button>
     </div>
     )
 }

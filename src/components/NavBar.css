@@ -7,28 +7,28 @@
     /* left: 10%; */
     /* right: 10%; */
     height: 10vh;
-    border-bottom: 5px solid #927606;
-    background-color: #fffffff2;
+    border-bottom: 5px solid #126b5f;
+    background-color: #191919;
 }
 
 .navBar-title {
     font-family: 'Megrim', cursive;
-    color: #927606;
+    color: white;
     text-align: center;
     margin: auto;
 }
 
 .helix-title-link {
     font-family: 'Megrim', cursive;
-    color: #927606;
+    color: white;
     text-align: center;
     margin: auto;
-    transition: all 0.5s;
+    transition: all 0.2s;
 }
 
 .helix-title-link:hover,
 .helix-title-link:focus {
-    color: black;
+    color: #126b5f;
 }
 
 .navBar-button-holder {
@@ -43,8 +43,8 @@
     height: 100%;
     width: 100%;
     text-decoration: none;
-    border: 3px solid #927606;
-    background-color: #927606;
+    border: 3px solid #126b5f;
+    background-color: #126b5f;
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
     /* transition: all 0.3s; */
@@ -58,8 +58,8 @@
     margin-top: auto;
     margin-bottom: auto;
     text-decoration: none;
-    border: 3px solid #927606;
-    background-color: #927606;
+    border: 3px solid #126b5f;
+    background-color: #126b5f;
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
     /* transition: all 0.3s; */
@@ -77,6 +77,6 @@
 .navBar-button:focus,
 .navBar-logout-button:hover,
 .navBar-logout-button:focus {
-    background-color: #685404;
+    background-color: #043a33;
     cursor: pointer;
 }
