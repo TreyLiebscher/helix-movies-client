@@ -59,7 +59,7 @@ describe('searchReducer', () => {
     describe('searchMovies', () => {
         it('Searches for movies by title', async () => {
             const store = mockStore();
-            store.dispatch(searchMoviesTEST());
+            await store.dispatch(searchMovies());
             expect(await getAction(store, "MOVIE_SEARCH_REQUEST")).toEqual({
                 type: "MOVIE_SEARCH_REQUEST"
             });
