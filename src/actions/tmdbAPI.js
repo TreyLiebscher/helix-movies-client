@@ -96,6 +96,21 @@ export function searchByTitle(title) {
         .then(data => data.results.map(normalizeMovie))
 }
 
+export const profileMovieSearch = (genre, company) => dispatch => {
+    dispatch(movieSearchRequest());
+    return searchByProfile(genre, company)
+        .then(movies => dispatch(movieSearchSuccess(movies)))
+        .catch(error => {
+            dispatch(movieSearchError(error))
+        });
+};
+
+export function searchByProfile(genre, company) {
+    const url = `https://api.themoviedb.org/3/discover/movie?api_key=c582a638ad7c6555e68892f076404dae&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_companies=${company}&with_genres=${genre}`;
+    return cachedFetch(url)
+        .then(data => data.results.map(normalizeMovie))
+}
+
 // // SEARCH BY ID
 // export const ID_SEARCH_REQUEST = 'ID_SEARCH_REQUEST';
 // export const idSearchRequest = () => ({

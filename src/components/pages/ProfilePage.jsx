@@ -6,7 +6,9 @@ import slugify from 'slugify';
 import { PromiseContainerWithRouter } from '../../containers/PromiseContainer'
 import requiresLogin from '../requires-login';
 import {getProfile} from '../../actions/users';
+import {profileMovieSearch} from '../../actions/tmdbAPI';
 import DeleteButton from '../DeleteButton';
+import OneClickSearch from '../oneClickSearch';
 import formatCurrency from 'format-currency';
 import './ProfilePage.css'
 
@@ -17,6 +19,8 @@ export class ProfilePage extends React.Component {
     componentDidMount() {
         this.props.dispatch(getProfile());
     }
+
+    
 
 
     render () {
@@ -61,6 +65,18 @@ export class ProfilePage extends React.Component {
         const avgRevenue = formatCurrency(this.props.profile.revenue);
         const avgRuntime = this.props.profile.runtime;
 
+        const oneClickResults = this.props.search.movies.map((movie, index) => {
+        
+            const style = { maxWidth: '300px' }
+            const img = movie.hasPoster ? (<img src={movie.poster} className="movie-poster"></img>) : <div className="movie-no-poster">No Poster available for {movie.title}</div>;
+            
+            return (<li key={movie.id} className="result-movie">
+                <Link to={`/analyze/${movie.id}/${slugify(movie.title)}`}>{img}</Link>
+                
+            </li>)
+            
+        });
+
 
         return (
             <div className="profile-container">
@@ -70,6 +86,10 @@ export class ProfilePage extends React.Component {
                 <p>This profile belongs to {this.props.profile.username}</p>
                 <div>{this.props.profile.email}</div>
                 <div>You have rated {moviesRated} movies</div>
+                <OneClickSearch profile={this.props.profile}/>
+                <ul className="search-results">
+                    {oneClickResults}
+                </ul>
                 <div className="profile-table-container">
                     <table className="profile-table">
                         <tbody>
@@ -152,7 +172,8 @@ export class ProfilePage extends React.Component {
 const mapStateToProps = state => {
     const {currentUser} = state.auth;
     return {
-        profile: state.userProfile
+        profile: state.userProfile,
+        search: state.search
     };
 };
 

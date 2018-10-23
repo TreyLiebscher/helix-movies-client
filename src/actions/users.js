@@ -72,10 +72,6 @@ export const profileRefreshError = error => ({
 
 export const deleteMovie = movieTitle => (dispatch, getState) => {
     const userId = getState().userProfile.id;
-    
-    
-    
-
     const movieArray = getState().userProfile.movies;
     const copyMovieArray = movieArray.slice(0);
     console.log('movieArray returns', movieArray);
