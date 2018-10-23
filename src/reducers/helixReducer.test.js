@@ -1,3 +1,11 @@
+const mockResponses = {
+    banana: {
+        results: [
+            { title: 'fake', id: 'fake', poster_path: null }
+        ]
+    }
+}
+
 import {
     searchReducer,
     detailReducer,
@@ -51,7 +59,7 @@ describe('searchReducer', () => {
     describe('searchMovies', () => {
         it('Searches for movies by title', async () => {
             const store = mockStore();
-            store.dispatch(searchMovies());
+            store.dispatch(searchMoviesTEST());
             expect(await getAction(store, "MOVIE_SEARCH_REQUEST")).toEqual({
                 type: "MOVIE_SEARCH_REQUEST"
             });

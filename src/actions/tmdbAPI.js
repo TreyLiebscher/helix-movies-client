@@ -2,6 +2,7 @@ import {API_BASE_URL} from '../config';
 
 import axios from 'axios';
 import { format } from 'path';
+import {cachedFetch} from './tmdbFetch';
 
 const cacheByUrl = {}
 
@@ -33,20 +34,7 @@ const normalizeDetailMovie = movie => ({
     vote_count: movie.vote_count
 });
 
-function cachedFetch(url, options) {
-    if (cacheByUrl[url]) {
-        return Promise.resolve(cacheByUrl[url])
-    }
-    //cache results in browser memory
-    return fetch(url, {headers: options})
-        .then(res => {
-            if (!res.ok) {
-                return Promise.reject(res.statusText);
-            }
-            return res.json();
-        })
-        .then(res => { cacheByUrl[url] = res; return res });
-}
+
 
 
 
