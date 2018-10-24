@@ -89,7 +89,6 @@ export const deleteMovie = movieTitle => (dispatch, getState) => {
         .then(res => res.json())
         
         .then(({profile, preferences}) => dispatch(profileRefreshSuccess(profile, preferences)))
-        // .then(res => dispatch(profileRefreshSuccess(res.user.movies)))
         .catch(err => {
             dispatch(profileRefreshError(err));
         });

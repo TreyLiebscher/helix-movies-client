@@ -2,12 +2,44 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+
+td {
+    border: 1px solid white;
+    list-style: none;
+    align-content: center;
+    text-align: center;
+}
+
+
 .analyze-page {
-    /* top: 10vh; */
-    /* left: 10%; */
-    /* right: 10%; */
     width: 80%;
     margin: auto;
+}
+
+.orgMovie-table-row > td {
+    background-color: #191919;
+}
+
+.orgMovie-container {
+    display: flex;
+}
+
+.orgMovie-box1 {
+    width: 30%;
+}
+
+.orgMovie-box2 {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center 
+}
+
+.orgMovie-plot {
+    padding: 20px;
+    background-color: #191919;
+    border-radius: 5px;
+    font-size: 20px;
 }
 
 .movieMatchResults {
@@ -26,18 +58,76 @@
     border: 1px solid red;
 }
 
-.matchPoster {
-    height: 100%;
+.match-poster {
+    width: 100px;
+    height: 150px;
 }
 
-td {
-    border: 1px solid #333;
-}
+
 
 .movieComparisonTable {
     width: 100%;
 }
 
 .matchedField {
-    background-color: lightgreen;
+    background-color: rgb(4, 80, 51);
+}
+
+@media only screen and (max-width: 650px) {
+    .analyze-page {
+        width: 95%;
+    }
+
+    table, thead, tbody, th, td, tr { 
+        display: block; 
+    }
+
+    thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    td {
+        border: 1px solid white;
+        border-bottom: 1px solid #eee; 
+        position: relative;
+        padding-left: 50%; 
+    }
+    
+    td:before { 
+        position: absolute;
+        left: 6px;
+        width: 45%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+    }
+
+    td:nth-of-type(1):before { content: "Title"; }
+	td:nth-of-type(2):before { content: "Poster"; }
+	td:nth-of-type(3):before { content: "Year"; }
+	td:nth-of-type(4):before { content: "Genre"; }
+	td:nth-of-type(5):before { content: "Rating"; }
+	td:nth-of-type(6):before { content: "Votes"; }
+	td:nth-of-type(7):before { content: "Runtime"; }
+	td:nth-of-type(8):before { content: "Budget"; }
+	td:nth-of-type(9):before { content: "Revenue"; }
+    td:nth-of-type(10):before { content: "Production Companies"; }
+    td:nth-of-type(11):before { content: "Production Countries"; }
+
+    .orgMovie-container {
+        display: block;
+    }
+
+    .orgMovie-box1 {
+        width: 100%;
+    }
+
+    .orgMovie-box2 {
+        width: 100%;
+    }
+
+    .orgMovie-plot {
+        font-size: 16px;
+    }
 }

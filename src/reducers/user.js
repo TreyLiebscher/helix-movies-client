@@ -68,6 +68,7 @@ export default function reducer(state = initialState, action) {
             loading: false
         });
     } else if (action.type === SAVE_MOVIE_SUCCESS) {
+        console.log('kiwi action is', action)
         return Object.assign({}, state, {
             id: action.profile.id,
             username: action.profile.username,
@@ -87,6 +88,7 @@ export default function reducer(state = initialState, action) {
 
         });
     } else if (action.type === SAVE_MOVIE_ERROR) {
+        console.log('kiwi error is', action.error)
         return Object.assign({}, state, {
             error: action.error,
             loading: false

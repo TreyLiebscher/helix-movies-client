@@ -2,6 +2,10 @@ html {
   background-color: #313131;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .main-wrapper {
   position: absolute;
   top: 10vh;

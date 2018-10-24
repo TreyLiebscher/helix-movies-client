@@ -1,6 +1,7 @@
 
 .movie-search {
     width: 80%;
+    max-width: 750px;
     margin: auto;
     height: 200px;
     background-color: #126b5f;
@@ -79,4 +80,27 @@
     margin-right: 5px;
     line-height: 150px;
 
+}
+
+@media only screen and (max-width: 650px) {
+    .movie-search {
+        width: 100%;
+        border-radius: 0px;
+    }
+
+    .form-button {
+        width: 60%;
+    }
+
+    .clear {
+        width: 20%;
+    }
+
+    .result-movie {
+        max-width: 100px;
+        height: 150px;
+    }
+
+    
+    
 }

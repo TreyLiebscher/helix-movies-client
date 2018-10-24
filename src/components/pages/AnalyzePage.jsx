@@ -4,6 +4,7 @@ import { Link, Redirect, withRouter } from 'react-router-dom';
 import slugify from 'slugify';
 import { matchMovies } from '../../actions/tmdbAPI';
 import SaveButton from '../SaveButton';
+import {MatchTable} from '../MatchTable';
 import { getProfile } from '../../actions/users';
 import formatCurrency from 'format-currency';
 import './AnalyzePage.css'
@@ -29,15 +30,9 @@ export class AnalyzePage extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const ID = this.props.match.params.id
         const prevID = prevProps.match.params.id
-        const movieArray = this.props.user.movies.length;
-        const prevMovieArray = prevProps.user.movies.length;
-        console.log(movieArray, prevMovieArray)
         if (ID !== prevID) {
             this.fetchData()
-        } else if (movieArray !== prevMovieArray) {
-            this.fetchData()
         }
-
     }
 
     renderSaveButton() {
@@ -45,7 +40,6 @@ export class AnalyzePage extends React.Component {
             return <SaveButton movie={this.props.movies.original} user={this.props.user}>Save to Favorites</SaveButton>;
         } else {
             return <Link to={'/login'} tabIndex="-1"><button className="save-button">Log in to save movies!</button></Link>
-            // return <SaveButton movie={this.props.movies.original} user={this.props.user}>Save to Favorites</SaveButton>;
         }
     }
 
@@ -87,7 +81,8 @@ export class AnalyzePage extends React.Component {
         const orgRuntime = orgMovie.runtime;
         const orgPopularity = orgMovie.popularity;
         const style = { maxWidth: '300px' };
-        const orgPoster = orgMovie.hasPoster ? (<img src={orgMovie.poster} style={style}></img>) : null;
+        const orgPoster = orgMovie.hasPoster ? (<img src={orgMovie.poster} style={style} className="movie-poster"></img>) : null;
+        const tablePoster = orgMovie.hasPoster ? (<img src={orgMovie.poster} style={style} className="match-poster"></img>) : null;
         const orgBudget = formatCurrency(orgMovie.budget);
         const orgRevenue = formatCurrency(orgMovie.revenue);
         const orgCompanies = orgMovie.production_companies.map((company, index) => {
@@ -96,15 +91,24 @@ export class AnalyzePage extends React.Component {
         const orgCountries = orgMovie.production_countries.map((country, index) => {
             return <li key={index}>{country.name}</li>
         });
-        
-        const orgPlot = orgMovie.overview;
 
+        const orgPlot = orgMovie.overview;
 
 
 
         // Matches
         const matchMovie = this.props.movies.matches;
+// /////////////////////////////////
 
+
+
+        // const matchTablesTest = this.props.movies.matches.map((match, index) => {
+        //     return <MatchTable key={index} match={match} movie={this.props.movies.original}/>
+        // })
+
+
+
+// /////////////////////////////////
         const matchTitles = matchMovie.map((match, index) => {
             return <td key={index}>
                 <Link to={`/analyze/${match.id}/${slugify(match.title)}`}
@@ -142,7 +146,7 @@ export class AnalyzePage extends React.Component {
 
         const matchPosters = matchMovie.map((match, index) => {
             const style = { maxWidth: '300px' };
-            const img = match.hasPoster ? (<img src={match.poster} style={style}></img>) : null;
+            const img = match.hasPoster ? (<img src={match.poster} style={style} className="match-poster"></img>) : null;
             return <td key={index}>{img}</td>;
         });
 
@@ -215,7 +219,7 @@ export class AnalyzePage extends React.Component {
             const budgetArray = matchMovie.map((item) => item.budget);
 
             const closest = this.closestMatch(originalBudget, budgetArray);
-            
+
             if (budget === closest) {
                 return <td className="matchedField" key={index}>${formatCurrency(budget)}</td>
             } else {
@@ -251,7 +255,7 @@ export class AnalyzePage extends React.Component {
                 }
             });
 
-            return <td>{companies}</td>
+            return <td key={index}>{companies}</td>
         });
         //Match Production Companies (return green for each closest match)
         const matchProductionCountries = matchMovie.map((match, index) => {
@@ -267,30 +271,94 @@ export class AnalyzePage extends React.Component {
                 }
             });
 
-            return <td>{countries}</td>
+            return <td key={index}>{countries}</td>
         });
 
 
         return (
             <div className="analyze-page">
                 <h1>{orgTitle} ({orgYear})</h1>
-                {this.renderSaveButton()}
-                <h2>Rating: {orgRating}% ({orgVotes} votes)</h2>
-                <p>{orgRuntime} minutes</p>
-                <p>Popularity: {orgPopularity}</p>
-                <ul>{genres}</ul>
-                {orgPoster}
-                <p>Budget: ${orgBudget}</p>
-                <p>Revenue: ${orgRevenue}</p>
-                <p>{orgPlot}</p>
-                <table className="movieComparisonTable">
-                    <thead>
-                        <tr>
-                            <th colSpan="4">Comparing matches to {orgTitle}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
+                <div className="orgMovie-container">
+                    <div className="orgMovie-box1">
+                        {this.renderSaveButton()}
+                        <h2>Rating: {orgRating}% ({orgVotes} votes)</h2>
+                        {orgPoster}
+                    </div>
+                    <div className="orgMovie-box2">
+                        <p className="orgMovie-plot">{orgPlot}</p>
+                    </div>
+                </div>
+                <div className="table-container">
+                    <table className="movieComparisonTable">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Poster</th>
+                                <th>Year</th>
+                                <th>Genre</th>
+                                <th>Rating</th>
+                                <th>Votes</th>
+                                <th>Runtime</th>
+                                <th>Budget</th>
+                                <th>Revenue</th>
+                                <th>Production Companies</th>
+                                <th>Production Countries</th>
+                            </tr>
+                        </thead>
+                        <tbody className="movieComparisonTable-body">
+                            <tr className="orgMovie-table-row">
+                                <td>{orgTitle}</td>
+                                <td>{tablePoster}</td>
+                                <td>{orgYear}</td>
+                                <td>{genres}</td>
+                                <td>{orgRating}%</td>
+                                <td>{orgMovie.vote_count}</td>
+                                <td>{orgMovie.runtime}</td>
+                                <td>${orgBudget}</td>
+                                <td>${orgRevenue}</td>
+                                <td>{orgCompanies}</td>
+                                <td>{orgCountries}</td>
+                            </tr>
+                            <tr>
+                                {matchTitles[0]}
+                                {matchPosters[0]}
+                                {matchYears[0]}
+                                {matchGenres[0]}
+                                {matchRatings[0]}
+                                {matchVotes[0]}
+                                {matchRuntimes[0]}
+                                {matchBudgets[0]}
+                                {matchRevenues[0]}
+                                {matchProductionCompanies[0]}
+                                {matchProductionCountries[0]}
+                            </tr>
+                            <tr>
+                                {matchTitles[1]}
+                                {matchPosters[1]}
+                                {matchYears[1]}
+                                {matchGenres[1]}
+                                {matchRatings[1]}
+                                {matchVotes[1]}
+                                {matchRuntimes[1]}
+                                {matchBudgets[1]}
+                                {matchRevenues[1]}
+                                {matchProductionCompanies[1]}
+                                {matchProductionCountries[1]}
+                            </tr>
+                            <tr>
+                                {matchTitles[2]}
+                                {matchPosters[2]}
+                                {matchYears[2]}
+                                {matchGenres[2]}
+                                {matchRatings[2]}
+                                {matchVotes[2]}
+                                {matchRuntimes[2]}
+                                {matchBudgets[2]}
+                                {matchRevenues[2]}
+                                {matchProductionCompanies[2]}
+                                {matchProductionCountries[2]}
+                            </tr>
+                            {/* <tr>
                             <td>Title</td>
                             <td>{orgTitle}</td>
                             {matchTitles}
@@ -334,13 +402,13 @@ export class AnalyzePage extends React.Component {
                             <td>Revenue</td>
                             <td>${orgRevenue}</td>
                             {matchRevenues}
-                        </tr>
-                        {/* <tr>
+                            </tr> */}
+                            {/* <tr>
                             <td>Plot Similarity</td>
                             <td>100%</td>
                             {matchPlotSimilarity}
                         </tr> */}
-                        <tr>
+                            {/* <tr>
                             <td>Production Companies</td>
                             <td>{orgCompanies}</td>
                             {matchProductionCompanies}
@@ -349,9 +417,12 @@ export class AnalyzePage extends React.Component {
                             <td>Production Countries</td>
                             <td>{orgCountries}</td>
                             {matchProductionCountries}
-                        </tr>  
-                    </tbody>
-                </table>
+                            </tr>   */}
+                            <MatchTable match={matchMovie} movie={orgMovie}/>
+                        </tbody>
+                    </table>
+                </div>
+                
             </div>
         )
     }
@@ -364,4 +435,5 @@ const mapStateToProps = state => ({
     user: state.userProfile
 })
 
-export default connect(mapStateToProps)(withRouter(AnalyzePage, { updateOnLocationChange: true }))
+// export default connect(mapStateToProps)(withRouter(AnalyzePage, { updateOnLocationChange: true }))
+export default connect(mapStateToProps)(AnalyzePage)

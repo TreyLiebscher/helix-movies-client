@@ -2,10 +2,9 @@
     position: fixed;
     display: -ms-flexbox;
     display: flex;
+    z-index: 2;
     top: 0;
     width: 100%;
-    /* left: 10%; */
-    /* right: 10%; */
     height: 10vh;
     border-bottom: 5px solid #126b5f;
     background-color: #191919;
@@ -79,4 +78,10 @@
 .navBar-logout-button:focus {
     background-color: #043a33;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 650px) {
+    .navBar-title {
+        margin-left: 10px;
+    }
 }
