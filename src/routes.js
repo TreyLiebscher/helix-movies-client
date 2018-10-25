@@ -22,6 +22,7 @@ export default (
     <Route exact path="/analyze/:id/:title" component={AnalyzePage} />
     <Route exact path="/streaming/:title" component={StreamingInfoWithData} />
     <Route exact path="/profile/home" component={ProfilePage} />
+    <Route exact path="/profile/oneclicksearch" component={ProfilePage} />
     <Route exact path="/profile/:username" component={PublicProfileWithData} />
     <Route exact path="/signup" component={SignupPage} />
     <Route exact path="/login" component={LogInPage} />

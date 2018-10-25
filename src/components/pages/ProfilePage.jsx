@@ -74,10 +74,14 @@ export class ProfilePage extends React.Component {
 
 
         const searchResults = () => {
-            if (this.props.search.movies.length === 0) {
+            if (
+                !this.props.search.loading && 
+                this.props.location.pathname === '/profile/oneclicksearch' 
+                && this.props.search.movies.length === 0
+                ) {
                 return noResults;
             }
-            const oneClickResults = this.props.search.movies.map((movie, index) => {
+            return this.props.search.movies.map((movie, index) => {
                 const style = { maxWidth: '300px' }
                 const img = movie.hasPoster ? (<img src={movie.poster} className="movie-poster"></img>) : <div className="movie-no-poster">No Poster available for {movie.title}</div>;
 
