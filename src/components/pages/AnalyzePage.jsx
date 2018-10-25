@@ -319,7 +319,7 @@ export class AnalyzePage extends React.Component {
                                 <td>{orgCompanies}</td>
                                 <td>{orgCountries}</td>
                             </tr>
-                            <tr>
+                            {/* <tr>
                                 {matchTitles[0]}
                                 {matchPosters[0]}
                                 {matchYears[0]}
@@ -357,7 +357,7 @@ export class AnalyzePage extends React.Component {
                                 {matchRevenues[2]}
                                 {matchProductionCompanies[2]}
                                 {matchProductionCountries[2]}
-                            </tr>
+                            </tr> */}
                             {/* <tr>
                             <td>Title</td>
                             <td>{orgTitle}</td>
@@ -418,8 +418,9 @@ export class AnalyzePage extends React.Component {
                             <td>{orgCountries}</td>
                             {matchProductionCountries}
                             </tr>   */}
-                            <MatchTable match={matchMovie} movie={orgMovie}/>
+                            
                         </tbody>
+                        <MatchTable match={matchMovie} movie={orgMovie}/>
                     </table>
                 </div>
                 

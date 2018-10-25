@@ -49,7 +49,7 @@ export class ProfilePage extends React.Component {
         });
 
         const savedMovies = this.props.profile.movies.map((movie, index) => {
-            const style = { maxWidth: '300px', margin: 'auto', height:'50%' };
+            const style = { maxWidth: '300px', margin: 'auto', height: '50%' };
             const poster = movie.hasPoster ? (<img src={movie.poster} style={style}></img>) : <p>No Poster Available for {movie.title}</p>;
 
             return <li key={index} className="movie">
@@ -70,23 +70,31 @@ export class ProfilePage extends React.Component {
         const avgBudget = formatCurrency(this.props.profile.budget);
         const avgRevenue = formatCurrency(this.props.profile.revenue);
         const avgRuntime = this.props.profile.runtime;
-
-        const oneClickResults = this.props.search.movies.map((movie, index) => {
-            const style = { maxWidth: '300px' }
-            const img = movie.hasPoster ? (<img src={movie.poster} className="movie-poster"></img>) : <div className="movie-no-poster">No Poster available for {movie.title}</div>;
-        
-            return (<li key={movie.id} className="result-movie">
-                <Link to={`/analyze/${movie.id}/${slugify(movie.title)}`}>{img}</Link>
-            </li>)
-
-        });
-
         const noResults = <p>No results found based off your current profile</p>
 
-        
+
+        const searchResults = () => {
+            if (this.props.search.movies.length === 0) {
+                return noResults;
+            }
+            const oneClickResults = this.props.search.movies.map((movie, index) => {
+                const style = { maxWidth: '300px' }
+                const img = movie.hasPoster ? (<img src={movie.poster} className="movie-poster"></img>) : <div className="movie-no-poster">No Poster available for {movie.title}</div>;
+
+                return (<li key={movie.id} className="result-movie">
+                    <Link to={`/analyze/${movie.id}/${slugify(movie.title)}`}>{img}</Link>
+                </li>)
+            });
+        }
 
 
-        
+
+
+
+
+
+
+
 
 
         return (
@@ -100,7 +108,7 @@ export class ProfilePage extends React.Component {
                 <OneClickSearch profile={this.props.profile} />
                 <ul className="search-results">
                     {this.displayLoadingMessage()}
-                    {oneClickResults}
+                    {searchResults()}
                 </ul>
                 <div className="profile-table-container">
                     <table className="profile-table">

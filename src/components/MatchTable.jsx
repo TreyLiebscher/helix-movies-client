@@ -1,8 +1,10 @@
 import React from 'react';
 import formatCurrency from 'format-currency';
+import slugify from 'slugify';
+import { Link } from 'react-router-dom';
 
 export class MatchTable extends React.Component {
-    
+
     closestMatch(num, arr) {
         let current = arr[0];
         let diff = Math.abs(num - current);
@@ -27,7 +29,7 @@ export class MatchTable extends React.Component {
     styleCloseMatches(org, match, matchArray) {
         const closest = this.closestMatch(org, matchArray);
         console.log(closest)
-        if(match === closest) {
+        if (match === closest) {
             return <td className="matchedField">{match}</td>
         } else {
             return <td>{match}</td>
@@ -40,7 +42,7 @@ export class MatchTable extends React.Component {
 
         const matchItems = match.map((item, index) => {
             const matcher = this.exactMatch(orgArray, item.name);
-            if(matcher !== -1) {
+            if (matcher !== -1) {
                 return <li className="genre matchedField" key={index}>{item.name}</li>
             } else {
                 return <li key={index} className="genre">{item.name}</li>
@@ -61,30 +63,37 @@ export class MatchTable extends React.Component {
         const matchPosters = matchArray.map((match, index) => {
             const style = { maxWidth: '300px' };
             const img = match.hasPoster ? (<img src={match.poster} style={style} className="match-poster"></img>) : null;
-            return <td key={index}>{img}</td>;
+            return <td key={'poster' + index}>{img}</td>;
         });
-        
+
         const matchRatings = matchArray.map((match) => match.vote_average * 10);
         const matchRuntimes = matchArray.map((match) => match.runtime);
-        const matchBudgets = matchArray.map((match) => match.budget);
-        
-        
+        const matchBudgets = matchArray.map((match) => formatCurrency(match.budget));
+
+
         console.log(matchYears, orgYear)
 
 
+
+
         const matchedMovies = this.props.match.map((item, index) => {
-            
+
             const img = item.hasPoster ? (<img src={item.poster} className="match-poster"></img>) : null;
-            
+            const budget = this.styleCloseMatches(orgMovie.budget, item.budget, matchBudgets);
+            console.log('budget returns', budget)
+
             return <tr key={index}>
-                        <td>{item.title}</td>
-                        <td>{img}</td>
-                        {this.styleCloseMatches(orgYear, item.release_date.substring(0, 4), matchYears)}
-                        {this.styleExactMatches(orgMovie.genres, item.genres)}
-                        {this.styleCloseMatches(orgMovie.vote_average * 10, item.vote_average * 10, matchRatings)}
-                        {this.styleCloseMatches(orgMovie.runtime, item.runtime, matchRuntimes)}
-                        {this.styleCloseMatches(orgMovie.budget, item.budget, matchBudgets)}
-                    </tr>
+                <td><Link to={`/analyze/${item.id}/${slugify(item.title)}`}
+                >
+                    {item.title}
+                </Link></td>
+                <td>{img}</td>
+                {this.styleCloseMatches(orgYear, item.release_date.substring(0, 4), matchYears)}
+                {this.styleExactMatches(orgMovie.genres, item.genres)}
+                {this.styleCloseMatches(orgMovie.vote_average * 10, item.vote_average * 10, matchRatings)}
+                {this.styleCloseMatches(orgMovie.runtime, item.runtime, matchRuntimes)}
+                {this.styleCloseMatches(formatCurrency(orgMovie.budget), formatCurrency(item.budget), matchBudgets)}
+            </tr>
         })
 
 
@@ -93,6 +102,6 @@ export class MatchTable extends React.Component {
                 {matchedMovies}
             </tbody>
         )
-        
+
     }
 }
