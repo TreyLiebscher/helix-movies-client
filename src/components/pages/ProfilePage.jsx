@@ -104,11 +104,22 @@ export class ProfilePage extends React.Component {
         return (
             <div className="profile-container">
                 <div className="user-info-container">
-                    Welcome {this.props.profile.username}!
+                    <div className="user-info-inner-1">
+                        <p>Welcome {this.props.profile.username}!</p>
+                        <p>{moviesRated} movies saved</p>
+                    </div>
+                    <div className="user-info-inner-2">
+                        <ul>
+                            <li>Favorite Genre <ul>{genres}</ul></li>
+                            <li>Favorite Decade <ul>{decades}</ul></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    
                 </div>
-                <p>This profile belongs to {this.props.profile.username}</p>
+                {/* <p>This profile belongs to {this.props.profile.username}</p>
                 <div>{this.props.profile.email}</div>
-                <div>You have rated {moviesRated} movies</div>
+                <div>You have rated {moviesRated} movies</div> */}
                 <OneClickSearch profile={this.props.profile} />
                 <ul className="search-results">
                     {this.displayLoadingMessage()}

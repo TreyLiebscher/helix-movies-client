@@ -288,36 +288,40 @@ export class AnalyzePage extends React.Component {
                         <p className="orgMovie-plot">{orgPlot}</p>
                     </div>
                 </div>
+                <div className="tableKey">
+                    <div className="matchFieldLegend"></div>
+                    <div>=  matching field</div>
+                </div>
                 <div className="table-container">
-                    <table className="movieComparisonTable">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Poster</th>
-                                <th>Year</th>
-                                <th>Genre</th>
-                                <th>Rating</th>
-                                <th>Votes</th>
-                                <th>Runtime</th>
-                                <th>Budget</th>
-                                <th>Revenue</th>
-                                <th>Production Companies</th>
-                                <th>Production Countries</th>
+                    <table className="movieComparisonTable matchTable">
+                        <thead className="matchThead">
+                            <tr className="table-head matchTR">
+                                <th className="matchTH">Title</th>
+                                <th className="matchTH">Poster</th>
+                                <th className="matchTH">Year</th>
+                                <th className="matchTH">Genre</th>
+                                <th className="matchTH">Rating</th>
+                                {/* <th>Votes</th> */}
+                                <th className="matchTH">Runtime</th>
+                                <th className="matchTH">Budget</th>
+                                <th className="matchTH">Revenue</th>
+                                <th className="matchTH">Production Companies</th>
+                                <th className="matchTH">Production Countries</th>
                             </tr>
                         </thead>
-                        <tbody className="movieComparisonTable-body">
-                            <tr className="orgMovie-table-row">
-                                <td>{orgTitle}</td>
-                                <td>{tablePoster}</td>
-                                <td>{orgYear}</td>
-                                <td>{genres}</td>
-                                <td>{orgRating}%</td>
-                                <td>{orgMovie.vote_count}</td>
-                                <td>{orgMovie.runtime}</td>
-                                <td>${orgBudget}</td>
-                                <td>${orgRevenue}</td>
-                                <td>{orgCompanies}</td>
-                                <td>{orgCountries}</td>
+                        <tbody className="movieComparisonTable-body matchTB">
+                            <tr className="orgMovie-table-row matchTR">
+                                <td className="non-matchedField matchTitle matchTD">{orgTitle}</td>
+                                <td className="non-matchedField matchTD">{tablePoster}</td>
+                                <td className="non-matchedField matchTD">{orgYear}</td>
+                                <td className="non-matchedField matchTD">{genres}</td>
+                                <td className="non-matchedField matchTD">{orgRating}%</td>
+                                {/* <td>{orgMovie.vote_count}</td> */}
+                                <td className="non-matchedField matchTD">{orgMovie.runtime}</td>
+                                <td className="non-matchedField matchTD">${orgBudget}</td>
+                                <td className="non-matchedField matchTD">${orgRevenue}</td>
+                                <td className="non-matchedField matchTD">{orgCompanies}</td>
+                                <td className="non-matchedField matchTD">{orgCountries}</td>
                             </tr>
                             {/* <tr>
                                 {matchTitles[0]}

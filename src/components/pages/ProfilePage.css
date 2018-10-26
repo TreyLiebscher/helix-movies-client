@@ -4,10 +4,20 @@
 }
 
 .user-info-container {
-    background-color: #126b5f;
+    display: flex;
+    background-color: #191919;
     color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
+.user-info-inner-1 {
+    width: 25%;
+}
+
+.user-info-inner-2 {
+    width: 75%;
+}
 
 .profile-chart-container {
     display: flex;

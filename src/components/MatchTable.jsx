@@ -26,13 +26,13 @@ export class MatchTable extends React.Component {
         return -1;
     }
 
-    styleCloseMatches(org, match, matchArray) {
+    styleCloseMatches(org, match, matchArray, symbol) {
         const closest = this.closestMatch(org, matchArray);
         console.log(closest)
         if (match === closest) {
-            return <td className="matchedField">{match}</td>
+            return <td className="matchedField matchTD">{match}{symbol}</td>
         } else {
-            return <td>{match}</td>
+            return <td className="non-matchedField matchTD">{match}{symbol}</td>
         }
     }
 
@@ -49,7 +49,7 @@ export class MatchTable extends React.Component {
             }
         })
 
-        return <td>{matchItems}</td>
+        return <td className="non-matchedField matchTD"><ul style={{listStyle: 'none', padding: '0', margin: '0'}}>{matchItems}</ul></td>
     }
 
 
@@ -60,45 +60,45 @@ export class MatchTable extends React.Component {
         const matchYears = matchArray.map((match) => match.release_date.substring(0, 4));
         const orgYear = orgMovie.release_date.substring(0, 4);
 
-        const matchPosters = matchArray.map((match, index) => {
-            const style = { maxWidth: '300px' };
-            const img = match.hasPoster ? (<img src={match.poster} style={style} className="match-poster"></img>) : null;
-            return <td key={'poster' + index}>{img}</td>;
-        });
+        // const matchPosters = matchArray.map((match, index) => {
+        //     const style = { maxWidth: '300px' };
+        //     const img = match.hasPoster ? (<img src={match.poster} style={style} className="match-poster"></img>) : null;
+        //     return <td key={'poster' + index}>{img}</td>;
+        // });
 
         const matchRatings = matchArray.map((match) => match.vote_average * 10);
         const matchRuntimes = matchArray.map((match) => match.runtime);
         const matchBudgets = matchArray.map((match) => formatCurrency(match.budget));
-
-
-        console.log(matchYears, orgYear)
+        const matchRevenues = matchArray.map((match) => formatCurrency(match.revenue));
 
 
 
 
         const matchedMovies = this.props.match.map((item, index) => {
 
-            const img = item.hasPoster ? (<img src={item.poster} className="match-poster"></img>) : null;
-            const budget = this.styleCloseMatches(orgMovie.budget, item.budget, matchBudgets);
-            console.log('budget returns', budget)
+            const img = item.hasPoster ? (<Link className="movie-link" to={`/analyze/${item.id}/${slugify(item.title)}`}
+            ><img src={item.poster} className="match-poster"></img></Link>) : null;
 
-            return <tr key={index}>
-                <td><Link to={`/analyze/${item.id}/${slugify(item.title)}`}
+            return <tr key={index} className="matchTR">
+                <td className="non-matchedField matchTitle matchTD"><Link className="movie-link" to={`/analyze/${item.id}/${slugify(item.title)}`}
                 >
                     {item.title}
                 </Link></td>
-                <td>{img}</td>
+                <td className="non-matchedField matchTD">{img}</td>
                 {this.styleCloseMatches(orgYear, item.release_date.substring(0, 4), matchYears)}
                 {this.styleExactMatches(orgMovie.genres, item.genres)}
-                {this.styleCloseMatches(orgMovie.vote_average * 10, item.vote_average * 10, matchRatings)}
-                {this.styleCloseMatches(orgMovie.runtime, item.runtime, matchRuntimes)}
+                {this.styleCloseMatches(orgMovie.vote_average * 10, item.vote_average * 10, matchRatings, '%')}
+                {this.styleCloseMatches(orgMovie.runtime, item.runtime, matchRuntimes, ' mins')}
                 {this.styleCloseMatches(formatCurrency(orgMovie.budget), formatCurrency(item.budget), matchBudgets)}
+                {this.styleCloseMatches(formatCurrency(orgMovie.revenue), formatCurrency(item.revenue), matchRevenues)}
+                {this.styleExactMatches(orgMovie.production_companies, item.production_companies)}
+                {this.styleExactMatches(orgMovie.production_countries, item.production_countries)}
             </tr>
         })
 
 
         return (
-            <tbody>
+            <tbody className="matchTB">
                 {matchedMovies}
             </tbody>
         )

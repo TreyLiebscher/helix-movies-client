@@ -21,6 +21,7 @@
     font-family: 'Megrim', cursive;
     color: white;
     text-align: center;
+    text-decoration: none;
     margin: auto;
     transition: all 0.2s;
 }
@@ -51,7 +52,7 @@
 
 .navBar-logout-button {
     border-radius: 5px;
-    height: 9vh;
+    height: 7vh;
     width: 100px;
     margin-right: 1em;
     margin-top: auto;
@@ -65,7 +66,7 @@
 }
 
 .navBar-link {
-    height: 9vh;
+    height: 7vh;
     width: 100px;
     margin-right: 1em;
     margin-top: auto;
