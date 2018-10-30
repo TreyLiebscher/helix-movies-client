@@ -7,8 +7,7 @@ export function cachedFetch(url, options) {
     //cache results in browser memory
     return fetch(url, { headers: options })
         .then(res => {
-            console.log('HTTP RESPONSE', res)
-
+            
             if (!res.ok) {
                 return Promise.reject(res.statusText);
             }

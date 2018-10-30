@@ -1,35 +1,36 @@
-const mockResponses = {
-    banana: {
-        results: [
-            { title: 'fake', id: 'fake', poster_path: null }
-        ]
-    }
-}
-
 import {
     searchReducer,
-    detailReducer,
-    similarReducer,
-    matchReducer
+    matchReducer,
+    profileSearchReducer
 } from './helixReducer';
 
 import {
     MOVIE_SEARCH_REQUEST,
     MOVIE_SEARCH_SUCCESS,
     MOVIE_SEARCH_ERROR,
+    movieSearchSuccess,
     searchMovies,
     searchMoviesTEST,
     MATCH_REQUEST,
     MATCH_SUCCESS,
     MATCH_ERROR,
     matchMovies,
+    matchSuccess,
+    PROFILE_SEARCH_REQUEST,
+    PROFILE_SEARCH_SUCCESS,
+    PROFILE_SEARCH_ERROR,
+    profileMovieSearch,
+    profileSearchSuccess
 } from '../actions/tmdbAPI';
+
 import {
     mockStore
 } from '../mockStore';
+
 import {
     getAction
 } from '../containers/getAction';
+
 import moxios from 'moxios';
 import searchMovieMock from '../containers/searchMovie.json';
 import searchMovieNormalizeMock from '../containers/searchMovieNormalized.json';
@@ -56,6 +57,13 @@ describe('searchReducer', () => {
         expect(state).toBe(currentState);
     });
 
+    it('should return the action', () => {
+        const movies = ['movie1', 'movie2', 'movie3']
+        const action = movieSearchSuccess(movies);
+        expect(action.type).toEqual(MOVIE_SEARCH_SUCCESS);
+        expect(action.movies).toEqual(movies);
+    });
+
     describe('searchMovies', () => {
         it('Searches for movies by title', async () => {
             const store = mockStore();
@@ -73,40 +81,40 @@ describe('searchReducer', () => {
 })
 
 // Using AXIOS/MOXIOS with alternate movie search action 'searchMoviesTEST'
-describe('searchMovies actions', () => {
-    beforeEach(function () {
-        moxios.install();
-    });
+// describe('searchMovies actions', () => {
+//     beforeEach(function () {
+//         moxios.install();
+//     });
 
-    afterEach(function () {
-        moxios.uninstall();
-    });
+//     afterEach(function () {
+//         moxios.uninstall();
+//     });
 
-    it('creates MOVIE_SEARCH_SUCCESS after fetching movies', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-            request.respondWith({
-                status: 200,
-                response: searchMovieMock,
-            });
-        });
+//     it('creates MOVIE_SEARCH_SUCCESS after fetching movies', () => {
+//         moxios.wait(() => {
+//             const request = moxios.requests.mostRecent();
+//             request.respondWith({
+//                 status: 200,
+//                 response: searchMovieMock,
+//             });
+//         });
 
-        const expectedActions = [{
-                type: MOVIE_SEARCH_REQUEST
-            },
-            {
-                type: MOVIE_SEARCH_SUCCESS,
-                movies: searchMovieNormalizeMock
-            },
-        ];
+//         const expectedActions = [{
+//                 type: MOVIE_SEARCH_REQUEST
+//             },
+//             {
+//                 type: MOVIE_SEARCH_SUCCESS,
+//                 movies: searchMovieNormalizeMock
+//             },
+//         ];
 
-        const store = mockStore();
+//         const store = mockStore();
 
-        return store.dispatch(searchMoviesTEST()).then(() => {
-            expect(store.getActions()).toEqual(expectedActions);
-        });
-    });
-});
+//         return store.dispatch(searchMoviesTEST()).then(() => {
+//             expect(store.getActions()).toEqual(expectedActions);
+//         });
+//     });
+// });
 
 //Match Reducer
 describe('matchReducer', () => {
@@ -147,41 +155,92 @@ describe('matchReducer', () => {
         });
         expect(state).toBe(currentState);
     });
+
+    it('should return the action', () => {
+        const movies = {
+            original: 'movie3',
+            matches: ['movie1', 'movie2']
+        };
+        const action = matchSuccess(movies);
+        expect(action.type).toEqual(MATCH_SUCCESS);
+        expect(action.movies).toEqual(movies);
+    });
+
+    describe('matchMovies', () => {
+        it('Searches for similar movies', async () => {
+            const store = mockStore();
+            await store.dispatch(matchMovies());
+
+            expect(await getAction(store, "MATCH_REQUEST")).toEqual({
+                type: "MATCH_REQUEST"
+            });
+            expect(await getAction(store, "MATCH_SUCCESS")).toEqual({
+                type: "MATCH_SUCCESS",
+                movies: {
+                    original: {
+                        id: undefined,
+                        title: undefined,
+                        release_date: undefined,
+                        runtime: undefined,
+                        popularity: undefined,
+                        poster: "https://image.tmdb.org/t/p/w500undefined",
+                        production_companies: undefined,
+                        production_countries: undefined,
+                        homepage: undefined,
+                        overview: undefined,
+                        budget: undefined,
+                        genres: undefined,
+                        revenue: undefined,
+                        hasPoster: false
+                    },
+                    matches: []
+                }
+            });
+        });
+
+    });
 })
 
+// Profile Search Reducer
+describe('profileSearchReducer', () => {
 
-// TODO make this work
-// describe('matchMovies action', () => {
-//     beforeEach(function () {
-//         moxios.install();
-//     });
+    it('Should set the initial state when nothing is passed in', () => {
+        const state = profileSearchReducer(undefined, {
+            type: '__UNKNOWN'
+        });
+        expect(state).toEqual({
+            movies: [],
+            error: null,
+            loading: false
+        });
+    });
 
-//     afterEach(function () {
-//         moxios.uninstall();
-//     });
+    it('Should return the current state on an unknown action', () => {
+        let currentState = {};
+        const state = profileSearchReducer(currentState, {
+            type: '__UNKNOWN'
+        });
+        expect(state).toBe(currentState);
+    });
 
-//     it('creates MATCH_SUCCESS after fetching movies', () => {
-//         moxios.wait(() => {
-//             const request = moxios.requests.mostRecent();
-//             request.respondWith({
-//                 status: 200,
-//                 response: searchMovieMock,
-//             });
-//         });
+    it('should return the action', () => {
+        const movies = ['movie1', 'movie2']
+        const action = profileSearchSuccess(movies);
+        expect(action.type).toEqual(PROFILE_SEARCH_SUCCESS);
+        expect(action.movies).toEqual(movies);
+    });
 
-//         const expectedActions = [{
-//                 type: MATCH_REQUEST
-//             },
-//             {
-//                 type: MATCH_SUCCESS,
-//                 movies: searchMovieNormalizeMock
-//             },
-//         ];
-
-//         const store = mockStore();
-
-//         return store.dispatch(matchMovies()).then(() => {
-//             expect(store.getActions()).toEqual(expectedActions);
-//         });
-//     });
-// })
+    describe('profileMovieSearch', () => {
+        it('Searches for movies by profile preferences', async () => {
+            const store = mockStore();
+            await store.dispatch(profileMovieSearch());
+            expect(await getAction(store, "PROFILE_SEARCH_REQUEST")).toEqual({
+                type: "PROFILE_SEARCH_REQUEST"
+            });
+            expect(await getAction(store, "PROFILE_SEARCH_SUCCESS")).toEqual({
+                type: "PROFILE_SEARCH_SUCCESS",
+                movies: []
+            });
+        })
+    })
+})
