@@ -10,10 +10,10 @@ import {mockStore} from '../mockStore';
 
 jest.mock('react-dom')
 
-const spy = jest.fn();
-
+const spy = jest.fn(); //function invocation
+const banana = (...args) => console.log(args)
 const Decorated = reduxForm({
-    form: 'Sign Up', onSubmit: {spy}
+    form: 'Sign Up', onSubmit: spy // {spy:spy}
 })(SignupForm)
 
 const username = 'Tester';
@@ -35,9 +35,10 @@ describe('<SignupForm />', () => {
     it('Should fire onSubmit callback when form is submitted', () => {
         const callback = spy;
         const store = mockStore();
+        const props= {onSubmit:callback, ...formFieldValues} 
         const wrapper = mount(
         <Provider store={store}>
-            <Decorated  {...formFieldValues}/>
+            <Decorated  {...props}/>
         </Provider>
         );
         const username = 'Tester';
