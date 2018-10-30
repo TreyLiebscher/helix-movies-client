@@ -9,8 +9,12 @@ const passwordLength = length({min: 10, max: 72});
 const matchesPassword = matches('password');
 
 export class SignupForm extends React.Component {
-    onSubmit(values) {
-        const {username, email, password} = values;
+    onSubmit() {
+
+        const {username, email, password, passwordConfirm} = this.props;
+        //DRY
+        this.props.onSubmit({username, email, password, passwordConfirm}) //test passes!
+
         const user = {username, email, password};
         return this.props
             .dispatch(registerUser(user))
