@@ -28,14 +28,14 @@ export class NavBar extends React.Component {
                 <button className="navBar-logout-button" onClick={() => this.logOut()}>Log out</button>
             );
             profileButton = (
-                <Link to={`/profile/home`} className="navBar-link" tabIndex="-1"><button className="navBar-button">Your profile</button></Link>
+                <Link to={`/profile/home`} className="navBar-link" tabIndex="-1"><button className="navBar-button profile">Your profile</button></Link>
             )
         } else {
             logInButton = (
-                <Link to={`/login`} className="navBar-link" tabIndex="-1"><button className="navBar-button">Log In</button></Link>
+                <Link to={`/login`} className="navBar-link" tabIndex="-1"><button className="navBar-button login">Log In</button></Link>
             )
             signupButton = (
-                <Link to={`/signup`} className="navBar-link" tabIndex="-1"><button className="navBar-button" >Sign Up</button></Link>
+                <Link to={`/signup`} className="navBar-link" tabIndex="-1"><button className="navBar-button signup" >Sign Up</button></Link>
             )
         }
         return (
