@@ -73,7 +73,7 @@ export const profileRefreshError = error => ({
 export const deleteMovie = movieTitle => (dispatch, getState) => {
     const userId = getState().userProfile.id;
     const movieArray = getState().userProfile.movies;
-    const copyMovieArray = movieArray.slice(0);
+    
     console.log('movieArray returns', movieArray);
     
     return fetch(`${API_BASE_URL}/movies/delete`, {
@@ -109,7 +109,6 @@ export const saveMovieError = error => ({
 
 export const saveMovie = movie => (dispatch, getState) => {
     const userId = getState().userProfile.id;
-    const movieArray = getState().userProfile.movies;
 
     return fetch(`${API_BASE_URL}/movies/save`, {
         method: 'POST',

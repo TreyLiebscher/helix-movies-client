@@ -1,5 +1,4 @@
 import { Link, Redirect } from 'react-router-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
 
 import './NavBar.css'
 
@@ -8,7 +7,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../localStorage';
-import LoginForm from './loginForm';
 
 export class NavBar extends React.Component {
     logOut() {

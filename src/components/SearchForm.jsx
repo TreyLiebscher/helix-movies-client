@@ -1,12 +1,9 @@
 import React from 'react';
-import { Field, reduxForm, focus } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import slugify from 'slugify';
-import { searchMovies, searchMoviesTEST } from '../actions/tmdbAPI';
+import { searchMovies } from '../actions/tmdbAPI';
 import './SearchForm.css';
-import Input from './input';
-import { required, nonEmpty, matches, length, isTrimmed } from '../validators';
 
 
 export class SearchForm extends React.Component {
@@ -61,7 +58,7 @@ export class SearchForm extends React.Component {
                     <input type="submit" value="Search" className="form-button submit"/>
                 </form>
                 <p className="tmdb-credit">This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
-                <a href="https://www.themoviedb.org/" target="blank"><img style={imgStyle} src="https://www.themoviedb.org/assets/1/v4/logos/primary-green-d70eebe18a5eb5b166d5c1ef0796715b8d1a2cbc698f96d311d62f894ae87085.svg"/></a>
+                <a href="https://www.themoviedb.org/" target="blank"><img style={imgStyle} src="https://www.themoviedb.org/assets/1/v4/logos/primary-green-d70eebe18a5eb5b166d5c1ef0796715b8d1a2cbc698f96d311d62f894ae87085.svg" alt="TMDB logo"/></a>
             </div>
         );
     }

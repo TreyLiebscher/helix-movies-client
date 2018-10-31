@@ -1,12 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Link } from 'react-router-dom';
-import {API_BASE_URL} from '../config';
 import { saveMovie } from '../actions/users';
 import './SaveButton.css'
 
 export function SaveButton(props) {
-    const {movie, user} = props;
 
     function saveMovie2(e) {
         e && e.preventDefault()

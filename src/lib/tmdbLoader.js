@@ -1,3 +1,7 @@
+
+
+// For future improvements, not currently being used (the utelly API charges for excessive requests)
+
 const cacheByUrl = {}
 
 function cachedFetch(url, options) {
@@ -14,7 +18,7 @@ function cachedFetch(url, options) {
         })
         .then(res => { cacheByUrl[url] = res; return res });
 }
-// For future improvements, not currently being used (the utelly API charges for excessive requests)
+
 export function getStreamingAvailability(title) {
     const url = `https://utelly-tv-shows-and-movies-availability-v1.p.mashape.com/lookup?country=us&term=${title}`;
     const options = {

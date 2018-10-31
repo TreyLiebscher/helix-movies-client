@@ -17,6 +17,7 @@
     display: flex;
     background-color: #191919;
     margin-top: 20px;
+    border-radius: 5px;
 }
 
 .user-control-box {

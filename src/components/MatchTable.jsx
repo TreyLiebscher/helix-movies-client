@@ -71,7 +71,7 @@ export class MatchTable extends React.Component {
         const matchedMovies = this.props.match.map((item, index) => {
 
             const img = item.hasPoster ? (<Link className="movie-link" to={`/analyze/${item.id}/${slugify(item.title)}`}
-            ><img src={item.poster} className="match-poster"></img></Link>) : null;
+            ><img src={item.poster} className="match-poster" alt="a movie poster"></img></Link>) : null;
 
             return <tr key={index} className="matchTR">
                 <td className="non-matchedField matchTitle matchTD"><Link className="movie-link" to={`/analyze/${item.id}/${slugify(item.title)}`}

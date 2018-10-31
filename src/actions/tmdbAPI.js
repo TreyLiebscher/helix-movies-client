@@ -1,10 +1,6 @@
-import { API_BASE_URL } from '../config';
-
 import axios from 'axios';
-import { format } from 'path';
-import { cachedFetch } from './tmdbFetch';
 
-const cacheByUrl = {}
+import { cachedFetch } from './tmdbFetch';
 
 // searchByTitle + getSimilar
 const normalizeMovie = movie => ({

@@ -1,9 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link, Redirect, withRouter} from 'react-router-dom';
-import {searchMovies, searchMoviesTEST} from '../../actions/tmdbAPI';
+import {Link, withRouter} from 'react-router-dom';
+import {searchMoviesTEST} from '../../actions/tmdbAPI';
 import slugify from 'slugify'
-import LoginForm from '../loginForm';
 import SearchForm from '../SearchForm';
 import './HomePage.css';
 
@@ -27,12 +26,12 @@ export function HomePage(props) {
         props.dispatch(searchMoviesTEST(val))
     }
 
-    console.log('kiwi', results)
+    
 
     const movies = results.movies.map((movie, index) => {
         
-        const style = { maxWidth: '300px' }
-        const img = movie.hasPoster ? (<img src={movie.poster} className="movie-poster"></img>) : <div className="movie-no-poster">No Poster available for {movie.title}</div>;
+        
+        const img = movie.hasPoster ? (<img src={movie.poster} className="movie-poster" alt="a movie poster"></img>) : <div className="movie-no-poster">No Poster available for {movie.title}</div>;
         
         return (<li key={movie.id} className="result-movie">
             <Link to={`/analyze/${movie.id}/${slugify(movie.title)}`}>{img}</Link>

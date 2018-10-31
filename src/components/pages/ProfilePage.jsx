@@ -1,12 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import slugify from 'slugify';
-import { PromiseContainerWithRouter } from '../../containers/PromiseContainer'
 import requiresLogin from '../requires-login';
 import { getProfile } from '../../actions/users';
-import { profileMovieSearch } from '../../actions/tmdbAPI';
 import DeleteButton from '../DeleteButton';
 import OneClickSearch from '../oneClickSearch';
 import formatCurrency from 'format-currency';
@@ -50,7 +47,7 @@ export class ProfilePage extends React.Component {
 
         const savedMovies = this.props.profile.movies.map((movie, index) => {
             const style = { maxWidth: '300px', margin: 'auto', height: '50%' };
-            const poster = movie.hasPoster ? (<img src={movie.poster} style={style}></img>) : <p>No Poster Available for {movie.title}</p>;
+            const poster = movie.hasPoster ? (<img src={movie.poster} style={style} alt="a movie poster"></img>) : <p>No Poster Available for {movie.title}</p>;
 
             return <li key={index} className="movie">
                 <Link to={`/analyze/${movie.movieId}/${slugify(movie.title)}`} className="movie-link">
@@ -66,7 +63,7 @@ export class ProfilePage extends React.Component {
         })
 
 
-        const avgRating = this.props.profile.rating;
+        
         const avgBudget = formatCurrency(this.props.profile.budget);
         const avgRevenue = formatCurrency(this.props.profile.revenue);
         const avgRuntime = this.props.profile.runtime;
@@ -82,8 +79,7 @@ export class ProfilePage extends React.Component {
                 return noResults;
             }
             return this.props.search.movies.map((movie, index) => {
-                const style = { maxWidth: '300px' }
-                const img = movie.hasPoster ? (<img src={movie.poster} className="movie-poster"></img>) : <div className="movie-no-poster">No Poster available for {movie.title}</div>;
+                const img = movie.hasPoster ? (<img src={movie.poster} className="movie-poster" alt="a movie poster"></img>) : <div className="movie-no-poster">No Poster available for {movie.title}</div>;
 
                 return (<li key={movie.id} className="result-movie">
                     <Link to={`/analyze/${movie.id}/${slugify(movie.title)}`}>{img}</Link>
@@ -224,7 +220,6 @@ export class ProfilePage extends React.Component {
 
 
 const mapStateToProps = state => {
-    const { currentUser } = state.auth;
     return {
         profile: state.userProfile,
         search: state.profileSearch

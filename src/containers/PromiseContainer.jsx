@@ -1,3 +1,5 @@
+// Please disregard this file as it is related to StreamingInfo
+
 import React, { Component } from 'react';
 import propTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
@@ -58,7 +60,6 @@ export default class PromiseContainer extends Component {
         const { promise, ...rest } = this.props
         this.props.promise(rest)
             .then(resolvedValue => {
-                console.log('kiwi resolvedValue is', resolvedValue)
                 this.setStateSafe({ resolved: true, resolvedValue })
             })
             .catch(err => {

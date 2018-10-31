@@ -7,11 +7,11 @@ export default function AboutPage() {
             <div className="about-flexbox">
                 <div className="about-item">
                     <p>Search for movies you already like</p>
-                    <img src="https://i.imgur.com/RCGb8lf.png" title="source: imgur.com" className="about-image"/>
+                    <img src="https://i.imgur.com/RCGb8lf.png" title="source: imgur.com" className="about-image" alt="movie search results"/>
                 </div>
                 <div className="about-item">
                     <p>See a detailed comparison to similar movies</p>
-                    <img src="https://i.imgur.com/GthnBfL.png" title="source: imgur.com" className="about-image"/>
+                    <img src="https://i.imgur.com/GthnBfL.png" title="source: imgur.com" className="about-image" alt="movie match results"/>
                 </div>
                 <div className="about-item">
                     <p>Save movies to your profile</p>
@@ -21,7 +21,7 @@ export default function AboutPage() {
                 </div>
                 <div className="about-item">
                     <p>After you've saved some movies, perform a search based off of YOUR favorite movies!</p>
-                    <img src="https://i.imgur.com/Z72aVQy.png" title="source: imgur.com" className="about-image"/>
+                    <img src="https://i.imgur.com/Z72aVQy.png" title="source: imgur.com" className="about-image" alt="personalized movie search results"/>
                 </div>
             </div>
         </div>

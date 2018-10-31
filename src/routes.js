@@ -6,7 +6,6 @@ import ProfilePage from './components/pages/ProfilePage';
 import { StreamingInfoWithData } from './components/StreamingInfo';
 import SignupPage from './components/signupPage';
 import LogInPage from './components/pages/LogInPage';
-import { NavBar } from './components/NavBar';
 import NotFoundPage from './components/pages/NotFoundPage';
 import HomePage from './components/pages/HomePage';
 import AnalyzePage from './components/pages/AnalyzePage';

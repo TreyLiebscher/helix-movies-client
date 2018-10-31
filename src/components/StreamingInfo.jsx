@@ -1,14 +1,17 @@
-import React, { Component } from 'react';
+// NOTICE: this is an inactive feature due to API cost
+
+
+import React from 'react';
 import propTypes from 'prop-types'
 import { PromiseContainerWithRouter } from '../containers/PromiseContainer';
-import { getStreamingAvailability, getStreaming } from '../lib/tmdbLoader';
+import { getStreaming } from '../lib/tmdbLoader';
 
 export default function StreamingInfo(props) {
     const { info } = props;
     const services = info.locations.map((item, index) => {
         return <li key={index}>
                     <p>{item.display_name}</p>
-                    <img src={item.icon} />
+                    <img src={item.icon} alt="stream company logo"/>
                     <a href={item.url} target="_blank">Watch on {item.display_name}</a>
                 </li>
     })

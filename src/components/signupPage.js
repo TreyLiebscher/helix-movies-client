@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect, withRouter} from 'react-router-dom';
-import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
 
 import SignupForm from './signupForm';

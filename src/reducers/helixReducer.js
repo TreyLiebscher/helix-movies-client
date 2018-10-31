@@ -96,7 +96,6 @@ export function matchReducer(state = matchedState, action) {
     if (action.type === MATCH_REQUEST) {
         const changedState = {loading: true, error: null};
         const newState = {...state, ...changedState};
-        console.log('kiwi req', newState)
         return newState;
     }
     else if (action.type === MATCH_SUCCESS) {
@@ -125,7 +124,6 @@ export function matchReducer(state = matchedState, action) {
         };
 
         const newState = {...state, ...changedState};
-        console.log('kiwi suc', newState)
         return newState;
     }
     else if (action.type === MATCH_ERROR) {

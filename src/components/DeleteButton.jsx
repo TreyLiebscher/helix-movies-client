@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { API_BASE_URL } from '../config';
 import { deleteMovie } from '../actions/users';
 import './SaveButton.css'
 

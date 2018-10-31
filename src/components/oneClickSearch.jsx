@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { profileMovieSearch } from '../actions/tmdbAPI';
 
 export function OneClickSearch(props) {
-    const { profile } = props;
+    // const { profile } = props;
 
     function search(e) {
         e.preventDefault()
