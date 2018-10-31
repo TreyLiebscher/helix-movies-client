@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router';
 
 // Module root components
 import ProfilePage from './components/pages/ProfilePage';
-import { PublicProfileWithData } from './components/pages/PublicProfile';
 import { StreamingInfoWithData } from './components/StreamingInfo';
 import SignupPage from './components/signupPage';
 import LogInPage from './components/pages/LogInPage';
@@ -23,7 +22,6 @@ export default (
     <Route exact path="/streaming/:title" component={StreamingInfoWithData} />
     <Route exact path="/profile/home" component={ProfilePage} />
     <Route exact path="/profile/oneclicksearch" component={ProfilePage} />
-    <Route exact path="/profile/:username" component={PublicProfileWithData} />
     <Route exact path="/signup" component={SignupPage} />
     <Route exact path="/login" component={LogInPage} />
     <Route path="*" component={NotFoundPage} />

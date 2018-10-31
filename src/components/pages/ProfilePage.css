@@ -4,28 +4,28 @@
 }
 
 .user-info-container {
-    display: flex;
     background-color: #191919;
+    border-radius: 5px;
     color: white;
     margin-top: 20px;
     margin-bottom: 20px;
-}
-
-.user-info-inner-1 {
-    width: 25%;
-}
-
-.user-info-inner-2 {
-    width: 75%;
-}
-
-.profile-chart-container {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-.profile-chart {
-    flex: 1;
+.info-box {
+    flex: 1 0 200px;
+    text-align: center;
+    border: 3px solid #126b5f;
+    margin:1em;
+}
+
+.info-box-subject {
+    background-color:#126b5f;
+}
+.info-box-list {
+    list-style: none;
+    padding: 0;
 }
 
 .savedMovies {
@@ -36,16 +36,13 @@
 }
 
 .movie {
+    background-color: #191919;
     margin: 0.5em;
     height: 300px;
-    -ms-flex: 1 1;
-    flex: 1 1;
-    display: -ms-flexbox;
+    flex: 1 150px;
     display: flex;
-    -ms-flex-direction: column;
     flex-direction: column;
-    border: 3px solid #126b5f;
-    color: white;
+    border-radius: 5px;
 }
 
 .movie-link {
@@ -61,7 +58,6 @@
 .profile-table-container {
     display: flex;
     width: 90%;
-    /* height: 500px; */
     margin: auto;
     flex-wrap: wrap;
     justify-content: center;
@@ -78,8 +74,6 @@
 
 .profile-table {
     flex: 1;
-    /* margin: 0.2em;
-    width: 25%; */
     height: 200px;
     border: 3px solid #086b5f;
 }
@@ -120,4 +114,14 @@
 .movieButton:focus {
     background-color: #043a33;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 770px) {
+    .savedMovies {
+        flex-direction: column;
+    }
+
+    .movie {
+        flex: 1;
+    }
 }

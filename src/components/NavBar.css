@@ -81,7 +81,7 @@
     cursor: pointer;
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 770px) {
     .navBar-title {
         margin-left: 10px;
     }

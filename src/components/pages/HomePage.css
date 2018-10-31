@@ -26,7 +26,7 @@
     border: 1px solid black;
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 770px) {
     .movie-poster {
         width: 100px;
         height: 150px;

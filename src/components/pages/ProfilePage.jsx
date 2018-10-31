@@ -58,8 +58,8 @@ export class ProfilePage extends React.Component {
                 </Link>
                 {poster}
                 <div className="buttonHolder">
-                    {/* <Link to={`/streaming/${slugify(movie.title)}`}><button className="movieButton">Streaming Availability</button> </Link> */}
-                    <button className="movieButton">Get Streaming Info</button>
+                    {/* <Link to={`/streaming/${slugify(movie.title)}`}><button className="movieButton">Streaming Availability</button> </Link>
+                    <button className="movieButton">Get Streaming Info</button> */}
                     <DeleteButton title={movie.title} className="movieButton" />
                 </div>
             </li>
@@ -70,15 +70,15 @@ export class ProfilePage extends React.Component {
         const avgBudget = formatCurrency(this.props.profile.budget);
         const avgRevenue = formatCurrency(this.props.profile.revenue);
         const avgRuntime = this.props.profile.runtime;
-        const noResults = <p>No results found based off your current profile</p>
+        const noResults = <p>No results found based off of your current profile. Favorite more movies to narrow down the search!</p>
 
 
         const searchResults = () => {
             if (
-                !this.props.search.loading && 
-                this.props.location.pathname === '/profile/oneclicksearch' 
+                !this.props.search.loading &&
+                this.props.location.pathname === '/profile/oneclicksearch'
                 && this.props.search.movies.length === 0
-                ) {
+            ) {
                 return noResults;
             }
             return this.props.search.movies.map((movie, index) => {
@@ -92,40 +92,56 @@ export class ProfilePage extends React.Component {
         }
 
 
-
-
-
-
-
-
-
-
-
         return (
             <div className="profile-container">
-                <div className="user-info-container">
-                    <div className="user-info-inner-1">
-                        <p>Welcome {this.props.profile.username}!</p>
-                        <p>{moviesRated} movies saved</p>
-                    </div>
-                    <div className="user-info-inner-2">
-                        <ul>
-                            <li>Favorite Genre <ul>{genres}</ul></li>
-                            <li>Favorite Decade <ul>{decades}</ul></li>
-                            <li></li>
-                        </ul>
-                    </div>
-                    
+
+                <div className="user-welcome-message">
+                    <h1>Welcome {this.props.profile.username}!</h1>
+                    <h3>Movies Favorited: {moviesRated}</h3>
                 </div>
-                {/* <p>This profile belongs to {this.props.profile.username}</p>
-                <div>{this.props.profile.email}</div>
-                <div>You have rated {moviesRated} movies</div> */}
+
+                <p>Search for movies by title</p>
+                <Link to={`/`} tabIndex="-1"><button className="save-button">Search for Movies</button></Link>
+                <p>Search for movies by your preferences</p>
                 <OneClickSearch profile={this.props.profile} />
+
                 <ul className="search-results">
                     {this.displayLoadingMessage()}
                     {searchResults()}
                 </ul>
-                <div className="profile-table-container">
+
+                <div className="user-info-container">
+                    <div className="info-box">
+                        <div className="info-box-subject">Favorite Genre</div>
+                        <div className="info-box-content"><ul className="info-box-list">{genres}</ul></div>
+                    </div>
+                    <div className="info-box">
+                        <div className="info-box-subject">Favorite Decade</div>
+                        <div className="info-box-content"><ul className="info-box-list">{decades}</ul></div>
+                    </div>
+                    <div className="info-box">
+                        <div className="info-box-subject">Average Budget</div>
+                        <div className="info-box-content"><ul className="info-box-list"><li>${avgBudget}</li></ul></div>
+                    </div>
+                    <div className="info-box">
+                        <div className="info-box-subject">Average Revenue</div>
+                        <div className="info-box-content"><ul className="info-box-list"><li>${avgRevenue}</li></ul></div>
+                    </div>
+                    <div className="info-box">
+                        <div className="info-box-subject">Average Runtime</div>
+                        <div className="info-box-content"><ul className="info-box-list"><li>{avgRuntime} mins</li></ul></div>
+                    </div>
+                    <div className="info-box">
+                        <div className="info-box-subject">Favorite Companies</div>
+                        <div className="info-box-content"><ul className="info-box-list">{companies}</ul></div>
+                    </div>
+                    <div className="info-box">
+                        <div className="info-box-subject">Favorite Countries</div>
+                        <div className="info-box-content"><ul className="info-box-list">{countries}</ul></div>
+                    </div>
+                </div>
+                
+                {/* <div className="profile-table-container">
                     <table className="profile-table">
                         <tbody>
                             <tr>
@@ -196,7 +212,7 @@ export class ProfilePage extends React.Component {
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div> */}
                 <ul className="savedMovies">{savedMovies}</ul>
             </div>
         )

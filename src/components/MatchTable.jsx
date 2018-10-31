@@ -60,12 +60,6 @@ export class MatchTable extends React.Component {
         const matchYears = matchArray.map((match) => match.release_date.substring(0, 4));
         const orgYear = orgMovie.release_date.substring(0, 4);
 
-        // const matchPosters = matchArray.map((match, index) => {
-        //     const style = { maxWidth: '300px' };
-        //     const img = match.hasPoster ? (<img src={match.poster} style={style} className="match-poster"></img>) : null;
-        //     return <td key={'poster' + index}>{img}</td>;
-        // });
-
         const matchRatings = matchArray.map((match) => match.vote_average * 10);
         const matchRuntimes = matchArray.map((match) => match.runtime);
         const matchBudgets = matchArray.map((match) => formatCurrency(match.budget));

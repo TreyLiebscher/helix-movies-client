@@ -301,7 +301,6 @@ export class AnalyzePage extends React.Component {
                                 <th className="matchTH">Year</th>
                                 <th className="matchTH">Genre</th>
                                 <th className="matchTH">Rating</th>
-                                {/* <th>Votes</th> */}
                                 <th className="matchTH">Runtime</th>
                                 <th className="matchTH">Budget</th>
                                 <th className="matchTH">Revenue</th>
@@ -316,113 +315,12 @@ export class AnalyzePage extends React.Component {
                                 <td className="non-matchedField matchTD">{orgYear}</td>
                                 <td className="non-matchedField matchTD">{genres}</td>
                                 <td className="non-matchedField matchTD">{orgRating}%</td>
-                                {/* <td>{orgMovie.vote_count}</td> */}
                                 <td className="non-matchedField matchTD">{orgMovie.runtime}</td>
                                 <td className="non-matchedField matchTD">${orgBudget}</td>
                                 <td className="non-matchedField matchTD">${orgRevenue}</td>
                                 <td className="non-matchedField matchTD">{orgCompanies}</td>
                                 <td className="non-matchedField matchTD">{orgCountries}</td>
                             </tr>
-                            {/* <tr>
-                                {matchTitles[0]}
-                                {matchPosters[0]}
-                                {matchYears[0]}
-                                {matchGenres[0]}
-                                {matchRatings[0]}
-                                {matchVotes[0]}
-                                {matchRuntimes[0]}
-                                {matchBudgets[0]}
-                                {matchRevenues[0]}
-                                {matchProductionCompanies[0]}
-                                {matchProductionCountries[0]}
-                            </tr>
-                            <tr>
-                                {matchTitles[1]}
-                                {matchPosters[1]}
-                                {matchYears[1]}
-                                {matchGenres[1]}
-                                {matchRatings[1]}
-                                {matchVotes[1]}
-                                {matchRuntimes[1]}
-                                {matchBudgets[1]}
-                                {matchRevenues[1]}
-                                {matchProductionCompanies[1]}
-                                {matchProductionCountries[1]}
-                            </tr>
-                            <tr>
-                                {matchTitles[2]}
-                                {matchPosters[2]}
-                                {matchYears[2]}
-                                {matchGenres[2]}
-                                {matchRatings[2]}
-                                {matchVotes[2]}
-                                {matchRuntimes[2]}
-                                {matchBudgets[2]}
-                                {matchRevenues[2]}
-                                {matchProductionCompanies[2]}
-                                {matchProductionCountries[2]}
-                            </tr> */}
-                            {/* <tr>
-                            <td>Title</td>
-                            <td>{orgTitle}</td>
-                            {matchTitles}
-                        </tr>
-                        <tr>
-                            <td>Poster</td>
-                            <td>{orgPoster}</td>
-                            {matchPosters}
-                        </tr>
-                        <tr>
-                            <td>Year</td>
-                            <td>{orgYear}</td>
-                            {matchYears}
-                        </tr>
-                        <tr>
-                            <td>Genre</td>
-                            <td>{genres}</td>
-                            {matchGenres}
-                        </tr>
-                        <tr>
-                            <td>Rating</td>
-                            <td>{orgRating}%</td>
-                            {matchRatings}
-                        </tr>
-                        <tr>
-                            <td>Votes</td>
-                            <td>{orgMovie.vote_count}</td>
-                            {matchVotes}
-                        </tr>
-                        <tr>
-                            <td>Runtime</td>
-                            <td>{orgMovie.runtime}</td>
-                            {matchRuntimes}
-                        </tr>
-                        <tr>
-                            <td>Budget</td>
-                            <td>${orgBudget}</td>
-                            {matchBudgets}
-                        </tr>
-                        <tr>
-                            <td>Revenue</td>
-                            <td>${orgRevenue}</td>
-                            {matchRevenues}
-                            </tr> */}
-                            {/* <tr>
-                            <td>Plot Similarity</td>
-                            <td>100%</td>
-                            {matchPlotSimilarity}
-                        </tr> */}
-                            {/* <tr>
-                            <td>Production Companies</td>
-                            <td>{orgCompanies}</td>
-                            {matchProductionCompanies}
-                        </tr>
-                        <tr>
-                            <td>Production Countries</td>
-                            <td>{orgCountries}</td>
-                            {matchProductionCountries}
-                            </tr>   */}
-                            
                         </tbody>
                         <MatchTable match={matchMovie} movie={orgMovie}/>
                     </table>

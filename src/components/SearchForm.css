@@ -82,7 +82,7 @@
 
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 770px) {
     .movie-search {
         width: 100%;
         border-radius: 0px;

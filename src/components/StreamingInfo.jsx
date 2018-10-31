@@ -29,7 +29,6 @@ StreamingInfo.propTypes = {
 
 const promise = props => {
     const searchTerm = props.match.params.title;
-    // return getStreamingAvailability(searchTerm);
     return getStreaming(searchTerm);
 }
 

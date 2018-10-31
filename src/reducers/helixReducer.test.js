@@ -32,8 +32,6 @@ import {
 } from '../containers/getAction';
 
 import moxios from 'moxios';
-import searchMovieMock from '../containers/searchMovie.json';
-import searchMovieNormalizeMock from '../containers/searchMovieNormalized.json';
 
 //Search Reducer
 describe('searchReducer', () => {
