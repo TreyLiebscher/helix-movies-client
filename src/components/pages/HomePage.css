@@ -36,4 +36,8 @@
         width: 100px;
         height: 150px;
     }
+
+    .search-results {
+        padding: 0;
+    }
 }

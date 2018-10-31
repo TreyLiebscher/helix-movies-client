@@ -16,10 +16,6 @@ td {
     margin-bottom: 20px;
 }
 
-/* .orgMovie-table-row > td {
-    background-color: #191919;
-} */
-
 .orgMovie-container {
     display: flex;
 }
@@ -50,20 +46,10 @@ td {
     list-style: none;
 }
 
-.movieMatch {
-    flex: 1 1;
-    margin: 1em;
-    /* height: 200px;
-    width: 150px; */
-    border: 1px solid red;
-}
-
 .match-poster {
     width: 100px;
     height: 150px;
 }
-
-
 
 .movieComparisonTable {
     width: 100%;
@@ -110,10 +96,6 @@ td {
         width: 95%;
     }
 
-    /* table, thead, tbody, th, td, tr { 
-        display: block; 
-    } */
-
     .matchTable, .matchThead, .matchTB, .matchTH, .matchTD, .matchTR {
         display: block;
     }
@@ -132,11 +114,6 @@ td {
     }
     
     .matchTD:before { 
-        /* position: absolute;
-        left: 6px;
-        width: 45%; 
-        padding-right: 10px; 
-        white-space: nowrap; */
         position: absolute;
         left: 0px;
         width: 47%;
@@ -173,5 +150,24 @@ td {
 
     .matchTitle {
         background-color: #086b5f;
+    }
+
+    .mobile-grid-line {
+        border-right: 3px solid white;
+    }
+
+    .org-poster {
+        max-width: 300px;
+        position: absolute;
+        right: 10%;
+        top: 10px;
+        width: 130px;
+        height: 195px;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .org-poster {
+        position: static;
     }
 }

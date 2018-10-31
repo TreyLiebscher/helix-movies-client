@@ -81,7 +81,7 @@ export class AnalyzePage extends React.Component {
         const orgRuntime = orgMovie.runtime;
         const orgPopularity = orgMovie.popularity;
         const style = { maxWidth: '300px' };
-        const orgPoster = orgMovie.hasPoster ? (<img src={orgMovie.poster} style={style} className="movie-poster"></img>) : null;
+        const orgPoster = orgMovie.hasPoster ? (<img src={orgMovie.poster} style={style} className="movie-poster org-poster"></img>) : null;
         const tablePoster = orgMovie.hasPoster ? (<img src={orgMovie.poster} style={style} className="match-poster"></img>) : null;
         const orgBudget = formatCurrency(orgMovie.budget);
         const orgRevenue = formatCurrency(orgMovie.revenue);
@@ -280,9 +280,9 @@ export class AnalyzePage extends React.Component {
                 <h1>{orgTitle} ({orgYear})</h1>
                 <div className="orgMovie-container">
                     <div className="orgMovie-box1">
-                        {this.renderSaveButton()}
-                        <h2>Rating: {orgRating}% ({orgVotes} votes)</h2>
                         {orgPoster}
+                        <h2>Rating: {orgRating}% ({orgVotes} votes)</h2>
+                        {this.renderSaveButton()}
                     </div>
                     <div className="orgMovie-box2">
                         <p className="orgMovie-plot">{orgPlot}</p>
@@ -293,6 +293,7 @@ export class AnalyzePage extends React.Component {
                     <div>=  matching field</div>
                 </div>
                 <div className="table-container">
+                    <div className="mobile-grid-line"></div>
                     <table className="movieComparisonTable matchTable">
                         <thead className="matchThead">
                             <tr className="table-head matchTR">

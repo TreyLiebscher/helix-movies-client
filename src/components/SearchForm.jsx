@@ -45,6 +45,8 @@ export class SearchForm extends React.Component {
     }
 
     render() {
+
+        const imgStyle = {height: '50px', width: '50px'}
         return (
             <div className="movie-search">
                 <h2>Search Movies</h2>
@@ -58,6 +60,8 @@ export class SearchForm extends React.Component {
                     </div>
                     <input type="submit" value="Search" className="form-button submit"/>
                 </form>
+                <p className="tmdb-credit">This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
+                <a href="https://www.themoviedb.org/" target="blank"><img style={imgStyle} src="https://www.themoviedb.org/assets/1/v4/logos/primary-green-d70eebe18a5eb5b166d5c1ef0796715b8d1a2cbc698f96d311d62f894ae87085.svg"/></a>
             </div>
         );
     }

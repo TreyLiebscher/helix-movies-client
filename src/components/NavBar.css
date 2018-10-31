@@ -85,4 +85,8 @@
     .navBar-title {
         margin-left: 10px;
     }
+
+    .navBar-link {
+        margin-right: 0;
+    }
 }
