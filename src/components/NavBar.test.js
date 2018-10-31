@@ -3,6 +3,7 @@ import {shallow, mount} from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom'
 import {NavBar} from './NavBar';
 
+// TEST_MARKER
 describe('<NavBar />', () => {
     it('Renders without crashing', () => {
         shallow(<NavBar />)

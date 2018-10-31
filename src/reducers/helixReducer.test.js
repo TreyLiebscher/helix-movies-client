@@ -80,41 +80,6 @@ describe('searchReducer', () => {
 
 })
 
-// Using AXIOS/MOXIOS with alternate movie search action 'searchMoviesTEST'
-// describe('searchMovies actions', () => {
-//     beforeEach(function () {
-//         moxios.install();
-//     });
-
-//     afterEach(function () {
-//         moxios.uninstall();
-//     });
-
-//     it('creates MOVIE_SEARCH_SUCCESS after fetching movies', () => {
-//         moxios.wait(() => {
-//             const request = moxios.requests.mostRecent();
-//             request.respondWith({
-//                 status: 200,
-//                 response: searchMovieMock,
-//             });
-//         });
-
-//         const expectedActions = [{
-//                 type: MOVIE_SEARCH_REQUEST
-//             },
-//             {
-//                 type: MOVIE_SEARCH_SUCCESS,
-//                 movies: searchMovieNormalizeMock
-//             },
-//         ];
-
-//         const store = mockStore();
-
-//         return store.dispatch(searchMoviesTEST()).then(() => {
-//             expect(store.getActions()).toEqual(expectedActions);
-//         });
-//     });
-// });
 
 //Match Reducer
 describe('matchReducer', () => {
