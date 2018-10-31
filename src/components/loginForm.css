@@ -26,3 +26,8 @@
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.6);
     border: 2px solid white;
 }
+
+.demo {
+    margin-bottom: 20px;
+    height: 25px;
+}
