@@ -24,7 +24,7 @@ export function OneClickSearch(props) {
 
     return (
         <div className="one-click-holder">
-            <button className="save-button" onClick={search}>ONE CLICK SEARCH</button>
+            <button className="save-button one-click" onClick={search}>ONE CLICK SEARCH</button>
         </div>
     )
 }

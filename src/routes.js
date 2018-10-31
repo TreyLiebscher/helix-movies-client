@@ -10,6 +10,7 @@ import { NavBar } from './components/NavBar';
 import NotFoundPage from './components/pages/NotFoundPage';
 import HomePage from './components/pages/HomePage';
 import AnalyzePage from './components/pages/AnalyzePage';
+import AboutPage from './components/pages/AboutPage';
 
 
 
@@ -24,6 +25,7 @@ export default (
     <Route exact path="/profile/oneclicksearch" component={ProfilePage} />
     <Route exact path="/signup" component={SignupPage} />
     <Route exact path="/login" component={LogInPage} />
+    <Route exact path="/about" component={AboutPage} />
     <Route path="*" component={NotFoundPage} />
   </Switch>
 );

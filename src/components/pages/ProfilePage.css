@@ -13,6 +13,17 @@
     flex-wrap: wrap;
 }
 
+.user-controls {
+    display: flex;
+    background-color: #191919;
+    margin-top: 20px;
+}
+
+.user-control-box {
+    flex: 1;
+    text-align: center;
+}
+
 .info-box {
     flex: 1 0 200px;
     text-align: center;
@@ -123,5 +134,13 @@
 
     .movie {
         flex: 1;
+    }
+
+    .user-controls {
+        display: block;
+    }
+    
+    .one-click {
+        margin-bottom: 10px;
     }
 }

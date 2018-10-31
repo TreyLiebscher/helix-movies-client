@@ -94,17 +94,20 @@ export class ProfilePage extends React.Component {
 
         return (
             <div className="profile-container">
-
-                <div className="user-welcome-message">
-                    <h1>Welcome {this.props.profile.username}!</h1>
-                    <h3>Movies Favorited: {moviesRated}</h3>
+                <div className="user-controls">
+                    <div className="user-control-box">
+                        <h1>Welcome {this.props.profile.username}!</h1>
+                        <h3>Movies Favorited: {moviesRated}</h3>
+                    </div>
+                    <div className="user-control-box">
+                        <p>Search for movies by title</p>
+                        <Link to={`/`} tabIndex="-1"><button className="save-button">Search for Movies</button></Link>
+                    </div>
+                    <div className="user-control-box">
+                        <p>Search for movies by your preferences</p>
+                        <OneClickSearch profile={this.props.profile} />
+                    </div>
                 </div>
-
-                <p>Search for movies by title</p>
-                <Link to={`/`} tabIndex="-1"><button className="save-button">Search for Movies</button></Link>
-                <p>Search for movies by your preferences</p>
-                <OneClickSearch profile={this.props.profile} />
-
                 <ul className="search-results">
                     {this.displayLoadingMessage()}
                     {searchResults()}

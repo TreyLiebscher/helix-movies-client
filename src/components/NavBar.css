@@ -62,7 +62,6 @@
     background-color: #126b5f;
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
-    /* transition: all 0.3s; */
 }
 
 .navBar-link {
@@ -81,12 +80,21 @@
     cursor: pointer;
 }
 
+
 @media only screen and (max-width: 770px) {
     .navBar-title {
         margin-left: 10px;
     }
 
+    .navBar-button-holder {
+        position: static;
+    }
+
+    .navBar-logout-button {
+        width: 65px;
+    }
+
     .navBar-link {
-        margin-right: 0;
+        width: 65px;
     }
 }
