@@ -3,6 +3,9 @@
 ## Live demo
 https://boiling-coast-88828.herokuapp.com/
 
+## Server
+https://github.com/TreyLiebscher/movie-helix-server
+
 ## About
 Movie Helix is an app that allows users to find new movies based off of movies that they already like. After a movie is found, users can view three top 'matches' that are similar to the original movie. A user can save as many movies as they like and then see a top level view of their personal movie preferences. Once they've saved enough, they can perform a search based on those preferences in an effort to find the 'perfect' movie!
 
