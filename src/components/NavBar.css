@@ -97,4 +97,8 @@
     .navBar-link {
         width: 65px;
     }
+
+    .helix-title-link {
+        font-size: 18px;
+    }
 }
