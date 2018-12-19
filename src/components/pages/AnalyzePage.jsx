@@ -108,7 +108,7 @@ export class AnalyzePage extends React.Component {
                 </div>
                 <div className="tableKey">
                     <div className="matchFieldLegend"></div>
-                    <div>=  matching field</div>
+                    <div>=  match/closest</div>
                 </div>
                 <div className="table-container">
                     <div className="mobile-grid-line"></div>
