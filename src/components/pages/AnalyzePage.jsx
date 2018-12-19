@@ -21,7 +21,6 @@ export class AnalyzePage extends React.Component {
     }
 
     componentDidMount() {
-        console.log(`AnalyzePage mounted`)
         this.fetchData()
     }
 

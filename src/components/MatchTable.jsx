@@ -28,7 +28,7 @@ export class MatchTable extends React.Component {
 
     styleCloseMatches(org, match, matchArray, symbol) {
         const closest = this.closestMatch(org, matchArray);
-        console.log(closest)
+
         if (match === closest) {
             return <td className="matchedField matchTD">{match}{symbol}</td>
         } else {

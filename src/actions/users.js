@@ -74,7 +74,7 @@ export const deleteMovie = movieTitle => (dispatch, getState) => {
     const userId = getState().userProfile.id;
     const movieArray = getState().userProfile.movies;
     
-    console.log('movieArray returns', movieArray);
+    // console.log('movieArray returns', movieArray);
     
     return fetch(`${API_BASE_URL}/movies/delete`, {
         method: 'DELETE',

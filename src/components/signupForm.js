@@ -16,7 +16,7 @@ export class SignupForm extends React.Component {
         
 
         const user = {username, email, password};
-        console.log(user)
+
         return this.props
             .dispatch(registerUser(user))
             .then(() => this.props.dispatch(login(username, password)));
