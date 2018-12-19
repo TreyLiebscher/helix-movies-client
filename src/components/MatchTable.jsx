@@ -36,6 +36,19 @@ export class MatchTable extends React.Component {
         }
     }
 
+    styleCloseMoneyMatch(org, match, matchArray, symbol){
+        const closest = this.closestMatch(org, matchArray);
+        
+        const currencyFormat = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" })
+        const formatMatch = currencyFormat.format(match)
+
+        if (match === closest) {
+            return <td className="matchedField matchTD">{formatMatch}{symbol}</td>
+        } else {
+            return <td className="non-matchedField matchTD">{formatMatch}{symbol}</td>
+        }
+    }
+
     styleExactMatches(org, match, matchArray) {
 
         const orgArray = org.map((item) => item.name);
@@ -62,8 +75,8 @@ export class MatchTable extends React.Component {
 
         const matchRatings = matchArray.map((match) => match.vote_average * 10);
         const matchRuntimes = matchArray.map((match) => match.runtime);
-        const matchBudgets = matchArray.map((match) => formatCurrency(match.budget));
-        const matchRevenues = matchArray.map((match) => formatCurrency(match.revenue));
+        const matchBudgets = matchArray.map((match) => match.budget);
+        const matchRevenues = matchArray.map((match) => match.revenue); 
 
 
 
@@ -83,8 +96,8 @@ export class MatchTable extends React.Component {
                 {this.styleExactMatches(orgMovie.genres, item.genres)}
                 {this.styleCloseMatches(orgMovie.vote_average * 10, item.vote_average * 10, matchRatings, '%')}
                 {this.styleCloseMatches(orgMovie.runtime, item.runtime, matchRuntimes, ' mins')}
-                {this.styleCloseMatches(formatCurrency(orgMovie.budget), formatCurrency(item.budget), matchBudgets)}
-                {this.styleCloseMatches(formatCurrency(orgMovie.revenue), formatCurrency(item.revenue), matchRevenues)}
+                {this.styleCloseMoneyMatch(orgMovie.budget, item.budget, matchBudgets)}
+                {this.styleCloseMoneyMatch(orgMovie.revenue, item.revenue, matchRevenues)}
                 {this.styleExactMatches(orgMovie.production_companies, item.production_companies)}
                 {this.styleExactMatches(orgMovie.production_countries, item.production_countries)}
             </tr>
