@@ -22,6 +22,7 @@ export class AnalyzePage extends React.Component {
 
     componentDidMount() {
         this.fetchData()
+        window.scrollTo(0, 0)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -29,6 +30,7 @@ export class AnalyzePage extends React.Component {
         const prevID = prevProps.match.params.id
         if (ID !== prevID) {
             this.fetchData()
+            window.scrollTo(0, 0)
         }
     }
 
